@@ -1,0 +1,49 @@
+\subsection{Resultados do BOSQUE}
+\label{resultados_bosque}
+Neste momento, serão mostrados os resultados das execuções baseadas no BOSQUE.
+
+\subsubsection{Treinamento} \label{result_treino_bosque}
+Na Tabela \ref{tab:resultados_treino_bosque}, vemos os resultados dos treinamentos do SP sobre Bosque transduzido por nós. Note que os campos são equivalentes aos explicados em \ref{result_treino_cintil}.
+\begin{center}
+    \input{tabelas/tab_bosque_result_treino.tex}
+\end{center}
+A Figura \ref{fig:treino_bosque} nos dá a visualização desses resultados. Pode-se observar que o resultado pre-eliminar dos testes é muito superior ao visualizado em \ref{result_treino_cintil}.
+\begin{center}
+    \input{imagens/bosque_treino.tex}
+\end{center}
+
+\subsubsection{Avaliação} \label{result_aval_bosque}
+Na Tabela \ref{tab:result_bosque_pcfg}, vemos o resultados dos testes utilizando o SP sobre o Bosque transduzido.
+\begin{center}
+    \input{tabelas/tab_bosque_result_pcfg.tex}
+\end{center}
+Na Figura \ref{fig:bosque_result_pcfg} podemos ter uma visualização melhor de tais resultados.
+
+\begin{center}
+    \input{imagens/bosque_result_pcfg.tex}
+\end{center}
+É possível notar que, mesmo com treinamento melhor, a classificação continua tendo uma qualidade baixa, nunca superando os 50\%.
+
+
+\subsubsection{Estudos de caso}
+\label{subsec:ec-bosque}
+
+De modo análogo ao do CINTIL, vamos revisar aqui alguns casos curiosos de sentenças classificadas. O Bosque tem mais casos problemáticos que o CINTIL, e visualizar todas elas tornaria este trabalho ainda maior.
+\begin{center}
+    \input{imagens/ec_bosque_sem_ponto_tree.tex}
+\end{center}
+A Figura \ref{fig:ec_bosque_sem_ponto_tree} nos mostra as diferenças entre árvores sem pontuação. Foram removidas as informações adicionais dos nós da árvore original do Bosque, mantendo apenas $(F:f)$.
+
+Temos poucos erros de \textit{parsing}. Uma ambiguidade no NP de \textquote{12 páginas}, que agora abarca também o PP irmão. E o núcleo do primeiro NP, que foi classificado como NNP.
+
+\begin{center}
+    \input{imagens/ec_bosque_komp_tree.tex}
+\end{center}
+A Figura \ref{fig:ec_bosque_komp_tree} traz uma sentença que, originalmente, possui o par KOMP<:acl internamente. É notório como as regras unárias (Não-terminal $\rightarrow$ terminal) são mais consistentes que as binárias. Curioso também a separação de palavras originalmente conjuntas, como \textquote{por exemplo} e \textquote{do que}. Ambas expressões aparecem pouco no CETEMFolha (22 e 34 vezes, respectivamente). Porém, pelas observações anteriores, supõe-se que o SP não está pronto para lidar com nós terminais concatenados durante a execução. Cabe observar que a estrutura de Comparação foi mantida no estilo PTB, como visto em \ref{fig:ec_bosque_komp_detalhe}, apesar da discordância entre SBAR (transdução) e PP (\textit{Stanford}).
+
+\begin{center}
+    \input{imagens/ec_bosque_ec_tree.tex}
+\end{center}
+A Figura \ref{fig:ec_bosque_ec_tree} vem com uma novidade inusitada: Foi considerada agramatical pelo \textit{parser} fatorado, disponibilizado pelo SP (que não abordamos neste trabalho). Mas foi interpretado pelo PCFG. Uma fato inesperado: a ideia com esta sentença era estudar a aplicação da \textit{tag} \textit{ec}, que inclusive não apresentou problemas. Mas a conjunção \textquote{parentes e amigos} foi desfeita pelo SP. \textquote{E} se tornou um mero irmão dos dois sintagmas, tal qual uma vírgula, e recebeu a tag CC, que pouco aparece devido às conversões feitas para que SP aceitasse conjunções. O mesmo ocorre no \textit{parsing} da sentença CF318-C (fragmento em \ref{fig:ec_bosque_komp_detalhe}), mostrando que, apesar deste trabalho ter se guiado pelo \textit{Bracketing Guidelines} (\citeonline{bracketing_ptb}), algumas estruturas poderiam se manter equivalentes às apresentadas no Bosque.
+
+Outras análises serão apresentadas nos apêndices.

@@ -1,0 +1,3 @@
+\begin{lstlisting}[breaklines, caption={Execução de testes do Stanford Parser para o Bosque},label={lst:testeBasicoBosque},language=Bash]
+    java -cp stanford-parser.jar -mx4g edu.stanford.nlp.parser.lexparser.LexicalizedParser -writeOutputFiles -outputFilesDirectory ~/<diretorio de relatorios de treino>/treino -loadFromSerializedFile ~/<diretorio da gramatica serializada>/serialGrammarBOSQUE1 -testTreebank ~/<diretorio dos treebanks> 422-4213 > ~/<diretorio dos resultados dos testes>testeBr1.txt
+\end{lstlisting}

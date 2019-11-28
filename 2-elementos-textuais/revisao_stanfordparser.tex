@@ -1,0 +1,26 @@
+\subsection{Parser Utilizado - Stanford Parser}
+\label{sec:stanfordParser}
+Para este trabalho, decidimos utilizar o \textit{Stanford Parser} (SP). Desenvolvido pelo \textit{Stanford NLP Group}\footnote{\url{https://nlp.stanford.edu/}}, consiste de um pacote escrito na linguagem Java com diversos parser \textit{incluídos}, como o neural, lexicalizado, PCFG etc. Possui modelos pré-programados para diversas línguas, como árabe, inglês, alemão, francês, espanhol e chinês. Ele está disponível como biblioteca no Maven, para desenvolvimento. Porém, é possível utilizá-lo por meio de API (as ferramentas necessárias estão inclusas no pacote, mas pode ser também visto em http://nlp.stanford.edu:8080/parser/), ou por terminal de comando unix. Existem pacotes baseados no SP para outras linguagens, como Python, Ruby, PHP, .NET etc.
+
+Também disponivel pelo Stanford NLP Group, existe o CoreNLP, que consiste em \citeonline[p~55]{manning2014CoreNLP} 
+\begin{quote}
+    \textquote{\textit{a Java (or at least JVM-based) annotation pipeline framework, which provides most of the common core natural language processing (NLP) steps, from tokenization through to coreference resolution}}.
+    \footnote{\textquote{Um \textit{framework} de \textit{pipeline} de anotações em java (pelo menos, baseado na JVM), que provê a maior parte do núcleo dos passos de processamento de linguagem natural (NLP), da tokenização à resolução de co-referência}. Tradução própria.}
+\end{quote}
+Seu objetivo é tornar a implementação de procedimentos NLP mais simples, com diversas ferramentas disponíveis de maneira compacta.
+
+Neste trabalho, não foi desenvolvido código baseados no SP, nem no CoreNLP, por alguns motivos. Primeiramente a proposta do trabalho é, justamente, verificar o quão simples seria desenvolver um parser alternativo, utilizando ferramentas já disponíveis. Segundo, o aprendizado de um novo \textit{framework} dispenderia uma quantidade de tempo pouco interessante.
+
+Outra pergunta que pode surgir é: no site, são disponibilizados diversos pacotes de idiomas, porque não usar algum alternativo? Mais uma vez, por dois motivos: o inglês é a língua \textit{default} do SP, não sendo necessário o uso de nenhum outro pacote; e a língua inglesa possui menos inflexões, o que pode facilitar o desenvolvimento. Como visto em \citeonline[p~371]{Manning1999FoundationsNLP}:
+\begin{quote}
+    \textquote{\textit{In many other languages, word order is much freer, and the surrounding words will contribute much less information about part of speech. However, in most such languages, the rich inflections of a word contribute more information about part of speech than happens in English.}}
+    \footnote{\textquote{Em muitas outras línguas, a ordem das palavras é muito mais livre, e as palavras vizinhas darão menor contribuição sobre morfossintaxe. Porém, na maioria delas, a riqueza de inflexões de uma palavra contribuem com mais informações sobre morfossintaxe do que acontece no Inglês}. Tradução própria.}
+\end{quote}
+
+Para a execução do SP, independente da forma, é obrigatório que o JDK\footnote{Java Development Kit. Disponível em \url{https://www.oracle.com/technetwork/java/javase/downloads/index.html}} esteja instalado no seu sistema.
+
+Para este trabalho, será utilizada a classe \textit{LexicalizedParser}, por ser a classe padrão para o uso do SP através de comandos de terminal. O treino com esta classe dá como resultado métricas que abrangem 4 \textit{parsers} distintos, que podem ser vistos nas Tabelas \ref{tab:cintil_result_full} e \ref{tab:bosque_result_full}. Utilizaremos os resultados do PCFG para nossos estudos, como visto em \ref{resultados}. PCFG e \textit{parser} lexicalizado são abordados em \ref{subsec:statisticalparsing} e \ref{lexParsing}, respectivamente.
+Os comandos utilizados para treinos e testes serão explicados em suas respectivas sessões.
+
+O \textit{Stanford NLP Group} é um grupo de pesquisa baseado na universidade de Stanford (Califórnia, EUA), fazendo parte do \textit{Stanford IA Lab}\footnote{\url{http://ai.stanford.edu/}}. Possui membros tanto do departamento de Linguística, quanto de Ciência da Computação. Tem como objetivo o desenvolvimento de algoritmos que permitam a computadores o processamento de linguagem humana. 
+

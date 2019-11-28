@@ -1,0 +1,200 @@
+\chapter{Desenvolvimento}
+\label{cap:desenv}
+
+A partir de agora, será descrito o desenvolvimento do trabalho propriamente dito. Espera-se que as revisões, até o momento, tenham sido suficientes para a compreensão total do mesmo.
+
+Para a execução dos treinos, fez-se necessário revisar a formatação do PTB, e dos dois \textit{treebanks} a serem convertidos. O procedimento de conversão, no geral, é basicamente o mesmo. Em primeiro lugar, a estrutura da sentença já classificada é refeita de forma lógica, remontando-a numa estrutura de dados em formato de árvore. Neste processo, as traduções das \textit{tags} são feitas. No segundo momento, caso a árvore recém traduzida possua alguma \textit{tag} que exija uma verificação mais aprofundada, esse tratamento é realizado. Esta segunda etapa ocorre de acordo com a necessidade, não sendo obrigatória para todas as sentenças. Por fim, a estrutura de dados é convertida para texto, respeitando o \textit{bracketing} do PTB.
+
+O leitor pode se perguntar a necessidade da segunda etapa, se um dos objetivos deste trabalho é, justamente, que não seja necessário muito desenvolvimento. Infelizmente, sem esse tratamento mais cuidadoso, o \textit{parser} é incapaz de ser treinado, ou de classificar novas sentenças. 
+
+
+\input{./2-elementos-textuais/desenvolvimento_treinandoCintil}
+\input{./2-elementos-textuais/desenvolvimento_treinandoBosque}
+% \section{Treinando o Stanford Parser sobre CINTIL}
+% \label{treinando_sp_cintil}
+% O pacote obtido, com o CINTIL, contém um guia de instruções \citeonline{narrativeDescriptionCintil}, e o treebank propriamente dito em formato XML\footnote{\url{https://www.w3.org/XML/}}. Para melhor uso, e melhor aplicação das árvores tanto para treino como para testes, fez-se necessária a separação deste arquivo em arquivos menores. Foi construído um script na linguagem Python para fazer tal separação, gerando dois tipos de arquivo: as sentenças originais (\textquote{raw}), e suas árvores (\textquote{tree}).
+
+% Claro que só isso não é suficiente. As tags do CINTIL estão em português, e para o uso delas pelo SP sem uso de pacotes, seria necessário traduzí-las para o inglês. Fizemos então a conversão dessas tags, de acordo com a Tabela \ref{tab:tab_cintil}. Note que tags que possuem tradução direta (exemplo: Adjetivo, A e JJ) não foram especificadas nas observações.
+
+% Uma dificuldade a mais, é que o tagset informado no site oficial do CINTIL está defasado com relação ao treebank original. O tagset mais confiável, a respeito, é o \textquote{CINTIL TreeBank Handbook} \citeonline{cintil_handbook}. Foram usadas as tags listadas nele, e as que ocorrem no treebank concreto e que não foram previstas no Handbook (Por exemplo, P’, C’ etc).
+
+% \begin{center}
+% \input{tabelas/tab_cintil.tex}
+% \end{center}
+
+% Como veremos também ao trabalharmos com o Bosque, nem todo caso pode ser feito com uma simples tradução direta CINTIL $\rightarrow$ PTB. Em alguns momentos, tivemos que avaliar, para cada caso, como traduzir a tag de maneira correta. Estes casos serão descritos abaixo
+% % ------------------------------------------------------------------------------------------------
+% \subsection{Problemas com CONJ (Conjunção)}
+% \label{subsec-cintil-conj}
+% Conjunções são estruturas (palavras, no geral) que faz parte da categoria semântica da Conectividade. Descrita por \citeonline[cap~2, pag~133]{Castilho2010gramatica},
+% \begin{displayquote}
+% Outra categoria semântica é a conectividade, gramaticalizada como preposições e conjunções. Essas classes ligam palavras e sentenças, com a diferença de que as preposições, como classe igualmente predicadora, atribui ao seu escopo traços de lugar, tempo, entre outros, propriedade não exercida pelas conjunções.
+% \end{displayquote}
+% O mesmo autor descreve que sentenças podem ser ligadas por conjunções e que, ao fazê-lo, estamos criando uma relação conjuncional entre ambas. \citeonline[cap~9, pag~338]{Castilho2010gramatica}
+% \begin{displayquote}
+%     Essa relação compreende a [\ldots] coordenação, [\ldots] formada por sentenças independentes umas de outras, ou de [\ldots] subordinação, [\ldots] formada por sentenças encaixadas umas em outras, tanto quanto [\ldots] formada por uma sentença adjunta à outra.
+% \end{displayquote}
+% As tabelas \ref{tab:tab_conj_separadas_cintil} e \ref{tab:tab_conj_concat_cintil} demonstram palavras e expressões utilizadas pelo CINTIL como conjunções.
+% \begin{center}
+% \input{tabelas/tab_conj_separadas_cintil.tex}
+% \end{center}
+% \begin{center}
+% \input{tabelas/tab_conj_concat_cintil.tex}
+% \end{center}
+% Penn Treebank e CINTIL lidam com conjunções de maneiras distintas. O PTB, em seu manual de anotação \citeonline{bracketing_ptb}, dedica a seção 7.5 para descrever tal fenômeno. Lá podemos ver que, para conjunções coordenadas, temos três casos: palavra simples (\textit{and}, \textit{but}, \textit{or}, \ldots), multi palavra (\textit{as well as}, \textit{not to mention}, \textit{rather than}, \ldots), e conjunções descontínuas (\textit{not only\ldots but}, \textit{not\ldots but instead}, \ldots). Palavras simples não precisam de marcação, a conjunção fica sem rótulo, como na figura \ref{fig:ptb_conj_exe_1}. Conjunções com várias palavras tem o sintagma de conjunção marcado como CONJP, e as conjunções são postas em estrutura plana, mostrado na figura \ref{fig:ptb_conj_exe_2}. Por fim, conjunções descontínuas tem apenas a parte com múltiplas palavras marcada por CONJP. A palavra isolada permanece isolada e sem marcação, como na figura \ref{fig:ptb_conj_exe_3}. O manual possui a descrição de mais casos, envolvendo Conjunções Coordenadas e \textit{times}\footnote{\textit{Vezes}, no sentido de multiplicação. Exemplo, \textit{three times}, ou \textit{three times five}}, porém não nos alongaremos no assunto, por não possuírem as tags CONJ ou CONJP.
+% \begin{center}
+% \input{imagens/ptb_conj_exe_1.tex}
+% \end{center}
+% \begin{center}
+% \input{imagens/ptb_conj_exe_2.tex}
+% \end{center}
+% \begin{center}
+% \input{imagens/ptb_conj_exe_3.tex}
+% \end{center}
+% O CINTIL, por outro lado, não é tão descritivo. Ele prevê as tags CONJ, CONJP e CONJ’. Podemos inferir, observando o \textit{treebank}, que CONJP se refere a toda a nova sentença em conjunção com a sentença inicial. CONJ’ se refere ao núcleo da conjunção (aos moldes da estrutura CP, que pode ser vista em \citeonline[cap~2, pag~63]{mioto2013novo}). Por fim, CONJ é a POS tag referente a conjunções.
+
+% CINTIL abarca toda a nova sentença da conjunção, como demonstrado na figura \ref{fig:cintil_conj_exe_1}. Como vimos anteriormente, o mesmo não ocorre no PTB. Conjunções normalmente não são marcadas e, se forem, receberam a marca CONJP para o núcleo\footnote{Também ocorre a conjunção marcada por SBAR, mas não há necessidade de explorarmos. Para o leitor curioso, recomendamos a leitura de \citeonline[sec~1.2.3]{bracketing_ptb}}.
+% \begin{center}
+% \input{imagens/cintil_conj_exe_1.tex}
+% \end{center}
+% Com isto em mente, fez-se necessário reescrever a disposição das tags, para que: CONJP se referisse apenas aos núcleos conjuntivos, CONJ’ fosse removida e, no contexto em que CONJ aparece dentro de tags CONJP, remover suas marcações, sem removê-las noutros momentos. Um exemplo pode ser visto na figura \ref{fig:cintil_conj_exe_2}.
+% \begin{center}
+% \input{imagens/cintil_conj_exe_2.tex}
+% \end{center}
+
+% \subsection{Problemas com C (Complementizador)}
+% \label{subsec-cintil-c}
+% Semelhante à CONJ em diversos aspectos, as tags C, C’ e CP permitem a conjunção entre sentenças, tornando uma segunda sentença objeto de uma primeira. O tratamento feito com elas foi muito semelhante ao dado para a tag CONJ, com um diferencial: CONJ’ ocorre sem necessariamente ter a tag CONJP como pai (12 casos), o que nunca ocorre com a família CP. 
+
+% \subsection{Problemas com PNT (Pontuação)}
+% \label{subsec-cintil-pnt}
+% Foi observado, também, que CINTIL e PTB lidam com pontuações de formas distintas. CINTIL usa a tag PNT para classificar estes símbolos. PTB prevê uma tag SYM, para símbolos. Além disso, vemos em \citeonline{buildingPTB} que os símbolos costumam ser representados sem etiquetas, como exemplificado na Fig \ref{fig:ptb_comma_parenthe}. Em \citeonline[cap~3]{bies95pennbracketing} fica bastante claro: fora \textit{bracketing} (parênteses, colchetes, chaves), os símbolos não recebem nenhuma POS. Quando recebe, como no caso de símbolos funcionando como palavras, ou símbolos matemáticos, são \textit{tags} referentes ao sintagma. Um detalhe importante, é como PTB lida com aspas e apóstrofos (\textit{quote}, e \textit{single-quote}). As aspas são removidas, e substituidas por dois apóstrofos ou duas crases (melhor visualizado na figura \ref{fig:ptb-quote}).
+
+% \begin{center}
+%     \input{imagens/ptb_comma_parenthetical.tex}
+% \end{center}
+
+% \begin{center}
+%     \input{imagens/ptb_quote_exemple.tex}
+% \end{center}
+
+% Fez-se necessário criar um script que removesse as tags PNT dos símbolos, do CINTIL, para reposicionar-los corretamente nas árvores, além de tratar \textit{quotes}.
+
+% Porém, não podia ser tão simples, e não foi. CINTIL não só identifica os PNT de forma diferentes, como também os POSICIONA de forma distinta, como podemos ver no comparativo da fig \ref{fig:comp_PNT_ptb_cintil}. No exemplo, abordando ponto final, é definido em  \citeonline[cap~3, sec ~3.1]{bracketing_ptb}, 
+% \begin{quote}
+%     In this corpus, each unit of text is enclosed in a top level of unlabeled brackets [...]. Formerly, top-level punctuation [...] could be attached to these top-level brackets. However, in this release, such punctuation should all be attached one level down (to the highest level of labeled brackets), so that there is only one top-level node within the unlabeled brackets.
+% \end{quote}
+% E resume em \citeonline[cap~3, sec ~3.1.2]{bracketing_ptb}: \textquote{Final punctuation as a rule is a child of the highest level of structure}. Já \citeonline{cintil_handbook} define como \textquote{End of sentence markers are in the top most adjunction}.
+
+% \begin{center}
+%     \input{imagens/comp_PNT_ptb_cintil.tex}
+% \end{center}
+
+% Vírgulas também são bastante curiosas. Em 3.1.1, \citeonline{bracketing_ptb} define 
+% \begin{quote}
+%     Paired punctuation marks are siblings of the constituents they surround. This is true even when the opening or closing member of the pair can be viewed as deleted. For instance, the commas that set off a subordinate clause or a relative clause from a main clause are siblings of the SBAR dominating the subordinate clause. [\ldots]
+% \end{quote}
+% Podemos ver esse fenômeno na fig \ref{fig:ptb_comma_parenthe}. Já o \citeonline{cintil_handbook}, \textquote{Commas separating left periphery constituents are right adjoined to theses constituents.}\footnote{\textquote{Vírgulas separando constituintes periféricos à esquerda são adjungidos à direita destes constituintes}, tradução própria}, exemplo na fig \ref{fig:cintil_comma_left}.
+
+% \begin{center}
+%     \input{imagens/cintil_comma_left.tex}
+% \end{center}
+
+% Para o leitor curioso, fica o cap. 3 do \citeonline{bracketing_ptb}, e 12 do \citeonline{cintil_handbook}, para o estudo dos demais sinais.
+
+% Antes de encerrarmos, existem casos no treebank em que pontuações não são associadas à etiqueta PNT. Esses casos costumam ser pontos de abreviação, reticências, ou apóstrofos (single-quotes) que antecedem nomes, e estão associados à etiqueta N. Para resolvê-los, primeiro foram mudamos suas etiquetas para PNT. Depois, continuamos com as operações previstas.
+
+% Fica claro, então, que é necessário \textit{reposicionar} os sinais antes de passar as árvores processadas para o PS. parece um erro pequeno, mas inviabiliza completamente qualquer tipo de teste, como podemos ver na mensagem de retorno exibida na fig \ref{fig:cintil_training_error}. Num primeiro momento, a solução foi apenas remover tais elementos, o que viabilizou o treinamento e avaliação.
+
+% \begin{center}
+%     \input{imagens/cintil_training_error.tex}
+% \end{center}
+
+% % ------------------------------------------------------------------------------------------------
+% \subsection{Treinamento}\label{treino_cintil}
+% Para fazer estas conversões, fizemos um script disponível online\footnote{\url{ https://github.com/Fernandomn/separador-cintil}}.
+
+% Com as tags convertidas, foi feito o treinamento. O ato do treino é relativamente simples: deve-se, através do terminal do seu sistema, navegar até o diretório onde se encontra o stanford-parser.jar, o arquivo que contém os parsers do SP que utilizaremos. Estando no diretório correto, deve-se executar o comando abaixo:
+
+% \begin{center}
+% \input{codigos/cod_treinoBasicoCintil.tex}
+% \end{center}
+
+% O código acima merece algumas explicações a parte, para quem não está familiarizado ao uso do SP pelo terminal
+
+% \begin{center}
+% \input{tabelas/tab_treinoBasicoCintil.tex}
+% \end{center}
+
+% A tabela \ref{tab:tab_treino_basico_cintil} mostra um fragmento das possibilidades de comandos a serem usados pela interface do terminal do SP. Note que usamos apenas 1014 arquivos nesta demonstração, que é um fração de 10\% dos arquivos / árvores do CINTIL disponíveis.
+
+% Para melhor verificação dos resultados, utilizamos o método de \textit{10-fold cross-validation}. Este método, como explicado por \citeonline{james2013introduction},
+% \begin{displayquote}
+% This approach involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k -- 1 folds\footnote{\textquote{Esta abordagem envolve dividir aleatoriamente o conjunto de observações em k grupos, ou dobras, de tamanhos aproximadamente iguais. O primeiro grupo é tratado como conjunto de validação, e o método se encaixa nos k -- 1 grupos restantes}. Tradução própria.}.
+% \end{displayquote}
+
+% No nosso caso, dividimos nosso corpora em 10 partes de 1014 sentenças. Fizemos o treinamento com 1 parte, e o teste com a parte restante, alternando as partes escolhidas.  Os resultados serão apresentados na conclusão.
+
+% Na sequencia, foi executado o treinamento com as partes restantes. De maneira análoga, no mesmo diretório, foi utilizado o seguinte comando:
+
+% \begin{center}
+% \input{codigos/cod_testeBasicoCintil.tex}
+% \end{center}
+% Que também merece explicações, na tabela \ref{tab:tab_teste_basico_cintil}:
+% \begin{center}
+% \input{tabelas/tab_testeBasicoCintil.tex}
+% \end{center}
+% O resultado total dos testes resultou na extensa tabela \ref{tab:cintil_result_full}, que pode ser vista nos apêndices. E os comentários dos resultados pode ser encontrado em \ref{resultados_cintil}.
+% ------------------------------------------------------------------------------------------------
+% \section{Treinando o Stanford Parser sobre Bosque}
+% \label{treinando_sp_bosque}
+
+% Como já vimos, o Bosque é disponibilizado em duas variantes, português brasileiro (BR) e português europeu (PT). este trabalho foi feito considerando ambas, porém focando na variante brasileira. 
+
+% Assim como o CINTIL, parte importante do nosso trabalho foi traduzir as tags do BOSQUE para o padrão PTB. Isso implicou em decisões que serão apresentadas na tabela a seguir:
+
+% \begin{center}
+%     \input{tabelas/tab_bosque.tex}
+% \end{center}
+
+% Primeiramente, traduzimos todas as tags em sequência, mantendo a estrutura das árvores originais. Notamos, então, que para além da tradução de tags, algumas particularidades entre treebanks precisou de uma análise distinta, para maior corretude. Tais procedimentos foram executados imediatamente após, e na ordem aqui relatada.
+% % ------------------------------------------------------------------------------------------------
+% \subsection{Problemas com EC (Prefixos)}
+% \label{sec_ec}
+
+% Palavras marcadas com "ec", tag de prefixos, são (como o nome indica) prefixos. No caso em específico, o prefixo (ou morfema prefixal) que recebem tais marcações são aqueles ligados à palavra por hífens, como na figura \ref{fig:bosque_2166}:
+
+% \begin{center}
+%     \input{imagens/bosque_2166.tex}
+% \end{center}
+
+% O PTB não prevê situações como estas. Pelo contrário, como podemos ver no guia de marcações do PTB \citeonline{bracketing_ptb}, tal sinal é ignorado. Recolhendo um exemplo do próprio corpus, analisemos a imagem \ref{fig:ptb_0012}
+
+% \begin{center}
+%     \input{imagens/ptb_0012.tex}
+% \end{center}
+
+% A flexão \textquote{mid-October} é representada, sozinha, como um sintagma nominal (\textit{noun phrase}). Portanto, fez-se necessário a criação de uma subtarefa que removesse tais tags, e que a estrutura fosse refeita, de modo a seguir os padrões do PTB. 
+
+% % ------------------------------------------------------------------------------------------------
+% \subsection{Problemas com CU (Coordenação)}
+% \label{sec_cu}
+% Coordenação é talvez a tag mais problemática do BOSQUE. Como destacam \citeonline{Wing2006Adaptation}, 
+% \begin{quote}
+%     Conjoined clauses in the native Floresta are of type CU, regardless of the type of constituents being conjoined. This causes grammars learned from the treebank to make errors such as conflating noun phrase conjunctions and sentential conjunctions.
+%     \footnote{\textquote{Cláusulas conjuntivas no Floresta nativo são do tipo CU, independentemente do tipo de constituinte conjunto. Isso faz com que a gramática aprendida do treebank cometa erros como confundir conjunções de sintagmas nominais e conjunções sentenciais}. Tradução própria.}.
+% \end{quote}
+% O PTB tem suas próprias regras para determinar a estrutura de coordenações, reservando o capítulo 7 de seu Manual de Agrupamento (\citeonline{bies95pennbracketing}). Seguindo tais regras, num primeiro momento de tradução, apenas marcamos as coordenações com a tag auxiliar \_CU\_. Depois, fizemos uma nova verificação, reconhecendo as sentenças onde essa marca aparece. Ao encontrá-las, reconstruímos as árvores na estrutura de listas encadeadas, para que pudéssemos fazer a análise dos filhos deste nó (CU) de maneira precisa.  A partir dele, seguimos a regra do Bracketing Guide, para traduzir a tag corretamente. Tal script está disponível para verificação\footnote{\url{https://github.com/Fernandomn/separa-bosque}}. 
+% % ------------------------------------------------------------------------------------------------
+% \subsection{Tag X}
+% \label{sec_x}
+% Por todo corpora, pode ser encontrado o par de tags, X e x. X é uma tag do tipo função, e x, uma POS tag. Ela aparece, recorrentemente, próxima à coordenações, mas no guia oficial do Bosque, o Bíblia Florestal\footnote{https://www.linguateca.pt/floresta/BibliaFlorestal/}, não há uma descrição formal para a mesma. Para evitar uma possível imprecisão ao traduzí-la, decidimos por remover do corpus as sentenças que a apresentam. Tal par ocorre em 981 casos, equivalente a <...> sentenças, correspondente a <..>\% do Bosque.
+
+
+
+
+
+
+
+% ---------------------------------------------------------------
+% \include{resultados.tex}

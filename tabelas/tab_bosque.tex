@@ -1,0 +1,50 @@
+\begin{longtable}{|p{0.1\linewidth}|p{0.2\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.3\linewidth}|}
+\caption{Tabela de conversão: BOSQUE para PTB}\\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações}\\
+\hline
+\endfirsthead
+\multicolumn{5}{c}%
+{\tablename\ \thetable\ -- \textit{Continuação da página anterior}} \\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações} \\
+\hline
+\endhead
+\hline \multicolumn{5}{r}{\textit{Continua na próxima página}} \\
+\endfoot
+\hline
+\endlastfoot
+    acl & Forma Oracional averbais & ?? & 277 & Não possui conversão direta. Melhor explicado em \ref{subsec:tag_acl}\\
+    adj & adjectivos & JJ & 3484 & \\
+    adjp & Sintagma adjectivais & ADJP & 3367 & \\
+    adv & advérbios & RB & 3052 & \\
+    advp & Sintagma adverbiais & ADVP & 2288 & \\
+    art & artigos & DT & 10742 & \\
+    conj-c & conjunções coordenativa & CC & 1723 & Explicado na sessão \ref{subsec:cu}\\
+    conj-s & conjunções subordinativa & IN & 798 & \\
+    cu & sintagma evidenciador de relação de coordenação & \_CU\_ & 1744 & Será explicado na sessão \ref{subsec:cu}\\
+    ec & prefixos & \_EC\_ & 80 & Será explicado na sessão \ref{subsec:sec_ec}\\
+    fcl & Forma Oracional Finita & VP & 6040 & Sentenças onde os verbos não estão no infinitivo. Sintagma verbal\\
+    icl & Forma Oracional não finita & VP & 1827 & Sentenças onde os veros estão conjugados. Sintagma Verbal\\
+    intj & interjeições & UH & 22 & \\
+    n & substantivos & NN & 15724 & \\
+    n-adj & substantivos / adjectivos & NN & 174 & Pesquisa mostrou que são todas as ocorrências são substantivos\\
+    np & Sintagma nominais & NP & 22981 & \\
+    num & numeral & CD & 1625 & \\
+    pp & Sintagma preposicionais & PP & 11576 & \\
+    pron-det & pronomes determinativos & DT & 1580 & Pelo \citeonline{posPTBguidelines}, \textquote{\textit{This category includes [\ldots] the indefinite determiners \textit{another}, \textit{any}, \textit{some}, \textit{each}, \textit{either} [\ldots], \textit{neither} [\ldots], \textit{that}, \textit{these}, \textit{this} and \textit{those} [\ldots]}}. No português, também, por \citeonline[p88]{mioto2013novo} \textquote{[\ldots] DP pode ter seu núcleo D preenchido por um item que tenha valor de determinante como artigos, demonstrativos e interrogativos[\ldots]}\\
+    pron-indp & pronomes independentes & PRP & 1001 & PTB considera 4 tipos de pronomes: os pessoais, possessivos, wh-possessivos e wh-pessoais. Decidimos manter a marcação de pronomes pessoais. Isso é reforçado pela própria descrição de \citeonline{freitas2007biblia}, \textquote{pronome independente (com comportamento semelhante ao nome)}\\
+    pron-pers & pronomes pessoais  & PRP & 891 & \\
+    prop & nomes próprios & NNP & 4575 & \\
+    prp & preposições & IN & 11694 & \\
+    sq & Sintagma sequências discursivas & S & 56 & Marcador de Sentença\\
+    v-fin & verbos finitos & VBP & 6167 & Verbos conjugados\\
+    v-ger & verbos gerúndios & VBG & 328 & \\
+    v-inf & verbos infinitivos & VB & 1684 & \\
+    v-pcp & verbos particípios & VBN & 1577 & \\
+    vp & Sintagma verbais & VP & 8103 & \\
+    x & <desconhecido> & VB & 552 & Explicado na sessão \ref{subsec:sec_x}
+
+\label{tab:tab_bosque}
+
+\end{longtable}

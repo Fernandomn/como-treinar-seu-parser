@@ -1,0 +1,54 @@
+\subsection{\textit{Treebanks} para Língua Portuguesa}
+\label{sec:tbPortugues}
+Descreveremos nessa seção alguns dos \textit{treebanks} existentes para a língua portuguesa. Estes são os \textit{treebanks} que usaremos no nosso processo de transdução.
+
+\subsubsection{FLORESTA SINTÁ(C)TICA}
+\label{subsec:florestasintatica}
+
+A Floresta Sintá(c)tica é um projeto colaborativo entre o Linguateca\footnote{https://www.linguateca.pt/} e o VISL\footnote{https://visl.sdu.dk/}. Consta de um conjunto de diversos \textit{treebanks}, em diversos estágios de construção, e diversos usos. O projeto conta atualmente com 4 partes distintas, separadas.
+
+Como visto em \citeonline{linguatecaFloresta}:
+\begin{quote}
+    \textquote{Atualmente, a Floresta Sintá(c)tica tem quatro partes, que diferem quanto ao gênero textual, quanto ao modo (escrito vs falado) e quanto ao grau de revisão linguística: o Bosque, totalmente revisto por linguistas; a Selva, parcialmente revista, a Floresta Virgem e a Amazônia, não revistos. Junto, todo esse material soma cerca de 261 mil frases (6,7 milhões de palavras) sintaticamente analisadas.}
+\end{quote}
+
+Neste trabalho, utilizamos o Bosque. Ele está disponível no site da Linguateca, em sua versão 8.0, que data de 2008. 
+
+Cabe notar que o Bosque está, atualmente, no projeto Universal Dependencies (UD). Decidimos manter o uso da versão 8.0 por ser disponibilizado, também, em formato com PTB, o que facilitaria (em tese) nosso estudo. O formato disponibilizado pelo UD segue o padrão CoNLL (\citeonline{nivre2007conll}).
+\begin{center}
+\input{imagens/bosque_ad.tex}
+\end{center}
+O Bosque segue o formato chamado Árvores Deitadas \citeonline[p~6]{afonso2006arvores}, que se apresenta como na Figura \ref{fig:bosque_ad}. Como descrito em \citeonline{freitas2007biblia}, 
+\begin{quote}
+    \textquote{A cada frase está associada informação textual, isto é, informação relativa ao extracto a que a frase pertence, o número da frase no Bosque e o texto (frase per se). Cada frase é iniciada por A1 (análise 1 da frase). A mesma árvore pode ter mais do que uma análise distinta que são indicadas por A2, A3, etc. [\ldots]\\
+    NÓ RAIZ é o nó mais alto da árvore correspondente à sua raiz, por isso é único, isto é, não existem mais nós ao mesmo nível. Assim, o nó raiz não exibe descontinuidade nem pode estar coordenado.\\
+    Todos os outros nós constituintes da árvore (NÓ 1 e nós dependentes e os dependentes dos nós dependentes (NÓ 1.1. ou NÓ 1.2. a NÓ 1.1.1....N ou NÓ 1.2.1....N) estão por isso abaixo da raiz da árvore.}
+\end{quote}
+\begin{center}
+\input{imagens/bosque_ad_exemplo.tex}
+\end{center}
+Cabe notar que cada nó segue o formato (F:f), ou seja, \textbf{F}unção e \textbf{f}orma. Como descrito em \citeonline{freitas2007biblia},
+\begin{quote}
+    \textquote{A função corresponde à função sintáctica (sujeito, predicador, etc.) que cada constituinte possui em cada oração ou sintagma que compõe a frase. A forma corresponde à estrutura interna dos constituintes, isto é, sintagmas e orações para os nós não terminais, e, para os nós terminais, é usada uma classificação muito próxima das classes de PoS (advérbio, adjectivo, etc.).}
+\end{quote}
+    
+Como podemos ver na Figura \ref{fig:bosque_ad_exemplo}, cada nó é rico em informações morfossintáticas. O tratamento para isto será melhor descrito em \ref{sec:treinando_sp_bosque}. As \textit{tags} utilizadas no Bosque, bem como seu nome, podem ser vistos na Tabela \ref{tab:tab_bosque}, ou no anexo 1 da Bíblia Florestal (\citeonline{freitas2007biblia}). A Bíblia é o manual de anotação, que descreve toda estrutura do Projeto. Caso deseje, uma versão impressa, \citeonline{afonso2006arvores} foi disponibilizada. Ao leitor curioso, recomendamos a sua leitura. 
+
+
+\subsubsection{CINTIL}
+\label{subsec:cintil}
+O CINTIL é um \textit{dataset} desenvolvido pela \textit{Natural Language and Speech Group} (NLX-Group\footnote{ \url{http://nlx.di.fc.ul.pt/}}) da Universidade de Lisboa\footnote{\url{https://www.ulisboa.pt}}. Seu objetivo é permitir o estudo linguístico da língua portuguesa, variante europeia.
+
+Por \citeonline[p~1]{narrativeDescriptionCintil}, ele é um corpus de árvores sintáticas de constituência, de textos em português, constituído por 10039 sentenças e 110166 tokens, tirados de diversas fontes de domínios: notícias (8861 sentenças, 101430 tokens), romances (339 sentenças, 3082 tokens). Além disso, há também 779 sentenças (5654 tokens) que são usadas para testes de regressão de gramáticas computacionais que apoiaram a anotação. A Tabela \ref{tab:cintil_tags} demonstra a distribuição do corpus.
+
+\begin{center}
+\input{tabelas/tab_cintil_tags.tex}
+\end{center}
+
+Foi usada uma classificação semi-automática na criação do \textit{treebank}. Como visto no Iness\footnote{\url{http://clarino.uib.no/iness/page?page-id=port-descr}}(\citeonline{rosen2012open}), num primeiro momento, uma \textit{deep computational grammar} \citeonline{lxgram} é usada para gerar todas as possíveis árvores duma sentença. Na sequência, é feita uma desambiguação manual, onde dois anotadores escolhem a melhor árvore. Em caso de empate, um terceiro especialista servirá de árbitro.
+
+O CINTIL é distribuído em formato XML, e as árvores classificadas tem formato semelhante ao do PTB, fazendo separações usando parênteses, e com classes muito parecidas. A Tabela \ref{tab:tab_cintil} demonstra as \textit{tags} originais, e a frequência de uso no banco.
+
+Os padrões de classificação do CINTIL atual está catalogado no \textit{CINTIL TreeBank handbook} \citeonline{cintil_handbook}.
+
+O CINTIL tem uma versão de 2005, e uma mais atual distribuída em 2012, pelo Metashare\footnote{\url{http://metashare.elda.org/repository/browse/cintil-treebank/2a17d622abcd11e1a404080027e73ea242399e2114844f63896f2f92dd31233e/}}. Existe o site de divulgação oficial, cintil.ul.pt\footnote{\url{http://cintil.ul.pt/pt/cintilwhatsin.html}}, porém ele não é atualizado há algum tempo. Isso se nota pois o \textit{tagset} disponibilizado por ele está desatualizado, sendo referente à versão anterior. O mais atual segue as diretrizes do supracitado \textit{Handbook}.

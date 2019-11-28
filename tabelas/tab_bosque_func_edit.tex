@@ -1,0 +1,44 @@
+\begin{longtable}{|p{0.1\linewidth}|p{0.2\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.3\linewidth}|}
+\caption{Tabela de conversão: BOSQUE para PTB (Funções relevantes)}\\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações}\\
+\hline
+\endfirsthead
+\multicolumn{5}{c}%
+{\tablename\ \thetable\ -- \textit{Continuação da página anterior}} \\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações} \\
+\hline
+\endhead
+\hline \multicolumn{5}{r}{\textit{Continua na próxima página}} \\
+\endfoot
+\hline
+\endlastfoot
+    \textgreater A & dependente em adjp ou advp (antecede o núcleo) & \textgreater A & 371 & Explicado em \ref{subsec:bosque_a} \\
+    A\textless & dependente em adjp ou advp (segue o núcleo) & A\textless & 272 & Explicado em \ref{subsec:bosque_a} \\
+    ACC & objecto directo (incluindo alguns tipos de se) & depende da \textit{form\_tag} & 4315 & Explicado em \ref{subsec:tag_acl}\\
+    ADVL & adjunto adverbial & depende da form & 6032 & Explicado em \ref{subsec:tag_acl}\\
+    CJT & elemento conjunto & \_CJT\_ & 3945 & Explicado em \ref{subsec:CJT}\\
+    EXC & enunciado exclamativo & S & 36 & \\
+    H & núcleo & depende da form & 40148 & \\
+    KOMP\textless  & complemento comparativo & \_KOMP\_ & 40 & Explicado em \ref{subsec:tag_komp}\\
+    \textgreater N & adjunto adnominal (antecede o núcleo) & NP & 14009 & Dobra do NP por adjunto, como visto em \citeonline[p~67]{mioto2013novo}
+    \footnote{\citeonline[p~67]{mioto2013novo} descreve a dobra de sintagmas para adjuntos.
+    \begin{quote}
+        \textquote{[\ldots] existem ainda sintagmas que são licensiados numa sentençça sem serem complemento ou especificador de um núcleo. São os chamados \textbf{adjuntos}. [\ldots] Um adjunto [\ldots] é um sintagma que está apenas contido na projeção máxima de um núcleo. [\ldots] A representação do adjunto sempre implica a duplicação da categoria com a qual ele está relacionado. Desta forma, o adjunto vai ser dominado apenas pelo segmento de cima da categoria duplicada.}
+    \end{quote}}
+    \\
+    N< & adjunto adnominal (segue o núcleo) & NP & 9208 & Dobra do NP por adjunto, como visto em \citeonline[p~67]{mioto2013novo}\\
+    OC & predicativo do objeto & depende da form & 102 & Explicado em \ref{subsec:tag_acl}\\
+    \textgreater P & dependente da preposição & PP & 71 & Por observação, e por \citeonline[p~67]{mioto2013novo}\\
+    P & predicador & VP & 8053 & Pela \citeonline[p~60]{afonso2006arvores}, O predicador é sempre de natureza verbal e, por isso, pode exibir apenas formas verbais\\
+    P< & argumento de preposição & PP & 11574 & Por observação, e por \citeonline[p~67]{mioto2013novo}\\
+    PIV & objecto preposicional & PP & 1097 & \\
+    QUE & enunciado interrogativo & S & 64 & \\
+    SC & predicativo do sujeito & VP & 1254 & \\
+    STA & enunciado declarativo & S & 3683 & \\
+    UTT & enunciado & S & 468 &
+
+\label{tab:bosque_func_edit}
+
+\end{longtable}

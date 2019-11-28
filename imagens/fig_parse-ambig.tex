@@ -1,0 +1,67 @@
+\begin{figure}[h!]
+    \centering
+    % \includegraphics{}
+    Para a sentença \textit{Arlindo tirou os pés da mesa}:
+    
+    \begin{forest}
+        [S
+            [SN
+                [\textit{Arlindo}]
+            ]
+            [SV
+                [V
+                    [\textit{tirou}]
+                ]
+                [SN
+                    [SN
+                        [\textit{os pés}]
+                    ]
+                    [SP
+                        [\textit{da mesa}]
+                    ]
+                ]
+            ]
+        ]
+    \end{forest}
+    \begin{forest}
+        [S
+            [SN
+                [\textit{Arlindo}]
+            ]
+            [SV
+                [V
+                    [\textit{tirou}]
+                ]
+                [SN
+                    [\textit{os pés}]
+                ]
+                [SP
+                    [\textit{da mesa}]
+                ]
+            ]
+        ]
+    \end{forest}
+    \begin{forest}
+        [S
+            [SN
+                [\textit{Arlindo}]
+            ]
+            [SV
+                [SV
+                    [V
+                        [\textit{tirou}]
+                    ]
+                    [SN
+                        [\textit{os pés}]
+                    ]
+                ]
+                [SP
+                    [\textit{da mesa}]
+                ]
+            ]
+        ]
+    \end{forest}
+    
+    \caption[Exemplo de ambiguidade entre árvores]{Exemplo de ambiguidade entre árvores (Adaptado de \citeonline[p~10]{paganiavaliaccao})}
+    \label{fig:parse-ambiguity}
+\end{figure}

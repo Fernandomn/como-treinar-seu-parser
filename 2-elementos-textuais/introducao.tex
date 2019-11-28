@@ -1,0 +1,151 @@
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+\chapter{Introdução}
+\label{cha:introducao}
+% ----------------------------------------------------------
+\begin{quote}
+    \textquote{O mundo é mediado pela linguagem} \citeonline{oliveira2019servico}
+    \footnote{É claro que uma reflexão tão bonita não teria sido gerada por mim. Muita gente já falou isso antes de mim, \citeonline{spolador2018mediadora} e \citeonline{baccega1995palavra} para citar exemplos.}
+\end{quote}
+No sentido que, interações humanas são realizadas, com o outro, a partir da linguagem, ou interpretadas com base nela. 
+% \textquote{Mas e quando eu chuto uma pedra? Eu só uso a linguagem pra xingar ela!}.
+Pode-se pensar, então, em situações nas quais a linguagem \textquote{não é} diretamente usada, como ao chutar uma pedra.
+% Bom, você interpreta toda a situação se valendo da linguagem para fazê-lo. 
+Porém, toda a situação é interpretada se valendo da linguagem para fazê-lo. 
+Quando se lembra dela, quando comenta com alguém, quando\ldots bom, usa palavrões logo depois de ter quebrado o dedo mindinho. Mas é claro, o falar, o ler e o ouvir tem um peso fundamental.
+
+Fanon afirma, em \citeonline[p~33]{fanon2008pele}: \textquote{Falar é estar em condições de empregar uma certa sintaxe, possuir a morfologia de tal ou qual língua, mas é sobretudo assumir uma cultura, suportar o peso de uma civilização}. E complementa \Ibidem[p~33]{fanon2008pele} \textquote{Um homem que possui a linguagem possui, em contrapartida, o mundo que essa linguagem expressa e que lhe é implícito}. Dominar a língua, ser capaz de interpretá-la e articulá-la, é um poder tamanho. Não só o poder de influência, mas o poder do reconhecimento como pessoa. Citando Fanon uma última vez, \Ibidem[p~33]{fanon2008pele} \textquote{Uma vez que falar é existir absolutamente para o outro}.
+
+Não é de surpreender, portanto, que a partir do momento que possuímos ferramentas tão poderosas como computadores, desejemos que elas sejam capazes de falar e compreender linguagem humana. Este não é um desejo novo. Pelo contrário, quando Turing em \citeonline[p~433]{turingJogoImitacao}, nos pede que consideremos a questão \textquote{\textit{Can machines think?}}\footnote{\textquote{Podem as máquinas pensar?}. Tradução própria.}, a forma sugerida para que o famoso Jogo da Imitação seja \textquote{jogado} é, essencialmente, uma troca de mensagens, ou seja, o uso livre (e consciente, aqui está a graça) da linguagem. Sendo um pouco mais pragmático, já em 1956 acontece o \textit{Dartmouth Summer Research Project on Artificial Intelligence}\footnote{\textquote{Projeto de Pesquisa de Verão em Inteligência Artificial de Dartmouth}. Tradução própria.}, em New Hampshire, Estados Unidos, que viria a ser conhecido como a origem da Inteligência Artificial (I.A.) como conhecemos hoje. Seu nome foi cunhado por um dos idealizadores, John Mccarthy, e o evento termina sem uma concordância entre metodologias e problemas comuns da teoria geral. Pelo contrário, como vemos em \citeonline[p~87]{Moor2006DartmouthIA}, na proposta da conferência constava:
+\begin{quote}
+    \textquote{\textit{The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.}}
+    \footnote{\textquote{O estudo deve seguir com base da conjectura que todo aspecto do aprendizado ou qualquer outra característica da inteligência pode, em princípio, ser tão precisamente descrito, que uma máquina pode ser feita para simulá-lo}. Tradução própria.}
+    \footnote{Eu gostaria de trazer um debate entre Alan Turing e Marvin Minsky. Turing, em \citeonline[p~442]{turingJogoImitacao} postula: \textquote{The popular view that scientists proceed inexorably from well-established fact to well-established fact, never being influenced by any unproved conjecture, is quite mistaken}. Já Minsky como visto em \citeonline[p~87]{Moor2006DartmouthIA}, demonstra descontentamento com o andamento da área. \textquote{Minsky expressed the concern that too many in AI today try to do what is popular and publish only successes. He argued that AI can never be a science until it publishes what fails as well as what succeeds.}}
+\end{quote}
+
+A interpretação da linguagem por meios automáticos é uma das várias áreas que a I.A, chamada de PLN (Processamento de Linguagem Natural, ou NLP em inglês). Que pode atrair, obviamente, muitos olhares poderosos. Entre 1987 e 1997 aconteceram as \textit{Message Understanding Conference} (MUC)\footnote{\textquote{Conferência de Compreensão de Mensagens}. Tradução própria.}. Como visto em \citeonline[p~466]{Grishman1996MUC}, foram organizadas pela NRAD\footnote{\textquote{\textit{Naval Research And Development}}, Desenvolvimento e pesquisa Naval}, uma divisão da RDT\&E\footnote{\textquote{\textit{Research, Development, Test \& Evaluation}}, Pesquisa, Desenvolvimento, Teste e Avaliação} do Centro de Comando Naval, Controle, e Vigilância Oceânica (antiga NOSC, Centro de Sistemas Oceânico Navais), com apoio da DARPA, a Agência de Projetos de Pesquisa de Defesa Avançada. Na conferência, diversos testes eram feitos, onde os participantes recebiam provas de Extração de Informação, visando obter dados valiosos de documentos.\footnote{\textquote{Curiosamente}, já na sua terceira edição, o MUC-3, os documentos base se tornaram relatórios sobre terrorismo na América do Sul e Central, o que mostra a atenção política dada pelos EUA ao Cone Sul.}
+
+De quais formas podemos ensinar um computador a ler e escrever? Diversas, na verdade. Uma delas é a Classificação Sintática Automatizada. Como definido por Charniak em \citeonline[p~33]{charniak97statistical}, \textquote{\textit{Syntactic parsing is the process of assigning a phrase marker to a sentence}}.
+% Ou seja, lembra na escola, quando você tinha que fazer a análise sintática de \textquote{João ganhou a bola}? 
+Ou seja, realizar a análise sintática de sentenças como \textquote{João ganhou a bola}, por exemplo.
+João é substantivo, ganhou é verbo etc. Classificação automatizada é programar o computador para que faça isso por nós.
+
+Tenta-se, até hoje, achar métodos baseados em lógica para realizar tal tarefa. Porém, o que anda em voga são os métodos estatísticos. Como definido em \citeonline[p~37]{charniak97statistical},
+\begin{quote}
+    \textquote{\textit{Statistical parsers work by assigning probabilities to possible parses of a sentence, locating the most probable parse, and then presenting the parse as the answer. Thus, to construct a statistical parser, one must figure out how to (1) find possible parses, (2) assign probabilities to them, and (3) pull out the most probable one.}}
+    \footnote{\textquote{Classificadores estatísticos funcionam atribuindo probabilidades para possíveis classificações (árvores) de uma sentença, localizando a árvore mais provável, e então apresentando a árvore como resposta. Também, para construir um \textit{parser} estatístico, deve-se descobrir como (1) encontrar possíveis árvores, (2) atribuir probabilidades para elas, e (3) devolver a mais provável}. Tradução própria.}
+\end{quote}
+E porque utilizar a estatística, ao invés de regras bem estabelecidas? Nas palavras do próprio Charniak, em \citeonline[p~89]{Moor2006DartmouthIA}:
+\begin{quote}
+    \textquote{\textit{Statistics has taken over natural language processing because it works.}}
+    \footnote{\textquote{Estatística dominou o processamento de linguagem natural porque funciona}. Tradução própria.}
+\end{quote}
+Como vemos em \citeonline{kegler2019parsing}, é possível retomar o histórico do estudo de \textit{parsers}\footnote{\textit{\textit{parser}} é o equivalente a classificador sintático na língua inglesa.} à períodos anteriores à era comum,
+% mas vamos nos reduzir aos estudos de Ada Lovelace em 1854, com a primeira linguagem de programação, e aos estudos do sr. Rutishauser em 1949, com o primeiro compilador teórico. 
+mas podemos tomar como partida os estudos do Sr. Rutishauser. Pode-se dizer, então, que os estudos sobre \textit{parsers} ocorrem desde 1949, pelo menos.
+\textit{Parsers} tem largo uso tanto para a área de Compiladores, como de PLN (falamos disso em \ref{sec:parsing}). Uma busca despretensiosa no Google Acadêmico\footnote{scholar.google.com.br} por \textquote{\textit{parser}} nos retorna aproximadamente 320.000 resultados. Pesquisar por \textquote{\textit{natural language processing}} retornará aproximadamente 3.290.000. \textit{Parsers} são quase 10\%\footnote{Na verdade, são 9.72\%. Mas você não faz muitos amigos levando as coisas tão ao pé da letra.} deste total.
+
+Uma área tão antiga, certamente tem estudos para o português.\footnote{Por que o foco no português? Porque os autores são brasileiros.} Fazendo o mesmo \textquote{estudo empírico} por \textquote{\textit{\textit{parser} portuguese}}\footnote{classificador sintático português}, obtemos aproximadamente 10.400 resultados. Quase 3\%.
+% Para tantos idiomas no mundo, não é ruim.
+Existem diversos idiomas no mundo, é uma boa fatia.
+Já \textquote{classificador sintático português} retorna 15.100, melhor ainda. Já pesquisar por  \textquote{\textit{parser} english} retorna\ldots
+
+106.000. Quase um terço.
+
+Note, não é o objetivo deste trabalho um embate entre lusófonos e anglófonos. Mas, de fato, as pesquisas em PLN sobre a língua portuguesa ainda estão longe de alcançarem números tão expressivos. Claro, a pesquisa existe, é crescente, e demonstram grande entusiasmo e comprometimento dos pesquisadores. No STIL\footnote{\textquote{Symposium in Information and Human Language Technology}, Simpósio em Informação e Tecnologia de Linguagem Humana --  \url{http://www.bracis2019.ufba.br/index.html}} 2019, por exemplo, uma quantidade considerável de trabalhos visava a interpretação, ou o auxílio à pesquisa da língua portuguesa (na forma da criação de \textit{datasets}, por exemplo), com alto nível de qualidade. Existe interesse nos estudos para esta linguagem. Mas, usando o mesmo evento como um micro estudo de caso, poucos trabalhos envolviam a pesquisa com \textit{parsers}\footnote{\url{http://comissoes.sbc.org.br/ce-pln/stil2019/accepted.html}}. O que gerou esse desinteresse? Hipotese:
+\begin{quote}
+    Desenvolver \textit{parsers} não é trivial, mesmo com dados e métodos disponíveis.
+\end{quote}
+% Já abordamos as três partes da sentença nessa introdução.
+Como já vimos: O desenvolvimento de \textit{parsers} é bastante expressivo, mas exige tempo e recursos; existem dados que podem ser usados na língua portuguesa, e vem sendo desenvolvidos cada vez mais; e a comunidade científica já lida com o desenvolvimento deles há bastante tempo. Tem um detalhe, ainda não declarado: é um conhecimento ainda \textquote{fechado} à comunidade científica, e à grandes empresas de tecnologia. O público geral não conseguiria começar a estudar o desenvolvimento de \textit{parsers} com a mesma praticidade e acolhimento que pessoas que começam a desenvolver \textit{websites}, por exemplo. Então, tais dificuldades podem ser exploradas.
+% vamos explorar essas dificuldades!
+
+Como já foi dito, vários métodos e vários materiais já existem, e estão disponíveis publicamente para acesso e uso. Porque não trabalhar com isto? Poderíamos usar algum \textit{parser} em inglês, dados em português, e pronto, o sucesso nos aguarda.
+
+Infelizmente, como espera-se que fique claro com este trabalho, não é simples fazer tal tarefa. Para serem utilizados, \textit{parsers} recebem implementações específicas para a língua que foram desenvolvidos. Mais do que isso, esperam informações que já estejam em formatos específicos, e estes, muitas vezes, são pensados para sua língua de origem, não para idiomas de forma geral.
+% Mas essa ideia ainda é boa demais para ser desperdiçada.
+Podemos, então, tentar outra abordagem.
+Porque não \textit{transduzimos} os dados?
+    
+% \textquote{Ei, você escreveu errado, é \textquote{traduzir}!}
+
+O termo \textquote{transduzir} parece estar escrito errado, mas como explicado por \citeonline[p~1]{Mohri2004}:
+\begin{quote}
+    \textquote{\textit{[Transductors] are automata in which each transition in addition to its usual input label is augmented with an output label from a possibly new alphabet, and carries some weight element of a semiring. Transducers can be used to define a mapping between two different types of information sources, e.g., word and phoneme sequences.}}
+    \footnote{\textquote{[Transdutores] São autômatos os quais cada transição, em adição à sua etiqueta de entrada normal, é aumentado com uma etiqueta de saída de um possível novo alfabeto, e carrega algum elemento de peso de um semi anel. Transdutores podem ser usados para definir um mapeamento entre dois tipos diferentes de fontes de informação, por exemplo palavras e sequências de fenômenos}. Tradução própria.}
+\end{quote}
+Ou seja, vamos transduzir um conjunto de dados n’outro. Porque não só \textquote{traduzir}? 
+% Porque linguas diferentes têm características diferentes, e precisamos estar prontos para lidar com elas.
+Porque línguas distintas possuem especificidades que torna complexo o processo de tradução direta. Não só isto, mas como veremos nas próximas páginas, os próprios conjuntos de dados possuem características muito peculiares.
+
+Após esta introdução, vamos definir o que é cada conceito do projeto, e suas etapas de execução, além de seus resultados.
+
+    
+\section{Contexto do Trabalho}
+\label{sec:contexto}
+Como já citado, o estudo de \textit{parser} é bastante conhecido do meio acadêmico, tendo muito uso tanto na NLP, como na compilação de linguagens de programação. Também, existe uma produção crescente para o desenvolvimento de tecnologias em NLP para o português, principalmente para as variantes européia e brasileira. Porém, o estudo de \textit{parsers} para a língua portuguesa parece não receber o mesmo entusiasmo, ficando restrito à melhoria dos sistemas já conhecidos.
+
+Com isto queremos, com pouco desenvolvimento, adaptar um \textit{parser} já estabelecido para a língua portuguesa. 
+
+Por que pouco desenvolvimento? Porque queremos, também, verificar o quão simples seria, para alguém sem conhecimento acadêmico, realizar tal feito.
+
+
+\section{Objetivos Gerais}
+\label{sec:objetivos-gerais}
+%o que vc quer fazer 
+
+% O objetivo deste trabalho é transduzir conjuntos de dados do português para o inglês, e verificar se um \textit{parser} conhecido e já utilizado é capaz de ter boa performance, quando recebendo dados de outro idioma para o qual não foi desenvolvido primariamente.
+O objetivo deste trabalho é realizar o treinamento de um \textit{parser} estabelecido, a partir de técnicas \textit{out-of-the-box}\footnote{\textquote{Fora da Caixa}, tradução própria.}, utilizando o mínimo de implementação. Verificar a capacidade de execução deste \textit{parser} a partir de conjuntos de treino originalmente não projetados para este classificador.
+
+Sobre \textit{out-of-the-box parser}, seguimos a linha de \citeonline[p~2]{Branco2010OutOfTheBox}, que se propõe a estender pacotes de \textit{software} já disponíveis, que permitam treinar um parser robusto a partir de um \textit{treebank}, que seja independente de linguagem e suporte uma aplicação para o português sem grandes problemas.
+
+\section{Objetivos Específicos}\label{sec:objetivos-especificos}
+\begin{itemize}
+%quebrar o problema grande em subproblemas
+    \item Estudar sobre analisadores sintáticos (\textit{parsers});
+    \item Verificar a existência de floresta sintática (\textit{treebanks}) na língua portuguesa;
+    \item Verificar a existência de \textit{parsers} em português;
+    \item Avaliar um \textit{parser} convencional para utilizar;
+    \item Adaptar bancos de árvores para utilizar no \textit{parser} utilizado;
+    \item Treinar \textit{parser} com o banco de árvores adaptado;
+    \item Avaliar resultados do \textit{parser};
+    \item Testar \textit{parser} com sentenças específicas.
+    
+\end{itemize}
+
+\section{Justificativa}	\label{justificativa}
+Ao debater o Processamento de Linguagem Natural, \citeonline[p~10]{vieira2001linguistica} comentam:
+\begin{quote}
+    \textquote{Para lidar com os vários problemas, temos hoje, em nível mundial, uma comunidade científica e acadêmica em crescimento. Há muita pesquisa e trabalhos realizados principalmente para o Inglês, Espanhol, Alemão, Francês e Japonês. Encontramos, porém, carência de pesquisas, ferramentas, recursos lingüísticos e humanos para tratar computacionalmente a língua portuguesa.}
+\end{quote}
+Como já citado, a quantidade de pesquisas em \textit{parsers} para a língua portuguesa ainda estão em número reduzido com relação aos estudos mundiais. E mais, por observação empírica, nota-se que estão muito focados na reprodução e manutenção de materiais já existentes, e antigos.
+\citeonline[p~371]{Manning1999FoundationsNLP}:
+\begin{quote}
+    \textquote{\textit{A full evaluation of taggers as useful preprocessors for high-level multilingual NLP tasks will only be possible after sufficient experimental results from a wide range of languages are available.}}
+    \footnote{\textquote{Uma avaliação completa de classificadores como pré-processadores úteis para tarefas de NLP multilingues de alto nível só serão possiveis após resultados experimentais suficientes de uma ampla gama de línguas estiver disponível}. Tradução própria.}
+\end{quote}
+
+Deseja-se que este seja mais um trabalho a acrescentar e fomentar conteúdo para esta subárea de pesquisa.
+
+
+\section{Metodologia}\label{sec:metodologia}
+% O método utilizado para elaboração deste trabalho de conclusão de curso, foi: estudar conjuntos de sentenças já classificadas na língua portuguesa (\textit{treebanks}, serão explicados em \ref{treebank}), e verificar as correspondências destas com o formato aceito pelo \textit{parser} escolhido. A partir de então, verificar quais etiquetas morfossintáticas (\textit{POS tags}, abordadas em \ref{subsec:POStags}) tem correspondência direta, e quais não. As que possuem, foram feitas transduções diretas. As que não, verificar uma correspondência gramatical, e utilizá-las no procedimento. 
+
+% Certas estruturas gramaticais são distintas, por mais que possuam valor sintático semelhante. Para estas, foi necessário fazer a convergência de estrutura, transduzindo assim não só as etiquetas, mas também a morfologia da árvore classificada (\textit{parse tree}, explicadas em \ref{parsing}).
+
+% As sentenças classificadas e transduzidas foram utilizadas para treinar o \textit{parser}. Foram coletados os dados de resultados dos treinos e testes, e e feitas análises baseadas nos métodos abordados em \ref{resultados}. 
+
+Para o estudo dos classificadores sintáticos, foi feita a revisão bibliográfica. Pesquisou-se no Google Acadêmico\footnote{\url{http://www.scholar.google.com}} por \textit{parsing}, \textit{statistical parsing}, \textit{constituency parsing}, \textit{Neural Networks and parsing}, \textit{Treebank}, \textit{parser comparison}. Foram coletados, em média, 10 artigos por assunto pesquisado, que tiveram seu resumo/\textit{abstract} lidos, para avaliação de relevância. Além disto, houve também a leitura dos capítulos 3, 11 e 12 de \citeonline{Manning1999FoundationsNLP}. Estudos diversos também foram realizados quando surgiu necessidade, para a resolução de dúvidas por exemplo.
+
+Para a pesquisa de florestas sintáticas para o português, além do diálogo com estudantes e professores, pesquisou-se pelas palavras-chave \textit{portuguese treebank}, \textit{treebank português}, \textit{floresta sintática português} em motores de busca como Google Acadêmico e Google\footnote{\url{www.google.com}}. Encontramos o Bosque, do projeto Floresta Sintá(c)tica disponível publicamente, e nos foi cedido o CINTIL.
+
+De forma análoga, pesquisou-se por \textit{parsers} na língua portuguesa nos motores de busca supracitados, com as palavras-chave \textit{portuguese parser}, \textit{parser português}, \textit{classificador sintático português}. Encontramos referências ao PALAVRAS e ao LX-Parser.
+
+Para os \textit{parsers} convencionais, utilizamos os motores de busca supracitados, pesquisando por \textit{parser}, \textit{parsing}, \textit{constituency parser}. Durante a revisão de literatura, e em diálogos com especialistas, conhecemos o \textit{Stanford Parser}, que utiliza dados no formato \textit{Penn treebank}. Optamos por utilizá-lo.
+
+Para a adaptação entre bancos de árvores, estudamos a estrutura dos bancos originais, por observação de exemplos. De acordo com as necessidades observadas, estudamos os manuais de cada um, que conste: \citeonline{bracketing_ptb}, \citeonline{buildingPTB} \citeonline{freitas2007biblia} e \citeonline{siteLxParser}. De acordo com a necessidade de aprofundamento, estudamos também \citeonline{afonso2006arvores}, \citeonline{bracketing_ptb} e \citeonline{cintil_handbook}. Para a transdução propriamente dita, foi escolhida a linguagem Python, pela afinidade do autor com a mesma. Tentou-se manter transduções com características semelhantes, que permitisse uma adaptação \textit{direta}. Em casos onde foi obrigatória a adaptação do formato da sentença classificada, esforçou-se para realizar o mínimo de impacto na árvore resultante. 
+
+As sentenças pré-classificadas transduzidas foram utilizadas para treinar o \textit{parser} escolhido. Optou-se por não realizar desenvolvimento de código diretamente sobre \textit{parser}. Portanto, foi utilizada a interface por terminal (\textit{command line interface}, CLI). Usou-se o método \textit{10-fold validation}, para obter diversas métricas de treino, que pudessem ser comparadas entre sí, e com os resultados do outro conjunto de dados transduzido.
+
+O classificador em questão imprime os resultados de treino por padrão. Tais resultados foram coletados, catalogados, e analisados. A análise foi feita, primeiramente, separando os resultados de cada conjunto de dados, e depois comparando-os.

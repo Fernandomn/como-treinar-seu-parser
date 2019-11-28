@@ -1,0 +1,78 @@
+\subsection{Resultados do CINTIL}
+\label{resultados_cintil}
+Nesta sessão, demonstraremos os resultados obtidos com a transdução do CINTIL.
+
+\subsubsection{Treinamento} \label{result_treino_cintil}
+Na Tabela \ref{tab:resultados_treino_cintil}, podemos ver o relatório de treinamento de cada execução do SP com o CINTIL transduzido.
+\begin{center}
+\input{tabelas/tab_cintil_result_treino.tex}
+\end{center}
+As colunas necessitam de explicações, cuja coleta foi trabalhosa. O FAQ do SP é pouco informativo, e o do CoreNLP possui a mesma dificuldade.
+
+Pelo código-fonte do SP\footnote{A referência foi a classe LexicalizedParser.java, que está disponível em \url{https://github.com/chbrown/stanford-parser/blob/master/edu/stanford/nlp/parser/lexparser/LexicalizedParser.java}}, \textit{States} representa a quantidade de Índices de Estado. Inferiu-se que é a quantidade de estados de transição da gramática gerada pelo treino. 
+
+\textit{Tags}, por sua vez, representa a quantidade de Índices de \textit{Tags}. Seria a quantidade de \textit{Tags} registradas durante o treino (note que o número varia pouco).
+
+\textit{Words}, de forma análoga, representa a quantidade de Índices de Palavras. Deduz-se que, a quantidade de palavras distintas verificadas pelo treinamento.
+
+\textit{UnaryR} e \textit{BinaryR} correspondem, respectivamente, às quantidades de regras das gramáticas Unária e Binária. A descrição de ambas classes é, na sequencia, \textquote{\textit{Maintains efficient indexing of unary grammar rules}} e \textquote{\textit{Maintains efficient indexing of binary grammar rules}}. Pelo Javadoc do SP\footnote{\url{https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/parser/lexparser/package-summary.html}},
+\begin{quote}
+    \begin{itemize}
+        \item \textit{Unary Grammar - consists of unary rewrite rules, one per line, each of which is of the form A -> B, followed by the normalized log probability.}
+        \footnote{Gramática Unária - consiste em regras de reescrita unárias, uma por linha, cada qual na forma A -> B, seguida pela probabilidade log normalizada}
+        \item \textit{Binary Grammar - consists of binary rewrite rules, one per line, each of which is of the form A -> B C, followed by the normalized log probability.}
+        \footnote{Gramática Binária - consiste em regras de reescrita binárias, uma por linha, cada qual na forma A -> B C, seguida pela probabilidade log normalizada}
+    \end{itemize}
+\end{quote}
+Cabe frisar que tal modelo, utilizando regras unárias e binárias, segue o padrão da Forma Normal de Chomsky, que pode ser visto em \citeonline[p~389]{Manning1999FoundationsNLP}.
+
+Por fim, \textit{Taggings} se refere à \textquote{\textit{[\ldots]the number of rules (tag rewrites as word) in the Lexicon.}}\footnote{o número de regras (etiquetas reescritas como palavras) no Lexicon}. Lexicon é uma interface, descrita como
+\begin{quote}
+    \textquote{\textit{An interface for lexicons interfacing to lexparser. Its primary responsibility is to provide a conditional probability P(word|tag), which is fulfilled by the {\#score} method. Inside the lexparser, Strings are interned and tags and words are usually represented as integers.}}
+    \footnote{\textquote{Uma interface entre lexicons e o lexparser. Sua responsabilidade primária é prover uma probabilidade condicional P(palavra|etiqueta), que é preenchida pelo método \textit{\#score}. Dentro do \textit{lexparser}, \textit{Strings} são representadas canonicamente, e etiquetas e palavras são geralmente representadas por inteiros}. Tradução própria.}
+\end{quote}
+Pode-se notar que bons resultados de treino são obtidos apenas com o primeiro \textit{fold}, cujos resultados superam os outros \textit{folds}. Melhor visualizado na Figura \ref{fig:treino_cintil}.
+\begin{center}
+    \input{imagens/cintil_treino_result.tex}
+\end{center}
+
+\subsubsection{Avaliação} \label{result_aval_cintil}
+Nos apêndices, a Tabela \ref{tab:cintil_result_full} traz os resultados completos de nossos testes com o CINTIL. Vamos usar, aqui, versões reduzidas dos dados.
+
+Começando pelos dados da PCFG interna ao LexicalizedParser, podemos ver o seu resultado na Tabela \ref{tab:result_cintil_pcfg}, e na Figura \ref{fig:cintil_result_pcfg}.
+\begin{center}
+    \input{tabelas/tab_resultados_cintil_pcfg.tex}
+\end{center}
+Fica claro que a simples transdução de árvores da língua portuguesa para os padrões da língua inglesa, conservando as palavras, é insuficiente para o bom resultado do \textit{parser}.
+
+Nota-se, também, que para classificações mais eficiente,s bastaria utilizar o primeiro décimo do CINTIL, pois tal bloco superou todos os outros durante o treino.
+\begin{center}
+    \input{imagens/cintil_result_pcfg.tex}
+\end{center}
+
+\subsection{Estudos de caso}
+\label{subsec:ec_cintil}
+Separamos alguns exemplos de sentenças transduzidas, classificadas pelo \textit{Stanford Parser}. Serão exibidas as sentenças já em formato de árvore. 
+
+O \textit{parsing} do PS é feito executando o comando \ref{lst:cod_parsing_cintil}
+\begin{center}
+    \input{codigos/cod_parsing_cintil.tex}
+\end{center}
+
+\begin{center}
+    \input{imagens/ec_cintil_sem_ponto_tree.tex}
+\end{center}
+Na Figura \ref{fig:ec_cintil_sem_ponto_tree}, vemos o resultado da classificação de uma sentença originalmente sem pontuações. Há algumas coisas interessantes a serem notadas. Se, por um lado, de fato a falta de pontuação ajudou no \textit{parsing}, por outro o SP tem dificuldades em separar contrações de preposições.
+% (nós marcados em negrito).
+\begin{center}
+    \input{imagens/ec_cintil_conjp_tree.tex}
+\end{center}
+A Figura \ref{fig:ec_cintil_conjp_tree} nos dá mais material de interesse. Por exemplo, pode-se notar como a ausência de conhecimento de léxico da língua classificada gera confusões. O \textquote{o} é facilmente confundido, mas não apenas. A adjunção de CONJP, que existe no CINTIL unicamente para o posicionamento do PNT, aparentemente confunde o SP, que a transforma num adjunto de VP. O sintagma VP, em \textquote{não podia} tem seu núcleo, e por conseguinte, o sintagma como um todo, alterado. Provavelmente, para seguir a tendência da língua inglesa, que costuma ter o núcleo do sintagma posicionado mais à direita \citeonline[p~40]{charniak97statistical}. A confusão com as pontuações é notável, sendo transformadas em substantivo (NNS) ou verbo (VB), o que é curioso. Supões-se que o SP não seja estranho à pontuações mesmo que elas não venham no seu conjunto de treino.
+\begin{center}
+    \input{imagens/ec_cintil_cp_tree.tex}
+\end{center}
+Sobre o sintagma CP, a Figura \ref{fig:ec_cintil_cp_tree}. Curiosamente, o sintagma em questão está acompanhando bem a estrutura da árvore original, e da árvore transduzida. O maior destaque ficam para as palavras de classe aberta (substantivos, verbos, adjetivos). Aparentemente, a informação léxica continua sendo um problema.
+\begin{center}
+    \input{imagens/ec_cintil_virgula_tree.tex}
+\end{center}
+Por fim, para finalizar nossa revisão com as transduções do CINTIL, temos a Figura \ref{fig:ec_cintil_virgula_tree}. Nota-se uma tendência muito interessante, do SP, de considerar palavras como adjetivo (JJ). Mesmo para palavras que nunca assumem tal forma, como \textquote{pelos}, que pode ser ou a contração \textit{por + os}, ou um substantivo. A falta de treinamento com pontuações mais uma vez é sentida, uma vez que SP não sabe como resolver vírgulas e pontos.

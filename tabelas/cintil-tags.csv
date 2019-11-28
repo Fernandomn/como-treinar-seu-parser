@@ -1,0 +1,7 @@
+﻿Sub-corpus,id,Sentences,Tokens,Domain
+Sentences for regression testing,aTSTS,779,5654,Test
+CINTIL-International Corpus of Portuguese,bCINT,1219,13516,News
+,cCINT,399,3082,Novels
+CETEMPublico,eCTMP,7541,86905,News
+Penn TreeBank (translation),dPENN,101,1012,News
+Total,,10039,110166,

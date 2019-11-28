@@ -1,0 +1,93 @@
+\begin{longtable}{|p{0.15\linewidth}|p{0.2\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.25\linewidth}|}
+\caption{Tabela de conversão completa: BOSQUE para PTB (Funções)}\\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações}\\
+\hline
+\endfirsthead
+\multicolumn{5}{c}%
+{\tablename\ \thetable\ -- \textit{Continuação da página anterior}} \\
+\hline
+\textbf{Tag Original (Português)} & \textbf{Nome da Tag} & \textbf{Tag Convertida} & \textbf{Ocorrências} & \textbf{Observações} \\
+\hline
+\endhead
+\hline \multicolumn{5}{r}{\textit{Continua na próxima página}} \\
+\endfoot
+\hline
+\endlastfoot
+
+    \textgreater A & dependente em adjp ou advp (antecede o núcleo) & \textgreater A & 371 & Explicado em \ref{subsec:bosque_a}\\
+    A\textless  & dependente em adjp ou advp (segue o núcleo) & A\textless & 272 & Explicado em  \ref{subsec:bosque_a}\\
+    A\textless ARG & Estrutura não descrita em \citeonline{freitas2007biblia} & não convertida & 12 & \\
+    A\textless arg & Estrutura não descrita em  \citeonline{freitas2007biblia}  & não convertida & 45 & \\
+    ACC & objecto directo (incluindo alguns tipos de se) & depende da \textit{form\_tag} & 4315 & Explicado em \ref{subsec:tag_acl}\\
+    ACC-PASS & função do clítico se numa oração passiva (partícula apassivante) & NP & 39 & Refere-se ao uso de pronomes clíticos numa sentença\\
+    ADVL & adjunto adverbial & depende da form & 6032 & Explicado em \ref{subsec:tag_acl}\\
+    ADVL/A< [+1] & ambiguidade adjunto adverbial / adjunto adjetival & não convertida & 2 & \\
+    ADVL/ADVL[-3] & ambiguidade adjunto adverbial / adjunto adjetival & não convertida & 2 & \\
+    ADVL/N< [+1] & ambiguidade adjunto adverbial / adjunto adnominal & não convertida & 70 & \\
+    ADVL/N< [+2] & ambiguidade adjunto adverbial / adjunto adnominal & não convertida & 25 & \\
+    ADVL/N< [+3] & ambiguidade adjunto adverbial / adjunto adnominal & não convertida & 5 & \\
+    ADVL/PIV & ambiguidade adjunto adverbial / obj. ind. preposicional & não convertida & 1 & \\
+    APP & aposição (do substantivo)  [epíteto de identidade] & NP & 212 & \\
+    AUX & verbo auxiliar & VBP & 1271 & \\
+    AUX\textless  & Em contexto de coordenção, partícula de ligação entre o auxiliar partilhado e verbos coordenados & VP & 2 & \\
+    CJT & elemento conjunto & \_CJT\_ & 3945 & Explicado em \ref{subsec:CJT}\\
+    CJT\&ACC & Coordenação de constituintes com funções diferentes & NP & 1 & Por observação de frequências\\
+    CJT\&ADVL & Coordenação de constituintes com funções diferentes & PP & 3 & Por observação de frequências\\
+    CJT\&PASS & Coordenação de constituintes com funções diferentes & PP & 1 & Por observação de frequências\\
+    CJT\&PRED & Coordenação de constituintes com funções diferentes & ADJP & 2 & Por observação de frequências\\
+    CMD & enunciado imperativo & S & 7 & \\
+    CO & coordenador & não convertida & 1753 & \\
+    COM & complementizador em estruturas de comparação (como, (do) que ) & não convertida & 118 & \\
+    DAT & objecto indirecto pronominal (incluindo \textit{se} ) & NP & 37 & \\
+    EXC & enunciado exclamativo & S & 36 & \\
+    FOC & marcador de foco & ADJP & 44 & \\
+    H & núcleo & depende da form & 40148 & Explicado em \textless ..\textgreater \\
+    KOMP\textless  & complemento comparativo & \_KOMP\_ & 40 & Explicado em \ref{subsec:tag_komp}\\
+    MV & verbo principal & VP & 7999 & \\
+    \textgreater N & adjunto adnominal (antecede o núcleo) & NP & 14009 & Dobra do NP por adjunto, como visto em \citeonline[p~67]{mioto2013novo}\\
+    N\textless  & adjunto adnominal (segue o núcleo) & NP & 9208 & Dobra do NP por adjunto, como visto em \citeonline[p~67]{mioto2013novo}\\
+    N\textless /ADVL[-1] & ambiguidade adjunto adnominal / adjunto adverbial & não convertida & 3 & \\
+    N\textless /ADVL[-2] & ambiguidade adjunto adnominal / adjunto adverbial & não convertida & 1 & \\
+    N\textless /ADVL[-3] & ambiguidade adjunto adnominal / adjunto adverbial & não convertida & 1 & \\
+    N\textless /N\textless [+1] & ambiguidade adjunto adnominal / adjunto adnominal [1 nivel] & não convertida & 2 & \\
+    N\textless /N\textless [+2] & ambiguidade adjunto adnominal / adjunto adnominal [2 níveis] & não convertida & 20 & \\
+    N\textless /N\textless [-2] & ambiguidade adjunto adnominal / adjunto adnominal [2 níveis] & não convertida & 1 & \\
+    N\textless /P\textless [+1] & ambiguidade adjunto adnominal / argumento de preposição & não convertida & 1 & \\
+    N\textless ARG & complemento nominal (complementa um substantivo não deverbal) & PP & 139 & \\
+    N\textless ARGO & complemento nominal (complementa um substantivo deverbal, relativo ao objecto) & PP & 450 & \\
+    N\textless ARGS & complemento nominal (complementa um substantivo deverbal, relativo ao sujeito) & PP & 132 & \\
+    N\textless PRED & adjeto predicativo [epíteto predicativo] & NP & 1542 & \\
+    N\textless PRED / N\textless PRED[+2] & ambiguidade adjeto predicativo / adjeto predicativo & não convertida & 2 & \\
+    N\textless PRED / N\textless PRED[-2] & ambiguidade adjeto predicativo / adjeto predicativo & não convertida & 1 & \\
+    N\textless PRED / UTT[-4] & ambiguidade adjeto predicativo / enunciado & não convertida & 1 & \\
+    NUM\textless  & dependente de numeral & não convertida & 2 & \\
+    OA & complemento adverbial (relativo ao objecto) & depende da form & 27 & \\
+    OC & predicativo do objeto & depende da form & 102 & Explicado em \ref{subsec:tag_acl}\\
+    \textgreater P & dependente da preposição & PP & 71 & Por observação, e por \citeonline[p~67]{mioto2013novo}\\
+    P & predicador & VP & 8053 & Pela \citeonline[p~60]{afonso2006arvores}, O predicador é sempre de natureza verbal e, por isso, pode exibir apenas formas verbais\\
+    P\textless  & argumento de preposição & PP & 11574 & Por observação, e por \citeonline[p~67]{mioto2013novo}\\
+    PASS & agente da passiva & PP & 242 & \\
+    PAUX & em contexto de coordenação, verbo auxiliar partilhado por verbos principais com os seus próprios constituintes & não convertida & 27 & \\
+    PCJT & preposição conjunta (de/desde......a/até/para ) & não convertida & 20 & \\
+    PIV & objecto preposicional & PP & 1097 & \\
+    PIV/N\textless [+1] & ambiguidade objecto preposicional / adjunto adnominal & não convertida & 1 & \\
+    PMV & em contexto de coordenação, verbo principal coordenado com os seus próprios constituintes & não convertida & 52 & \\
+    PRD & Por \citeonline[p~123]{afonso2006arvores}, existe normalmente uma palavra- \textit{como}, \textit{por}, etc. -que é uma conjunção subordinativa que inicia a oração de predicação (a função é representada por PRD) & não convertida & 70 & \\
+    PRED & adjunto predicativo & VP & 76 & \\
+    PRT-AUX & partícula de ligação verbal & não convertida & 117 & \\
+    QUE & enunciado interrogativo & S & 64 & \\
+    \textgreater S & dependente de complementizador & JJ & 2 & \\
+    S\textless  & aposto da oração & NP & 18 & \\
+    SA & complemento adverbial [pode ser substituído por um pronome adverbial] (relativo ao sujeito) & PP & 204 & \\
+    SC & predicativo do sujeito & VP & 1254 & \\
+    STA & enunciado declarativo & S & 3683 & \\
+    SUB & subordinador & IN & 746 & \\
+    SUBJ & sujeito (incluindo sujeitos impessoais \textit{se} ) & depende da form & 4982 & depende da form\\
+    TOP & constituinte de tópico & NP & 1 & \\
+    UTT & enunciado & S & 468 & \\
+    VOC & constituinte vocativo & NP & 8 & \\
+    X & ? & \_X\_ & 376 & Explicado em \ref{subsec:sec_x}
+\label{tab:bosque_func_full}
+
+\end{longtable}

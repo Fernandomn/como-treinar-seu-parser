@@ -1,0 +1,37 @@
+Tag,Legenda original,Tradução
+CC,Coordinating conjunction,Conjunção coordenada
+CD,Cardinal number,Número cardinal
+DT,Determiner,Determinante/artigo
+EX,Existential there,There existencial
+FW,Foreign word,Palavra estrangeira
+IN,Preposition/subordinating conjunction,Preposição / conjunção subordinada
+JJ,Adjective,Adjetivo
+JJR,"Adjective, comparative","Adjetivo, comparativo"
+JJS,"Adjective, superlative","Adjetivo, superlativo"
+LS,List item marker,Marcador de item de lista
+MD,Modal,Modal
+NN,"Noun, singular or mass","Substantivo, singular ou conjunto"
+NNS,"Noun, plural","Substantivo, plural"
+NNP,"Proper noun, singular","Substantivo próprio, singular"
+NNPS,"Proper noun, plural","Substantivo próprio, plural"
+PDT,Predeterminer,Predeterminante
+POS,Possessive ending,Encerramento possessivo ('s)
+PRP,Personal pronoun,Pronome pessoal
+PRP$,Possessive pronoun,Pronome possessivo
+RB,Adverb,Advérbio
+RBR,"Adverb, comparative",Advérbio comparativo
+RBS,"Adverb, superlative",Advérbio superlativo
+RP,Particle,Particula
+SYM,Symbol (mathematical or scientific),Símbolo (matematico ou científico)
+TO,to,to (para)
+UH,Interjection,Interjeição
+VB,"Verb, base form","Verbo, infinitivo"
+VBD,"Verb, past tense","Verbo, passado"
+VBG,"Verb, gerund/present participle","Verbo, gerûndio / presente particípio"
+VBN,"Verb, past participle","Verbo, passado particípio"
+VBP,"Verb, non-3rd ps. sing. present","Verbo, presente singular não-3ª pessoa"
+VBZ,"Verb, 3rd ps. sing. present","Verbo, presente singular 3ª pessoa"
+WDT,wh-determiner,"Determinante com WH (What, Which)"
+WP,wh-pronoun,"Pronome com WH (who, whose, which, what) "
+WP$,Possessive wh-pronoun,Pronome possessivo com WH (whose)
+WRB,wh-adverb,"Advérbio com WH (when, where, how, why)"

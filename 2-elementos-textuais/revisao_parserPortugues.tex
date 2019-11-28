@@ -1,0 +1,33 @@
+\subsection{\textit{Parsers} para Língua Portuguesa}
+\label{parser_portugues}
+Seguindo a premissa do trabalho, pesquisamos por \textit{parsers} para a língua portuguesa já disponíveis. Encontramos principalmente dois, o PALAVRAS e o LX-Parser, que descreveremos aqui.
+
+% ------------------------------------------------------
+
+\subsubsection{PALAVRAS}\label{subsec:palavras}
+Este \textit{software} foi o produto da dissertação de doutorado de Echkard Bick\footnote{\url{https://visl.sdu.dk/~eckhard/Artikeloversigt.html}}, \citeonline{bick2000palavras}. É um \textit{parser} baseado no paradigma de \textit{Constrains}\footnote{limitações}. Este \textit{parser} foi utilizado no projeto Floresta Sintá(c)tica, para classificação automática de textos, como pode ser visto em \ref{subsec:florestasintatica}.
+
+Além do projeto da Linguateca, vemos em \citeonline{bick2000palavras} que o parser também é utilizado no projeto GramTrans\footnote{https://gramtrans.com/}, que utiliza o CETEMFolha e CETEMPúblico para fazer traduções dinamarquês / Português.
+
+Como visto em \citeonline{linguatecaFloresta}, 
+\begin{quote}
+    \textquote{O CETENFolha (Corpus de Extractos de Textos Electrónicos NILC/Folha de S. Paulo) é um corpus de cerca de 24 milhões de palavras em português brasileiro, criado pelo projecto Processamento computacional do português (projecto que deu origem à Linguateca) com base nos textos do jornal Folha de S. Paulo que fazem parte do corpus NILC/São Carlos, compilado pelo Núcleo Interinstitucional de Lingüística Computacional (NILC).}
+\end{quote}
+Por sua vez,
+\begin{quote}
+    \textquote{O CETEMPúblico (Corpus de Extractos de Textos Electrónicos MCT/Público) é um corpus de aproximadamente 180 milhões de palavras em português europeu, criado pelo projecto Processamento computacional do português [\ldots] após a assinatura de um protocolo entre o Ministério da Ciência e da Tecnologia (MCT) português e o jornal PÚBLICO em Abril de 2000.}
+\end{quote}
+Não conseguimos encontrar o PALAVRAS para fazer testes próprios.
+
+% ------------------------------------------------------
+
+\subsubsection{LX-PARSER}\label{subsec:lxparser}
+% siteLxParser
+Como descrito em \citeonline{siteLxParser}, \textquote{O LX-Parser é um analisador sintáctico de constituência para o Português baseado numa abordagem estatística}. Em \citeonline{Branco2010OutOfTheBox} podemos ver que tanto o Bosque quanto o CINTL foram considerados para o seu desenvolvimento. Cabe uma citação: 
+\textquote{\textit{Most of that paper actually consists in the description of the many difficulties that the authors need to cope with when adapting the tree format of Bosque to a format suited for training the parser}}.
+Trouxemos essa trecho pois encontramos dificuldades semelhantes. Por fim, \citeauthor{Branco2010OutOfTheBox} decidiram por continuar o desenvolvimento utilizando o CINTIL.
+\footnote{Pode-se supor que, o fato de a mesma equipe de desenvolvimento do LX-Parser ter desenvolvido o CINTIL, tenha tido forte influência nesta escolha.}
+
+LX-Parser usa como base o \textit{Stanford Parser}, e conta com um \textit{tagset} que pode ser visto na Tabela \ref{tab:tab_cintil}
+
+O software \textit{standalone} está disponível para download, porém utiliza uma versão muito antiga do SP, portanto não foi possível utilizá-lo. Mas contam com uma versão online que pode ser acessada em \url{http://lxcenter.di.fc.ul.pt/services/pt/LXParserPT.html}. Note-se que não é um \textit{webservice}, ou seja, não é uma ferramenta que pode ser acessada remotamente por outro sistema. Exigindo assim, portanto, que o usuário acesse a página da web para usufruí-la.

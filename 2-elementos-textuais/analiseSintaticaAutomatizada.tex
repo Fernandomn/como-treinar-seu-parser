@@ -1,0 +1,41 @@
+\chapter{Analise Sintática Automatizada}
+% ---
+Nesta sessão, explicaremos o que é a análise sintática automatizada
+% ---
+\section{Definição}
+
+\textit{Parser}, ou classificador, é o software capaz de, a partir de um texto de entrada, verificar se o mesmo pertence/foi gerado por uma certa gramática. O processo de classificação podem encontrar várias ``formas'' de gerar a mesma sentença. A essas formas chamaremos ``árvores'' (de árvore de derivação) ou ``parse''. O objetivo do \textit{parser} é achar a árvore ``correta'' ou, no melhor das hipóteses, mais coerente, dada a situação. A ação de procurar por essa árvore é chamada \textit{parsing}.
+% ---
+
+% ---
+\section{Métodos de \textit{Parsing}}
+Podemos usar métodos bem simples para interpretar uma língua. Por exemplo, podemos usar \textit{n-grams} ou derivações mais complexas do Modelo de Markov para representar linguagem estática e simples. Muito útil para a interpretação de telefones, por exemplo.
+
+Existem na literatura modelos mais complexos e interessantes. Para citar exemplos, o MSTParser (\textit{Minimum-Spanning Tree Parser}) se baseia em duas etapas de processamento, como descrito em \cite{mstParser} . Na primeira, cria uma árvore sem marcação para o texto de entrada, tentando procurar uma máxima arvore geradora de um grafo de dependências relativo à entrada. Na segunda, é dado um rótulo para cada nó dessa árvore.
+
+O MaltParser \cite{quickGuideMaltParser} possui um (ou melhor, nove) algoritmos de \textit{parsing} de dependências baseado em transições, que gera as possíveis árvores, e é auxiliado por um ``oráculo'', treinado previamente, que valida as sentenças classificadas.
+
+Por fim, \citeauthor{fastAccurate} nos mostram um parser de dependências baseado em transições, mas que utiliza RNR de três camadas e faz um pré-processamento de características, o que torna este classificador muito eficiente em contraste com outros disponíveis.
+
+% ---
+\section{\textit{Parsing} baseado em RNR}
+Redes Neurais são uma estrutura de processamento bioinspirada, onde são construídas pequenas estruturas chamadas neurônios, que interagem entre si numa configuração em rede. Os neurônios são ativados ao processar o dado de entrada, caso este atenda uma função interna. Dados que ativem neurônios reforçam a rede, caso contrário a rede é rebalanceada. Redes Neurais Recursivas são redes neurais em que o resultado da última camada de neurônios realimenta a rede, visando aprimorar o balanceamento dela como um todo. 
+
+\citeauthor{fastAccurate} demonstra como implementar uma Rede Neural para fazer um classificador de dependências baseado em transições muito rápido e eficiente. \citeauthor{Pontus2013RNN} implementa um \textit{parser} baseado em RNR, mas que ainda carece de aprimoramentos. \citeauthor{Socher:2011:PNS:3104482.3104499} porém, mostra a relação entre a classificação de imagens e a classificação de textos, e como utilizar RNR para este fim.
+
+\section{Avaliação de \textit{Parser} de Constituência}
+Existem algumas métricas para a avaliação de \textit{parsers}. As mais conhecidas são  LAS (Label Attachment Score), UAS (Unlabeled Attachment Score) e LA (Label Accuracy). \cite{analisadoresLN} LAS significa a porcentagem de acertos em relação ao arquivo de saída que o parser tem onde o rótulo da palavra (o que a palavra é sintaticamente) e o arco estão corretos. UAS significa o quanto o parser acertou em relação ao arco, no caso, se ele acertou a dependência. LA significa apenas o quanto o parser acertou o rótulo da palavra.
+
+\chapter{\textit{Treebanks} para Português}
+Nesta sessão, faremos um resumo do que são \textit{treebanks}, e exemplares em português.
+\section{Floresta Sintática}
+Se considerarmos um \textit{parse} uma árvore de derivação de um texto/sentença, e um corpus um conjunto de sentenças, Floresta Sintática (ou \textit{treebanks}, \textit{treebanks} = banco de árvores) são um conjunto de corpus já classificados e estruturados (morfo)sintaticamente. Servem para o aprendizado de \textit{softwares} de \textit{parsing}.
+
+\section{Floresta Sintá(c)tica}
+O Floresta Sintá(c)tica é um projeto colaborativo entre o Linguateca, centro de recursos para o processamento computacional da língua portuguesa, e o VISL, projeto de pesquisa do Instituto de Linguagem e Comunicação do \textit{University of Southern Denmark} (SDU). Possui textos anotados em português nas variantes brasileira e europeia, com anotações feitas automaticamente pelo \textit{software} PALAVRAS, e revisto por linguistas. 
+
+Possui 4 variantes, sendo elas o Bosque, totalmente revisto por linguistas; a Selva, parcialmente revista, a Floresta Virgem e a Amazônia, não revistos. 
+
+\section{CINTIL} \label{CINTIL}
+O CINTIL é um corpus anotado em português de Portugal, desenvolvido na Universidade de Lisboa. Ele possui mais de um milhão de palavras anotadas, e verificadas por especialistas. 
+``Este é o primeiro corpus deste tipo desenvolvido para o português no que diz respeito ao tamanho, à profundidade da anotação linguística, à variedade de gêneros e de tipos de textos, e ao nível de correção da anotação'', de acordo com sua página online.
