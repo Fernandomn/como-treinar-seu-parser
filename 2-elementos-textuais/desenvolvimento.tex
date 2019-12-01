@@ -3,9 +3,9 @@
 
 A partir de agora, será descrito o desenvolvimento do trabalho propriamente dito. Espera-se que as revisões, até o momento, tenham sido suficientes para a compreensão total do mesmo.
 
-Para a execução dos treinos, fez-se necessário revisar a formatação do PTB, e dos dois \textit{treebanks} a serem convertidos. O procedimento de conversão, no geral, é basicamente o mesmo. Em primeiro lugar, a estrutura da sentença já classificada é refeita de forma lógica, remontando-a numa estrutura de dados em formato de árvore. Neste processo, as traduções das \textit{tags} são feitas. No segundo momento, caso a árvore recém traduzida possua alguma \textit{tag} que exija uma verificação mais aprofundada, esse tratamento é realizado. Esta segunda etapa ocorre de acordo com a necessidade, não sendo obrigatória para todas as sentenças. Por fim, a estrutura de dados é convertida para texto, respeitando o \textit{bracketing} do PTB.
+Para a execução dos treinos, fez-se necessário revisar a formatação do PTB, e dos dois \textit{treebanks} a serem convertidos. O procedimento de conversão, no geral, é basicamente o mesmo. Em primeiro lugar, a estrutura da sentença já classificada é refeita de forma lógica, remontando-a numa estrutura de dados em formato de árvore. Neste processo, as traduções das \textit{POS tags} são feitas. No segundo momento, caso a árvore recém traduzida possua alguma \textit{tag} que exija uma verificação mais aprofundada, esse tratamento é realizado. Esta segunda etapa ocorre de acordo com a necessidade, não sendo obrigatória para todas as sentenças. Por fim, a estrutura de dados é convertida para texto, respeitando o \textit{bracketing} do PTB.
 
-O leitor pode se perguntar a necessidade da segunda etapa, se um dos objetivos deste trabalho é, justamente, que não seja necessário muito desenvolvimento. Infelizmente, sem esse tratamento mais cuidadoso, o \textit{parser} é incapaz de ser treinado, ou de classificar novas sentenças. 
+O leitor pode se perguntar sobre a necessidade da segunda etapa, se um dos objetivos deste trabalho é, justamente, que não seja necessário muito desenvolvimento. Infelizmente, sem esse tratamento mais cuidadoso, o \textit{parser} é incapaz de ser treinado, ou de classificar sentenças. 
 
 
 \input{./2-elementos-textuais/desenvolvimento_treinandoCintil}

@@ -7,13 +7,13 @@ Em Processamento de Linguagem Natural, não é possível avaliar textos em seu c
     \textquote{\textit{Adopting such a corpus-based approach, people have pointed to the earlier advocacy of empiricist ideas by the British linguist J.R. Firth, who coined the slogan \textquote{You shall know a word by the company it keeps}}}
     \footnote{\textquote{Adotando tal abordagem baseada em corpus, pessoas apontaram para as primeiras defesas das ideias empiricistas pelo linguista britânico] J. R. Flirth, que forjou o slogan \textquote{Você deve conhecer uma palavra pela companhia que esta mantém}}. Tradução própria.}.
 \end{displayquote}
-Seu uso não é novo. Pelo contrário, em 1951, Zelling Harris tenta descobrir procedimentos no qual a estrutura de uma linguagem possa ser encontrado automaticamente. Como destacado em  \Ibidem[p~6]{Manning1999FoundationsNLP},
+Seu uso não é novo. Pelo contrário, em 1951, Zelling Harris tenta descobrir procedimentos no qual a estrutura de uma linguagem possa ser encontrado automaticamente. Como destacado em  (\textit{\Ibidem[p~6]{Manning1999FoundationsNLP}}),
 \begin{displayquote}
     \textquote{\textit{While this work had no thoughts to computer implementation, and is perhaps somewhat computationally naive, we find here also the idea that a good grammatical description is one that provides a compact representation of a corpus of texts}}
     \footnote{\textquote{Enquanto este trabalho não pensava numa implementação computacional, e é de certa forma ingênuo computacionalmente, encontramos aqui também a ideia de que uma boa descrição gramatical é uma que provenha de uma representação compacta de um corpus de textos}. Tradução própria.}.
 \end{displayquote}
 
-Como já vimos, diversas técnicas de \textit{parsing} utilizam de aprendizado supervisionado. Portanto, precisamos de uma fonte de dados que sirvam para o treino e para o teste destes sistemas. No nosso caso, usamos bancos de árvores, ou \textit{treebanks}. \textit{Treebanks} são, como descrevem \citeonline[p~412]{Manning1999FoundationsNLP}, \textquote{\textit{some examples of the kinds of parse trees that are wanted. A collection of such example parses is referred to as a treebank}}
+Diversas técnicas de \textit{parsing} utilizam de aprendizado supervisionado. Portanto, precisamos de uma fonte de dados que sirvam para o treino e para o teste destes sistemas. No nosso caso, usamos bancos de árvores, ou \textit{treebanks}. \textit{Treebanks} são, como descrevem \citeonline[p~412]{Manning1999FoundationsNLP}, \textquote{\textit{some examples of the kinds of parse trees that are wanted. A collection of such example parses is referred to as a treebank}}
 \footnote{\textquote{Alguns exemplos dos tipo de análise em árvore desejados. Uma coleção de tais árvores de exemplo são denominados \textit{treebank}}. Tradução própria.}.
 
 \citeonline[p~142]{bick2008FlorestaSintatica} resumem como:
@@ -40,12 +40,12 @@ Vários \textit{treebanks} foram construídos ao longo da história\footnote{\ci
 A ideia do \textit{Penn Treebank} (PTB) é, indo na contramão, fazer um \textit{corpus} com o \textit{tagset} simplificado. Algumas estratégias foram tomadas para que essa redução fosse possível, uma vez que, é preciso lembrar, a extensa quantidade de \textit{tags} tem razão para acontecer. É uma forma de alcançar \apudonline[p~314]{garside1988computational}{buildingPTB}
 \textquote{\textit{the ideal of providing distinct codings for all classes of words having distinct grammatical behaviour}}.
 \footnote{\textquote{O ideal de prover códigos distintos para todas as classes de palavras possuindo comportamentos gramaticais distintos}. Tradução própria.}
-Uma das primeiras estratégias citadas foi reduzir a redundância de \textit{tags} cuja distinção pode ser obtida pelo léxico da palavra. Por exemplo, \Ibidem[p~314]{buildingPTB}
+Uma das primeiras estratégias citadas foi reduzir a redundância de \textit{tags} cuja distinção pode ser obtida pelo léxico da palavra. Por exemplo, (\textit{\Ibidem[p~314]{buildingPTB}})
 \textquote{\textit{The Brown Corpus [\ldots] distinguishes three forms of do--the base form (DO), the past tense (DOD), and the third person singular present (DOZ)}}
 \footnote{\textquote{O Brown Corpus [\ldots] distingue tres formas de \textquote{do} - a forma base (DO), o tempo passado (DOD), e a terceira pessoa do presente do singular (DOZ)}. Tradução própria}.
 Todas estas diferenças podem ser capturadas lexicalmente no momento da análise.
 
-Além da recuperabilidade lexical, também houve a eliminação de \textit{POS tags} cuja distinção é recuperável com referência à estrutura sintática. \Ibidem[p~315]{buildingPTB},
+Além da recuperabilidade lexical, também houve a eliminação de \textit{POS tags} cuja distinção é recuperável com referência à estrutura sintática. (\textit{\Ibidem[p~315]{buildingPTB}}),
 \begin{quote}
     \textquote{\textit{For instance, the Penn Treebank tagset does not distinguish subject pronouns from object pronouns even in cases where the distinction is not recoverable from the pronoun's form, as with you, since the distinction is recoverable on the basis of the pronoun's position in the parse tree in the parsed version of the corpus.}}
     \footnote{\textquote{Por exemplo, o conjunto de etiquetas do Penn Treebank não distingue pronomes sujeitos de pronomes objeto mesmo em casos onde a distinção não é recuperável pela forma pronominal, tal como \textquote{\textit{you}}, uma vez que a distinção é recuperável na base a posição do pronome na árvore de derivação na versão classificada do corpus}. Tradução própria.}
