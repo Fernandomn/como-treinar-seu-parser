@@ -9,7 +9,8 @@ Primeiramente, deve-se notar como é curioso que, apesar do treino do SP com dad
     \item Apesar do tamanho do Bosque ser menor, suas árvores são mais completas, permitindo maior generalização;
     \item A transdução dos dados do Bosque foi feita de forma mais acurada, permitindo um treinamento melhor.
 \end{itemize}
-É curioso notar, por exemplo, como o SP registrou mais \textit{tags} sobre o Bosque do que sobre o CINTIL. Observar as Tabelas \ref{tab:tab_cintil} e \ref{tab:tab_bosque} poderia ser uma alternativa, mas não se justifica: Foram usadas 20 \textit{tags} na transdução do Bosque, contra\ldots 20 do CINTIL. Mesmo com as duas tabelas de possibilidades do Bosque, para alguns casos (como comentado em \ref{subsec:sec_x} \ref{subsec:tag_acl}). A quantidade de regras gramaticais apreendidas quando nos baseamos no Bosque, também, é de um contraste muito interessante: no melhor caso do treinamento sobre CINTIL (\textit{fold 1}), foram aprendidas 257 regras, contra 1027 do pior caso do treino com o Bosque (\textit{fold 10}). Observar as Figuras \ref{fig:treino_cintil} e \ref{fig:treino_bosque} nos permite ver essas diferenças.
+
+É curioso notar, por exemplo, como o SP registrou mais \textit{tags} sobre o Bosque do que sobre o CINTIL. Observar as Tabelas \ref{tab:tab_cintil} e \ref{tab:tab_bosque} poderia ser uma alternativa, mas não se justifica: Foram usadas 20 \textit{tags} na transdução do Bosque, contra\ldots 20 do CINTIL. Mesmo com as duas tabelas de possibilidades do Bosque, para alguns casos (como comentado em \ref{subsec:sec_x} e \ref{subsec:tag_acl}). A quantidade de regras gramaticais aprendidas quando nos baseamos no Bosque, também, é de um contraste muito interessante: no melhor caso do treinamento sobre CINTIL (\textit{fold 7}), foram aprendidas 427 regras binárias, contra 4402 do pior caso do treino com o Bosque (\textit{fold 9}). Observar as Figuras \ref{fig:treino_cintil} e \ref{fig:treino_bosque} nos permite ver essas diferenças.
 
 Uma olhada mais atenta às \textit{tags} utilizadas pode nos dar uma pista. Como pode-se ver na Tabela \ref{tab:comp_cintil_bosque}, basicamente foram usadas as mesmas \textit{tags}. As diferenças expressivas estão, no CINTIL, no uso repetitivo das interjeições, e no uso de CONJP. Bosque, por outro lado, tem uma pluralidade maior de marcações relativas à verbos. Retornar à Tabela \ref{tab:tab_bosque} nos faz ver que tal característica vem desde o \textit{treebank} original. 
 \begin{center}
@@ -18,29 +19,54 @@ Uma olhada mais atenta às \textit{tags} utilizadas pode nos dar uma pista. Como
 
 Seria o caso, então, de uma maior atenção no desenvolvimento da solução para um \textit{dataset} do que para o outro? Pode-se afirmar que não. Toda alteração feita, como já dito ao longo do trabalho, foi com o objetivo de fazer com que o \textit{Stanford Parser} fosse capaz de receber as florestas sintáticas transduzidas. Toda alteração e desenvolvimento foram feitos pensando no mínimo necessário para que o processamento fosse possível. Com isso, quer-se dizer que: A ambos conjuntos de dados, foi dada atenção equivalente.
 % pois o objetivo deste trabalho não era fazer uma adaptação perfeita. 
-Código foi escrito na medida que o SP, e os \textit{treebanks} \textquote{exigiam}.
+O código foi escrito na medida que o SP e os \textit{treebanks} \textquote{exigiam}.
 % Para citar um fato, em \ref{subsec:percent} comentamos que precisamos excluir as sentenças que incluíam \textquote{\%} em seu corpo. Isso dá um total de 149 sentenças, aprox. 3,5\% do \textit{dataset} completo.
 \begin{center}
     \input{imagens/comp_F1_cintil_bosque.tex}
 \end{center}
-O que nos leva a um novo problema: ambos \textit{datasets} tiveram resultados baixos de \textit{F1-score}, variando entre 41\% e 45\%. A Figura \ref{fig:comp_f1_cintil_bosque} permite melhor visualização.
+
+O que nos leva a um novo problema: ambos \textit{datasets} tiveram resultados baixos de \textit{F1-score}.
+O CINTIL teve desempenho melhor, porém ainda assim pouco expressivo, entre 52\% e 64\%. O Bosque flutua entre 46\% e 54\%.
+% , variando entre 41\% e 45\%. 
+A Figura \ref{fig:comp_f1_cintil_bosque} permite melhor visualização.
 % Tal fato também nos faz levantar algumas hipóteses.
-As seções \ref{result_aval_cintil} e \ref{result_aval_bosque} nos fazem entender o motivo. O mesmo conjunto de dados foi usado tanto para o treino como para os testes. Porém, ao executar sentenças reais, os resultados são sofríveis. Deve-se levar em consideração os pontos abordados sobre as características da métrica de avaliação em \ref{subsec:parseval}, é claro. Mas é inegável: os \textit{parse} obtidos estão muito aquém do esperado. 
+As Seções \ref{result_aval_cintil} e \ref{result_aval_bosque} nos fazem entender o motivo. O mesmo conjunto de dados foi usado tanto para o treino como para os testes. Porém, ao executar sentenças reais, os resultados são sofríveis. Deve-se levar em consideração os pontos abordados sobre as características da métrica de avaliação em \ref{subsec:parseval}, é claro. Mas é inegável: os \textit{parse} obtidos estão muito aquém do esperado. 
 
-A observação mais próxima desses resultados indica uma possível resposta: o \textit{Stanford Parser} está muito atrelado às regras lexicais do Inglês. O que faz todo sentido, quando lembramos que deliberadamente optamos por usar tal \textit{parser}. Mais: ao optar-se por não fazer grandes desenvolvimentos a partir dele, ou até mesmo não utilizar modelos de outras linguagens que estão disponíveis e distribuídos oficialmente, era sabido que o modelo padrão que compõe o SP é o da língua inglesa. Portanto, em nada otimizado para o português, qualquer variante que seja. 
+Faz todo o sentido retomar este trabalho no futuro, aprimorar suas características, e torná-lo mais preciso, sem que seja necessário descartar nenhuma sentença que seja. A ausência de pontuações é muito sentida no \textit{score} final. 
+% Mas, estamos convencidos: Transdutores não são a solução para o problema da ausência de \textit{parsers} para o Português.
+Porém, notam-se ainda erros relevantes nas classificações, em sintagmas independentes de sintagmas de pontuações, ou dos estudos apontados aqui.
 
-Faz todo o sentido retomar este trabalho no futuro, aprimorar suas características, e torná-lo mais preciso, sem que seja necessário descartar nenhuma sentença que seja. A ausência de pontuações é muito sentida no \textit{score} final. Mas, estamos convencidos: Transdutores não são a solução para o problema da ausência de \textit{parsers} para o Português.
+% A observação mais próxima desses resultados indica uma possível resposta: o \textit{Stanford Parser} está muito atrelado às regras lexicais do Inglês. 
+Pode-se considerar, também, o impacto do uso do modelo básico de classificação do SP, referente à língua inglesa.
+O que faz todo sentido, quando lembramos que deliberadamente optamos por usar tal \textit{parser}. Mais: ao optar-se por não fazer grandes desenvolvimentos a partir dele, ou até mesmo não utilizar modelos de outras linguagens que estão disponíveis e distribuídos oficialmente, era sabido que o modelo padrão que compõe o SP é o da língua inglesa. Portanto, em nada otimizado para o português, qualquer variante que seja. 
 
-Ou melhor, não sozinhos. Transduzir os dois \textit{datasets}, de modo que o SP fosse capaz de processá-las foi um grande avanço. Isto torna uma potencial nova etapa possível, essa sim podendo ser a resposta: adaptar o SP para o Português. Produzir um novo modelo de linguagem para a ferramenta parece ser uma alternativa plausível.
+% Ou melhor, não sozinhos. Transduzir os dois \textit{datasets}, de modo que o SP fosse capaz de processá-las foi um grande avanço. Isto torna uma potencial nova etapa possível, essa sim podendo ser a resposta: adaptar o SP para o Português. Produzir um novo modelo de linguagem para a ferramenta parece ser uma alternativa plausível.
+Uma dos problemas motivadores deste trabalho, a ausência de \textit{parsers} para língua portuguesa, ainda parece um pouco distante. Pelo menos no atual estágio dos transdutores desenvolvidos. Porém, transduzir os dois \textit{datasets}, de modo que o SP fosse capaz de processá-las foi um grande avanço. Isto torna uma potencial nova etapa possível, essa sim podendo ser a resposta: adaptar o SP para o Português. Produzir um novo modelo de linguagem para a ferramenta parece ser uma alternativa plausível.
 
-Esta ideia não é nova, o LX-Parser (\citeonline{Branco2010OutOfTheBox} e \citeonline{silva-etal-2010-top}) foi desenvolvido justamente com este pensamento. Mas se encontra obsoleto. Além de que, foi necessário usar um novo \textit{dataset} no seu desenvolvimento. Criar transdutores que adaptem florestas sintáticas pré-existentes pode ser um avanço nesta parte do desenvolvimento. Isto, claro, se pensarmos num desenvolvimento já apoiado em ferramentas e bibliotecas pré-existentes. Desenvolver um \textit{parser} novo sempre é uma possibilidade.
+Esta ideia não é nova, o LX-Parser (\cite{Branco2010OutOfTheBox} e \cite{silva-etal-2010-top}) foi desenvolvido justamente com este pensamento, mas se encontra obsoleto. Além de que, foi necessário usar um novo \textit{dataset} no seu desenvolvimento. Criar transdutores que adaptem florestas sintáticas pré-existentes pode ser um avanço nesta parte do desenvolvimento. Isto, claro, se pensarmos num desenvolvimento já apoiado em ferramentas e bibliotecas pré-existentes. Desenvolver um \textit{parser} novo sempre é uma possibilidade.
 
 Por fim, precisamos voltar à pergunta levantada em \ref{cha:introducao} e \ref{sec:contexto}: seria possível a alguém, com pouco conhecimento acadêmico, realizar tarefa semelhante ao do trabalho apresentado? A resposta é: Dificilmente. 
 
-Desenvolver os transdutores exigiu uma certa gama de conhecimentos interessantes e multidisciplinares. Fora algumas necessidades. Ter um computador, por exemplo. Suponhamos que ela tenha um computador, e não seja estranha à equipamentos eletrônicos. Ela vai precisar aprender a programar. A linguagem de programação deste trabalho foi Python, que tem baixa dificuldade de aprendizado inicial. Ótimo começo. A pessoa em questão precisa saber o básico de manipulação de \textit{strings}, o que por sorte, costuma ser um dos aprendizados iniciais. As facilidades param por aí. Construir o transdutor exige o conhecimento de estruturas de dados, para que a estrutura simbólica das árvores seja reproduzida logicamente. Por conseguinte, é preciso também ser capaz de manipular tais árvores. Pode-se ter uma noção intuitiva disto, mas não é um assunto trivial. Também, exige que ela tenha conhecimento de árvores de constituência. Dependendo do histórico de vida desta pessoa, ela viu algo semelhante na escola. Mas é um conhecimento de cursos de licenciatura / bacharelado em letras. Também, o transdutor exige multidisciplinaridade do desenvolvedor. É preciso ter disposição para programar, assim como de ler gramáticas para estudar regras gramaticais e linguísticas. Não ter esses conhecimentos implicará em código ruim. 
+Desenvolver os transdutores exigiu uma certa gama de conhecimentos multidisciplinares. 
+% Fora algumas necessidades. 
+Podemos enumerá-los da seguinte forma:
+\begin{itemize}
+    \item Ter um computador disponível
+    \item Saber programar com uma linguagem de programação. O presente trabalho foi desenvolvido em Python, e o SP, em Java
+    \item Conhecimento com manipulação de \textit{strings}
+    \item Conhecimento de estruturas de dados (árvores)
+    \item Conhecimento de árvores de constituência
+    \item Conhecimentos de linguística
+\end{itemize}
+% Ter um computador, por exemplo. Suponhamos que ela tenha um computador, e não seja estranha à equipamentos eletrônicos. Ela vai precisar aprender a programar. A linguagem de programação deste trabalho foi Python, que tem baixa dificuldade de aprendizado inicial. Ótimo começo. A pessoa em questão precisa saber o básico de manipulação de \textit{strings}, o que por sorte, costuma ser um dos aprendizados iniciais. As facilidades param por aí. Construir o transdutor exige o conhecimento de estruturas de dados, para que a estrutura simbólica das árvores seja reproduzida logicamente. Por conseguinte, é preciso também ser capaz de manipular tais árvores. Pode-se ter uma noção intuitiva disto, mas não é um assunto trivial. Também, exige que ela tenha conhecimento de árvores de constituência. Dependendo do histórico de vida desta pessoa, ela viu algo semelhante na escola. Mas é um conhecimento de cursos de licenciatura / bacharelado em letras. Também, o transdutor exige multidisciplinaridade do desenvolvedor. É preciso ter disposição para programar, assim como de ler gramáticas para estudar regras gramaticais e linguísticas. 
+Não ter esses conhecimentos implicará em código ruim. 
 
 Mais: me referi apenas à construção dos transdutores. Para a construção de \textit{parsers}, será necessário um bom conhecimento de estatística, e de desenvolvimento em inteligência artificial. Como mostramos em \ref{subsec:statisticalparsing}, nem só a estatística será suficiente para se obter um \textit{parser} utilizável.
 
-Fica, então, a dúvida: uma pessoa que queira usar um \textit{parser} precisa mesmo de tudo isso? Bastaria usar os disponíveis. Mas, como já citado ao longo deste trabalho, existem poucos disponíveis. E \textit{parsers} podem ser úteis para o público geral. No aprendizado de línguas, nativa ou estrangeira, ou tradução, por exemplo. Se esta pessoa hipotética não conseguir achar algum \textit{parser} que lhe seja útil, ela seria capaz de construir um por conta própria?
+Fica, então, a dúvida: uma pessoa que queira usar um \textit{parser} precisa mesmo de tudo isso? Bastaria usar os disponíveis. Mas, como já citado ao longo deste trabalho, existem poucos disponíveis. E \textit{parsers} podem ser úteis para o público geral. 
+% No aprendizado de línguas, nativa ou estrangeira, ou tradução, por exemplo. 
+Como citado em \ref{sec:parsing}, em \cite{Manning1999FoundationsNLP} é descrito como eles podem ser utilizados para Tradução de Máquina, Agrupamento (\textit{clustering}), Recuperação de Informação e Categorização de Textos, para citar exemplos.
+Se esta pessoa hipotética não conseguir achar algum \textit{parser} que lhe seja útil, ela seria capaz de construir um por conta própria?
 
-A resposta otimista é: Esperamos que sim. Muito material de estudo está disponível gratuitamente e de forma acessível. A resposta pessimista é que sem bagagens prévias de conhecimento, será muito complicado. Boa sorte aos futuros desenvolvedores.
+A resposta otimista é: Esperamos que sim. Muito material de estudo está disponível gratuitamente e de forma acessível. A resposta pessimista é que sem bagagens prévias de conhecimento, será muito complicado.
+% Boa sorte aos futuros desenvolvedores.

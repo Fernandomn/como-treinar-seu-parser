@@ -40,7 +40,7 @@ Apesar de uma ferramenta muito útil e desafiadora, \citeonline[p~457]{Manning19
 
 Sintaticamente falando, palavras podem ser agrupadas em classes (ou grupos) que demonstrem seu comportamento sintático. Tais classes podem ser chamadas de Categorias Sintáticas, ou Categorias Gramaticais. Até mesmo Classes Gramaticais. Exemplos de classes são \textit{verbo}, \textit{substantivo}, \textit{adjetivo}, \textit{artigo} etc. Outra forma de se referir a tais classes, é chamando-as de \textquote{\textit{Part of Speech}}\footnote{Parte do Discurso} (POS).
 
-Como saber se palavras diferentes pertencem ao mesmo grupo? \citeonline[p~81]{Manning1999FoundationsNLP} \textquote{\textit{The most basic test for words belonging to the same class is the substitution test}}
+Como saber se palavras diferentes pertencem ao mesmo grupo? \cite[p~81]{Manning1999FoundationsNLP} \textquote{\textit{The most basic test for words belonging to the same class is the substitution test}}
 \footnote{\textquote{O teste mais básico para palavras pertencentes à mesma classe é o teste de substituição}. Tradução própria.}.
 Podemos ver um exemplo na Figura \ref{fig:substTest}.
 
@@ -93,7 +93,7 @@ O sintagma (ou \textit{phrase}) é, de acordo com \citeonline[p~55]{Castilho2010
 \end{quote}
 E, (\textit{\Ibidem[p~55]{Castilho2010gramatica}}) \textquote{Os sintagmas exemplificam a propriedade de \textquote{constituência}, isto é, a capacidade linguística de organizar expressões dotadas de uma margem esquerda, um núcleo e uma margem direita}.
 
-\citeonline{NLPConstParsing} destaca que \textquote{\textit{Constituency parsing aims to extract a constituency-based parse tree from a sentence that represents its syntactic structure according to a phrase structure grammar}}\footnote{\textquote{Análise de Constituência visa extrair uma árvore baseada em constituencia de uma sentença que represente sua estrutura sintática de acordo com uma gramática de estrutura frasal}. Tradução própria.}, ou seja, uma árvore de constituintes (ou árvore de constituência - \textit{constituency parse}). Esta árvore demonstra a relação hierárquica da sentença e dos seus elementos. Como destacam \citeonline[p~93]{Manning1999FoundationsNLP},
+\cite{NLPConstParsing} destaca que \textquote{\textit{Constituency parsing aims to extract a constituency-based parse tree from a sentence that represents its syntactic structure according to a phrase structure grammar}}\footnote{\textquote{Análise de Constituência visa extrair uma árvore baseada em constituencia de uma sentença que represente sua estrutura sintática de acordo com uma gramática de estrutura frasal}. Tradução própria.}, ou seja, uma árvore de constituintes (ou árvore de constituência - \textit{constituency parse}). Esta árvore demonstra a relação hierárquica da sentença e dos seus elementos. Como destacam \citeonline[p~93]{Manning1999FoundationsNLP},
 \begin{displayquote}
     \textquote{\textit{One fundamental idea is that certain groupings of words behave as constituents. Constituents can be detected by their being able to occur in various positions, and showing uniform syntactic possibilities for expansion.}}
     \footnote{\textquote{Uma ideia fundamental é que certos agrupamentos de palavras se comportam como constituintes. Constituintes podem ser detectados por serem capazes de ocorrer em várias posições, e mostrar possibilidades sintáticas uniformes para expansão}. Tradução própria.}
@@ -150,7 +150,7 @@ Já línguas como o Latim ou o Russo podem posicionar as palavras em qualquer po
     \item A Maria, Pedro deu o Livro
 \end{itemize}
 
-Para reproduzir o padrão de sentenças, podemos nos valer das regras de reescrita. \citeonline[p~96]{Manning1999FoundationsNLP}
+Para reproduzir o padrão de sentenças, podemos nos valer das regras de reescrita. \cite[p~96]{Manning1999FoundationsNLP}
 \textquote{\textit{A rewrite rule has the form \textquote{category $\to$ category*} and states that the symbol on the left side can be rewritten as the sequence of symbols on the right side}}
 \footnote{\textquote{Uma regra de reescrita tem a forma \textquote{categoria $\to$ categoria*} e declara que o símbolo do lado esquerdo pode ser reescrito com a sequência de símbolos no lado direito}. Tradução própria.}.
 Ou seja, para quem já está familiarizado com o estudo de teoria dos autômatos, seriam as regras de produção ou reescrita. \citeonline[p~171]{hopcroft2003automataTheory} definem uma produção como:
@@ -179,13 +179,13 @@ Determinar qual regra utilizar em cada derivação para classificar uma sentenç
 \textquote{\textit{Statistical parsers work by assigning probabilities to possible parses of a sentence, locating the most probable parse, and then presenting the parse as the answer.}}
 \footnote{\textquote{Classificação estatística funciona atribuindo probabilidades à possíveis árvores de uma sentença, localizando a árvore mais provável, e então apresentando a árvore como resposta}. Tradução própria.}
 
-Com isto, pode-se intuir uma estrutura simples, uma Gramática Livre de Contexto com probabilidades atribuidas às suas regras. \citeonline[p~382]{Manning1999FoundationsNLP}
+Com isto, pode-se intuir uma estrutura simples, uma Gramática Livre de Contexto com probabilidades atribuidas às suas regras. \cite[p~382]{Manning1999FoundationsNLP}
 \begin{quote}
     \textquote{\textit{The simplest probabilistic model for recursive embedding is a PCFG, a Probabilistic (sometimes also called Stochastic) Context Free Grammar which is simply a CFG with probabilities added to the rules, indicating how likely different rewritings are.}}
     \footnote{\textquote{O modelo probabilístico mais simples para incorporação recursiva é uma PCFG, uma Gramática Livre de Contexto Probabilística (às vezes também chamada Estocástica), que é simplesmente uma GLC com probabilidades adicionadas às regras, indicando o quão prováveis diferentes reescritas são.}}
 \end{quote}
     
-Deste modo, dada uma sentença $s$, e uma possível árvore $\pi$, sendo $c$ os constituintes da árvore, e $r(c)$ a regra usada para expandir c, temos a equação \ref{eq:pcfg_simples}.
+Deste modo, dada uma sentença $s$, e uma possível árvore $\pi$, sendo $c$ os constituintes da árvore, e $r(c)$ a regra usada para expandir $c$, temos a equação \ref{eq:pcfg_simples}.
 \begin{center}
     \input{equacoes/eq_prob_simples_PCFG.tex}   
 \end{center}
@@ -200,7 +200,7 @@ Para se criar uma PCFG, o procedimento é como segue: deve-se ler árvores previ
 \end{quote}
 Para catalogar as regras necessárias para uma gramática, é necessário um conjunto de sentenças / árvores pré-classificadas. São chamados de bancos de árvores, florestas sintáticas, ou \textit{treebanks}, que serão comentados em \ref{treebank}. Um dos mais populares entre eles, o \textit{Penn Treebank} (ou PTB), é abordado em \ref{subsec:PennTB}. Preferencialmente, esses conjuntos tem que ter uma quantidade alta de sentenças. O  \textit{Penn Treebank}, por exemplo, tem na casa de 50.000 árvores para que, com isto, sejam catalogadas uma quantidade grande de regras. Pois até mesmo o PTB (\textit{\Ibidem[p~39]{charniak97statistical}}) \textquote{\textit{is not large enough to contain them all}}\footnote{\textquote{não é grande o bastante para conter todas}. Tradução própria.}.
 
-PCFGs possuem algumas características interessantes, que foram listadas em \citeonline[p~386-388]{Manning1999FoundationsNLP}
+PCFGs possuem algumas características interessantes, que foram listadas em \cite[p~386-388]{Manning1999FoundationsNLP}
 \begin{itemize}
     \item Quanto mais as gramáticas crescem, mais ambíguas se tornam
     \item PCFG não dá uma boa ideia quanto à plausibilidade das árvores, uma vez que se baseia em fatores estruturais, não lexicais
@@ -209,7 +209,7 @@ PCFGs possuem algumas características interessantes, que foram listadas em \cit
     \item Geram um modelo de linguagem probabilístico para linguagens naturais
     \item O poder preditivo das PCFGs tende a ser maior do que gramáticas de estado finitos
     \item Na prática, costumam ser piores que modelos \textit{n-gram} (n > 1), uma vez que \textit{n-grams} consideram o contexto.
-    \footnote{Modelos como Modelos Ocultos de Markov, ou n-gramas, não serão abordados neste trabalho. Ao leitor curioso, recomendamos \citeonline[p~191]{Manning1999FoundationsNLP} e \Ibidem[p~317]{Manning1999FoundationsNLP}}
+    \footnote{Modelos como Modelos Ocultos de Markov, ou n-gramas, não serão abordados neste trabalho. Ao leitor curioso, recomendamos \cite[p~191]{Manning1999FoundationsNLP} e \Ibidem[p~317]{Manning1999FoundationsNLP}}
     \item PCFGs não são bons modelos em separado, mas pode ser usado em conjunto com outros modelos
     \item PCFGs tem certos vieses que podem ser inapropriados. Por exemplo, costuma dar preferência à árvores menores, pois uma quantidade pequena de expansões costuma ser valorizadas, uma vez que reescritas individuais tem probabilidades maiores.
 \end{itemize}
@@ -221,12 +221,13 @@ Por fim, \citeonline[p~38]{charniak97statistical} \textquote{\textit{PCFGs by th
 \subsection{\textit{Lexicalized Parsing}}
 \label{lexParsing}
 
-Considerar cada palavra no processo de \textit{parsing} seria muito problemático. Algumas palavras podem aparecer no conjuntos de dados apenas uma vez, ou ser uma conjugação pouco vista de um verbo pouco utilizado, e isso rapidamente se tornaria um problema. Uma alternativa, então, é considerar o núcleo dos constituintes. \citeonline[p~40]{charniak97statistical} \textit{Parsers} estatísticos lexicalizados coletam, então, duas estatísticas. Uma relativa ao núcleo do sintagma para a regra usada para expandir este sintagma, denotado $p(r|h)$ (para $r$ regra, e $h$ núcleo. E o núcleo de um sintagma com relação ao núcleo de uma subárvore, ou $p(h|m,t)$ (sendo $h$ núcleo da subárvore, $m$ o núcleo do sintagma mãe, e $t$ o tipo (\textit{POS tag}) da subárvore. 
+Considerar cada palavra no processo de \textit{parsing} seria muito problemático. Algumas palavras podem aparecer no conjuntos de dados apenas uma vez, ou ser uma conjugação pouco vista de um verbo pouco utilizado, e isso rapidamente se tornaria um problema. Uma alternativa, então, é considerar o núcleo dos constituintes. \cite[p~40]{charniak97statistical} \textit{Parsers} estatísticos lexicalizados coletam, então, duas estatísticas. Uma relativa ao núcleo do sintagma para a regra usada para expandir este sintagma, denotado $p(r|h)$ (para $r$ regra, e $h$ núcleo. E o núcleo de um sintagma com relação ao núcleo de uma subárvore, ou $p(h|m,t)$ (sendo $h$ núcleo da subárvore, $m$ o núcleo do sintagma mãe, e $t$ o tipo (\textit{POS tag}) da subárvore. 
 
 Assim, a Equação \ref{eq:pcfg_simples} se torna a Equação \ref{eq:lex_parser}:
 \begin{center}
     \input{equacoes/eq_lex_parser.tex}
 \end{center}
+
 A Equação \ref{eq:lex_parser} é explicada por (\textit{\Ibidem[p~40]{charniak97statistical}}), 
 \begin{quote}
     \textquote{\textit{Here, we first find the probability of the head of the constituent $h(c)$ given the head of the mother $m(c)$ and then the probability of the rule $r(c)$ given the head of $c$.}}

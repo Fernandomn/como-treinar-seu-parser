@@ -45,6 +45,7 @@ Para o Bosque, o sinal de percentagem (\%) participa de um nó isolado marcado c
 \begin{center}
     \input{imagens/fig_bosque_percent.tex}
 \end{center}
+
 % Tal estrutura foi reproduzida mas, não pudemos precisar o motivo, o SP não aceita as estruturas convertidas por nós que possuam \%. Resolvemos, portanto, remover tais sentenças da análise.
 A estrutura foi reproduzida pelo \textit{script} desenvolvido, mas o SP não foi capaz de processá-lo. Num momento futuro, será investigado o motivo de tal comportamento. A priori, fez-se necessário descartar tais sentenças. Isso dá um total de 149 sentenças, aprox. 3,5\% do \textit{dataset} completo.
 \begin{center}
@@ -65,7 +66,7 @@ Existem três casos distintos a serem considerados na hora de posicionar pontua�
 \begin{quote}
     \textquote{[É a] pontuação que delimita trechos de texto colocada ao mesmo nível dos nós mais altos correspondentes a esse trecho, quer seja um nó não terminal ou o um nó terminal. Estes casos incluem os seguintes tipos de pontuação: aspas, parênteses, vírgulas, travessões}.
 \end{quote}
-Para separadores, \citeonline[p~30]{afonso2006arvores} \textquote{pontuação que separa trechos, colocada ao mesmo nível do trecho que se inicia a partir da pontuação que o separa do trecho anterior. Incluem-se neste caso a vírgula, ponto e vírgula, dois pontos, travessão}. Por fim, \cite[p~33]{afonso2006arvores} 
+Para separadores, \cite[p~30]{afonso2006arvores} \textquote{[É a] pontuação que separa trechos, colocada ao mesmo nível do trecho que se inicia a partir da pontuação que o separa do trecho anterior. Incluem-se neste caso a vírgula, ponto e vírgula, dois pontos, travessão}. Por fim, \cite[p~33]{afonso2006arvores} 
 \begin{quote}
     \textquote{A pontuação final permite identificar a frase como constituindo um elemento comunicativo [\ldots], e por isso é considerada como fazendo parte integrante da frase. Por vezes, uma \textquote{frase analisada} corresponde a uma sequência de \textquote{frases} como funções principais (STA, QUE, EXC, e UTT).}
 \end{quote}
@@ -83,33 +84,39 @@ Coordenação é uma das \textit{tags} mais problemáticas do BOSQUE. Como desta
     \textquote{\textit{Conjoined clauses in the native Floresta are of type CU, regardless of the type of constituents being conjoined. This causes grammars learned from the treebank to make errors such as conflating noun phrase conjunctions and sentential conjunctions}}.
     \footnote{\textquote{Cláusulas conjuntivas no Floresta nativo são do tipo CU, independentemente do tipo de constituinte conjunto. Isso faz com que a gramática aprendida do treebank cometa erros como confundir conjunções de sintagmas nominais e conjunções sentenciais}. Tradução própria.}.
 \end{quote}
-O PTB tem suas próprias regras para determinar a estrutura de coordenações, reservando o Capítulo 7 de seu \textit{Bracketing Guidelines}\footnote{Manual de Agrupamento} (\cite[p~117]{bracketing_ptb}). Seguindo tais regras, num primeiro momento de tradução, apenas marcamos as coordenações com a \textit{tag} auxiliar \_CU\_. Depois, fizemos uma nova verificação, reconhecendo as sentenças onde essa marca aparece.
+
+O PTB tem suas próprias regras para determinar a estrutura de coordenações, reservando o Capítulo 7 de seu \textit{Bracketing Guidelines}\footnote{Manual de Agrupamento} \cite[p~117]{bracketing_ptb}. Seguindo tais regras, num primeiro momento de tradução, apenas marcamos as coordenações com a \textit{tag} auxiliar \_CU\_. Depois, fizemos uma nova verificação, reconhecendo as sentenças onde essa marca aparece.
 \begin{center}
     \input{imagens/bosque_exemplo_cu.tex}
 \end{center}
-Já citamos, em \ref{subsec-cintil-conj}, que o PTB lida com a coordenação de basicamente três formas: palavras simples, palavras múltiplas e conjunções descontínuas. A \textit{tag} \textit{cu} define o sintagma que encabeça a coordenação. Isto pode ser melhor visto na Figura \ref{fig:bosque_exemplo_cu}. Isto facilita o procedimento, pois deve-se, então, verificar se os sintagmas filhos possuem a mesma \textit{tag}, e se são nós terminais ou não-terminais. Sendo terminais, devem ser impressos numa estrutura achatada (\textit{flat structure}). Sendo não-terminais, de mesma categoria, a \textit{tag} cu deve ser convertida para uma \textit{tag} equivalente. Sendo sintagmas de categorias distintas, cu é convertido para UCP (\textit{Unlike Coordinated Phrase}\footnote{\textquote{Sintagma Coordenado Diferente}. Tradução própria.}).
+
+Já citamos, em \ref{subsec-cintil-conj}, que o PTB lida com a coordenação de basicamente três formas: palavras simples, palavras múltiplas e conjunções descontínuas. A \textit{tag} \textit{cu} define o sintagma que encabeça a coordenação. Isto pode ser melhor visto na Figura \ref{fig:bosque_exemplo_cu}. Isto facilita o procedimento pois, deve-se então verificar se os sintagmas filhos possuem a mesma \textit{tag}, e se são nós terminais ou não-terminais. Sendo terminais, devem ser impressos numa estrutura achatada (\textit{flat structure}). Sendo não-terminais, de mesma categoria, a \textit{tag} cu deve ser convertida para uma \textit{tag} equivalente. Sendo sintagmas de categorias distintas, cu é convertido para UCP (\textit{Unlike Coordinated Phrase}\footnote{\textquote{Sintagma Coordenado Diferente}. Tradução própria.}).
 \begin{center}
     \input{imagens/bosque_exemplo_conj-c.tex}
 \end{center}
-Tem-se, também, que tomar cuidado com os casos de palavras simples, em \textit{flat structure}. Por dois motivos: primeiro, não necessariamente uma palavra que, no Bosque, é marcada por conj-c (conjunção coordenativa), será um indicador de conjunção, efetivamente. Exemplo na sentença CF766-6, Figura \ref{fig:bosque_exemplo_conj-c}. Nesses casos, a palavra deve ser marcada com a \textit{tag} CC para o PTB. O segundo problema é a correta escrita da \textit{flat structure}. O \citeonline[p~117]{bracketing_ptb}  mostra alguns exemplos possíveis. Empiricamente, notamos que a forma correta deve ser como na Figura \ref{fig:bosque_exemplo_flat}, ou seja, o valor pós-conjunção deve ser destacado num novo sintagma.
+
+Tem-se, também, que tomar cuidado com os casos de palavras simples, em \textit{flat structure}. Por dois motivos: primeiro, não necessariamente uma palavra que, no Bosque, é marcada por conj-c (conjunção coordenativa), será um indicador de conjunção, efetivamente. Exemplo na sentença CF766-6, Figura \ref{fig:bosque_exemplo_conj-c}. Nesses casos, a palavra deve ser marcada com a \textit{tag} CC para o PTB. O segundo problema é a correta escrita da \textit{flat structure}. O \cite[p~117]{bracketing_ptb}  mostra alguns exemplos possíveis. Empiricamente, notamos que a forma correta deve ser como na Figura \ref{fig:bosque_exemplo_flat}, ou seja, o valor pós-conjunção deve ser destacado num novo sintagma.
 \begin{center}
     \input{imagens/bosque_exemplo_flat.tex}
 \end{center}
 % ------------------------------------------------------------------------------------------------
 \subsection{O par \textbf{x} e \textbf{X}}
 \label{subsec:sec_x}
-Ainda há, no \textit{corpus}, o par de \textit{tags}, X e x. X é uma \textit{tag} do tipo função, e x uma \textit{POS tag}. Na Bíblia Florestal (\citeonline{freitas2007biblia}), não há uma descrição formal para ambas. Apenas notou-se que nunca aparecem em par, mas quase sempre próximas. Num primeiro momento, a solução foi ignorar este par, descartando toda sentença / árvore em que aparecem. Mas uma revisão mostrou que seria uma grande perda desprezá-los, e isso nos levou a uma série de desdobramentos interessantes.
+Ainda há, no \textit{corpus}, o par de \textit{tags}, X e x. X é uma \textit{tag} do tipo função, e x uma \textit{POS tag}. Na Bíblia Florestal (\cite{freitas2007biblia}), não há uma descrição formal para ambas. Apenas notou-se que nunca aparecem em par, mas quase sempre próximas. Num primeiro momento, a solução foi ignorar este par, descartando toda sentença / árvore em que aparecem. Mas uma revisão mostrou que seria uma grande perda desprezá-los, e isso nos levou a uma série de desdobramentos interessantes.
 \begin{center}
     \input{tabelas/tab_tags_X.tex}
 \end{center}
+
 Na Tabela \ref{tab:tag_X}, mostramos quais as ocorrências das \textit{tags} X e x, em conjunto com seus possíveis pares (ou seja, \textquote{$(F:x)$ e $(X:f)$}, sendo \textit{f} e \textit{F} \textit{tags} quaisquer). Pode-se notar que, por mais que ambas sejam casadas com diversas etiquetas, no geral se associam à \textit{tags} de conjunção. Uma hipótese, então, é:
 \begin{quote}
 	X e x são \textit{tags} coringas. Elas ocupam o espaço da Função ou da Forma (respectivamente) quando a informação realmente relevante é apenas o seu par. 
 \end{quote}
+
 Isto gera um problema. Como descrito em \ref{subsec:florestasintatica}, todo nó tem pelo menos o par F:f, e como foi dito no começo da seção, deu-se preferência às \textit{tags} \textit{forma} (por serem equivalentes às \textit{POS tags}) em detrimento às outras. As \textit{tags} x nos forçam a voltar a olhar para as \textit{tags} irmãs. Ou seja, nos casos em que o nó possui uma \textit{tag} x, F informará o valor a ser convertido. As \textit{tags} F, então, necessitam de uma nova tabela, que pode ser vista na Tabela \ref{tab:bosque_func_edit}.
 \begin{center}
     \input{tabelas/tab_bosque_func_edit.tex}
 \end{center}
+
 A Tabela \ref{tab:bosque_func_edit} é um fragmento da Tabela \ref{tab:bosque_func_full}, que pode ser encontrada nos apêndices. Esta última possui, efetivamente, todas as \textit{tags} de função, seus nomes, possíveis conversões etc. Diversas delas não serão utilizadas neste trabalho, portanto não necessitam ser abordadas nesta seção.
 
 Isso nos leva a novas questões. Nem todas as \textit{tags} de função são explícitas quanto ao sintagma que elas definem. Ou seja, uma informação de sintagma precisa seria obtida pela \textit{tag} $f$, que no caso é $x$, que não tem valor sintagmático, e o PTB não prevê sintagmas não marcados, ou etiquetas coringa. Vamos verificar essas funções nas próximas sessões, e as estratégias utilizadas para resolver tais problemas.
@@ -119,24 +126,24 @@ Isso nos leva a novas questões. Nem todas as \textit{tags} de função são exp
 \label{subsec:bosque_a}
 
 Vemos em \cite[p~13]{afonso2006arvores}
-\begin{quote}
+% \begin{quote}
     \textquote{A indicação de \textquote{>} e \textquote{<} presentes nas funções acima, reflectem a posição do dependente face ao núcleo, como setas direccionadas para o núcleo cuja natureza está indicada por letras maiúsculas}. 
-\end{quote}
-
+% \end{quote}
 Vemos também que 
-\begin{quote}
+% \begin{quote}
     \textquote{Por outro lado, >A significa que o dependente aponta para o núcleo de natureza adjectival ou adverbial (\textquote{A}) que se encontra à direita do dependente (\textquote{>})}.
-\end{quote}
+% \end{quote}
 
 A possível ambiguidade da sentença anterior é resolvida em \cite[p~58]{afonso2006arvores}, no qual se lê \textquote{As mesmas etiquetas, A< e >A, como se pode constatar, estão presentes tanto nos sintagmas adjectivais como nos sintagmas adverbiais enquanto modificadoras de adjectivos ou advérbios}. Ou seja, para a correta conversão de >A (por exemplo) para ADVP, ou ADJP, é necessário olhar o nó irmão, e verificar o seu núcleo. Este sendo adjetivo ou sintagma adjetival, >A se torna ADVP, e análogo para advérbios. Mas o que fazer em casos como da sentença CF761-3 (Figura \ref{fig:bosque_a_seta_errado}), em que o nó irmão de >A é um advérbio, mas o núcleo do sintagma é adjetivo? 
 \begin{center}
     \input{imagens/bosque_Aseta_errado.tex}
 \end{center}
+
 Para este trabalho, os nós não conservam as informações de função, apenas de forma. Assim sendo, >A será transduzido de acordo com o primeiro nó válido na direção indicada por > ou <.
 % ------------------------------------------------------------------------------------------------
 \subsection{PROBLEMAS COM CJT (Conjunção)}
 \label{subsec:CJT}
-Ainda sobre sintagmas evidenciadores da relação de coordenação (visto em \ref{subsec:cu}), \citeonline[p~20]{afonso2006arvores} descreve: 
+Ainda sobre sintagmas evidenciadores da relação de coordenação (visto em \ref{subsec:cu}), \cite[p~20]{afonso2006arvores} descreve: 
 \begin{quote}
     \textquote{A sua estrutura interna evidencia também a relação de coordenação: duas ou mais partes coordenadas como função e uma ou mais conjunções coordenativas, que podem ou não estar presentes. A forma de cada uma das partes coordenadas segue os princípios gerais dos sintagmas não verbais, isto é, dependendo da sua estrutura interna e em particular da função dos dependentes do núcleo do sintagma, ou dos sintagmas verbais}.
 \end{quote}
@@ -147,6 +154,7 @@ Quando tal tipo de função ocorre para um nó, a solução de transdução cost
 \begin{center}
     \input{tabelas/tab_bosque_frequencia_CJT.tex}
 \end{center}
+
 Podemos ver na Tabela \ref{tab:bosque_CJT} a frequência com quem CJT se pareia, e vemos nele uma certa \textit{tag} chamada acl. Na Tabela \ref{tab:tab_bosque} podemos ver que ela merece uma atenção especial. Dedicaremos um pouco mais de tempo à ela.
 % ------------------------------------------------------------------------------------------------
 \subsection{PROBLEMAS COM ACL (ORAÇÕES AVERBAIS)}
@@ -154,14 +162,14 @@ Podemos ver na Tabela \ref{tab:bosque_CJT} a frequência com quem CJT se pareia,
 Vemos em \cite{freitas2007biblia}, \textquote{Finalmente, na oração averbal
 \footnote{Note que, em \cite[p~12]{afonso2006arvores}, acl é grifada como \textquote{oração deverbal}}
 \footnote{\textquote{the crawling chaos\ldots}. \citeonline{lovecraft1920nyarlathotep}}
-, o verbo não está presente, mas normalmente estas orações são encabeçadas por uma conjunção subordinativa que indica a natureza oracional do período}. Ao passo que fcl e icl (orações finitas e não-finitas) podemos afirmar serem conversíveis para VP, acl nos obriga a fazer conversões para a forma de oração subordinada (\cite[p~172]{bracketing_ptb}), porém também não de forma assertiva. Pois, como vemos na Tabela \ref{tab:bosque_acl}, acl pode se ligar a qualquer forma sintagmática, inclusive início de orações. Porém, observar a função costuma dar uma informação bastante definitiva, conversão que adotamos nos casos de ADVL:acl, EXC:acl, N<:acl, N<PRED:acl, QUE:acl, STA:acl, UTT:acl. Para casos como ACC:acl e OC:acl, tomamos opções arbitrárias: convertemos para NP. Faltam dois casos então, KOMP< e CJT (novamente).
+, o verbo não está presente, mas normalmente estas orações são encabeçadas por uma conjunção subordinativa que indica a natureza oracional do período}. Ao passo que fcl e icl (orações finitas e não-finitas) podemos afirmar serem conversíveis para VP, acl nos obriga a fazer conversões para a forma de oração subordinada \cite[p~172]{bracketing_ptb}, porém também não de forma assertiva. Pois, como vemos na Tabela \ref{tab:bosque_acl}, acl pode se ligar a qualquer forma sintagmática, inclusive início de orações. Porém, observar a função costuma dar uma informação bastante definitiva, conversão que adotamos nos casos de ADVL:acl, EXC:acl, N<:acl, N<PRED:acl, QUE:acl, STA:acl, UTT:acl. Para casos como ACC:acl e OC:acl, tomamos opções arbitrárias: convertemos para NP. Faltam dois casos então, KOMP< e CJT (novamente).
 \begin{center}
     \input{tabelas/tab_bosque_acl.tex}
 \end{center}
 % ------------------------------------------------------------------------------------------------
 \subsection{PROBLEMAS COM KOMP< (COMPLEMENTOS)}
 \label{subsec:tag_komp}
-Esta etiqueta é definida, por \cite[p~57]{afonso2006arvores} como \textquote{KOMP<, segundo termo de uma oração comparativa ou oração consecutiva}. E em \cite[p~116]{afonso2006arvores} 
+Esta etiqueta é definida, por \cite[p~57]{afonso2006arvores} como \textquote{KOMP<, segundo termo de uma oração comparativa ou oração consecutiva}. E em \cite[p~116]{afonso2006arvores}:
 \begin{quote}
     \textquote{Em termos de representação em árvores, a particularidade é o segundo termo de comparação ser etiquetado com KOMP< (etiqueta de sintagma) ao mesmo nível de constituintes que o adjectivo ou advérbio e o seu dependente. [\ldots] KOMP< terá como forma \textquote{fcl}, no caso de o verbo principal estar expresso ou \textquote{acl}, no caso de o verbo principal estar omisso}.
 \end{quote}
@@ -214,12 +222,14 @@ De modo análogo ao CINTIL, fizemos o treinamento baseado num comando simples, c
 \begin{center}
     \input{codigos/cod_treinoBasicoBosque.tex}
 \end{center}
+
 São comandos análogos aos utilizados para CINTIL. Explicações podem ser vistas na Tabela \ref{tab:tab_treino_basico_cintil}.
 
 Para a execução dos testes, foi utilizado o comando \ref{lst:testeBasicoBosque}
 \begin{center}
     \input{codigos/cod_testeBasicoBosque.tex}
 \end{center}
+
 É o mesmo comando explicado na Tabela \ref{tab:tab_teste_basico_cintil}. Também foi utilizado o \textit{10-fold validation} para o Bosque. Porém, os testes foram feitos majoritariamente com o CETEMFolha, que possui 4213 sentenças (contra 10140 do CINTIL).
 
 O resultado completo dos testes pode ser visto na Tabela \ref{tab:bosque_result_full}, nos apêndices. Os comentários dos resultados pode ser visto em \ref{resultados_bosque}.

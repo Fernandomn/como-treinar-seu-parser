@@ -14,11 +14,13 @@ Considerando um treinamento supervisionado (como no caso dos nossos \textit{pars
 \begin{center}
     \input{tabelas/tab_matriz_confusao.tex}
 \end{center}
-A partir daí podemos definir duas métricas, \textit{precision} e \textit{recall}\footnote{Precisão e Revocação}. Por \citeonline[p~268-269]{Manning1999FoundationsNLP} \textit{precision} é definida como a medida da proporção de itens selecionados que o sistema acertou. \textit{Recall} é definida como a medida da proporção dos itens alvo que o sistema selecionou. Podemos ver ambas na equação  \ref{eq:precision_recal}.
+
+A partir daí podemos definir duas métricas, \textit{precision} e \textit{recall}\footnote{Precisão e Revocação}. Por \cite[p~268-269]{Manning1999FoundationsNLP} \textit{precision} é definida como a medida da proporção de itens selecionados que o sistema acertou. \textit{Recall} é definida como a medida da proporção dos itens alvo que o sistema selecionou. Podemos ver ambas na equação  \ref{eq:precision_recal}.
 \begin{center}
     \input{equacoes/eq_precision_recall.tex}
 \end{center}
-A medida F-measure, também conhecido por F1-score \citeonline[p~262]{derczynski2016complementarity} é, por \citeonline[p~1]{truthFScore}, a média harmônica entre \textit{precision} (P) e \textit{recall} (R), como pode ser visto na Equação \ref{eq:f_score}. Seus valores variam entre 0 e 1. 
+
+A medida F-measure, também conhecido por F1-score \cite[p~262]{derczynski2016complementarity} é, por \cite[p~1]{truthFScore}, a média harmônica entre \textit{precision} (P) e \textit{recall} (R), como pode ser visto na Equação \ref{eq:f_score}. Seus valores variam entre 0 e 1. 
 \begin{center}
     \input{equacoes/eq_f1_score.tex}
 \end{center}
@@ -27,7 +29,7 @@ A medida F-measure, também conhecido por F1-score \citeonline[p~262]{derczynski
 
 \subsubsection{\textit{PARSERVAL MEASURES}}
 \label{subsec:parseval}
-As PARSERVAL measures são basicamente três: \textit{precision} (ou \textit{labeled precision}, LP), \textit{recall} (ou \textit{labeled recall}, RB) e \textit{crossing brackets}, que seguem uma lógica semelhante à supracitada em \ref{subsec:parseval}. Dado um \textit{parser} que gere uma árvore, \citeonline[p~433-434]{Manning1999FoundationsNLP}
+As PARSERVAL measures são basicamente três: \textit{precision} (ou \textit{labeled precision}, LP), \textit{recall} (ou \textit{labeled recall}, RB) e \textit{crossing brackets}, que seguem uma lógica semelhante à supracitada em \ref{subsec:parseval}. Dado um \textit{parser} que gere uma árvore, \cite[p~433-434]{Manning1999FoundationsNLP}
 \begin{quote}
     \textquote{\textit{Precision is how many brackets in the parse match those in the correct tree, recall measures how many of the brackets in the correct tree are in the parse, and crossing brackets gives the average of how many constituents in one tree cross over constituent boundaries in the other tree.}}
     \footnote{\textquote{Precisão é quantos parênteses na árvore gerada combinam com aqueles da árvore correta, revogação mede quantos parênteses na árvore correta estão na árvore gerada, e parênteses cruzados dá a média de quantos constituintes em uma árvore cruza com as fronteiras na outra árvore}. Tradução própria.}
@@ -35,7 +37,8 @@ As PARSERVAL measures são basicamente três: \textit{precision} (ou \textit{lab
 \begin{center}
     \input{imagens/fig_demo_parseval.tex}
 \end{center}
-Nesse contexto, o cálculo do F-MEASURE se dá utilizando a mesma Equação \ref{eq:f_score}
+
+Nesse contexto, o cálculo do F-MEASURE se dá utilizando a mesma Equação \ref{eq:f_score}.
 
 Algumas críticas podem ser feitas à esse sistema. \citeonline{constParsEvalYT} demonstra que essa medida é muito sensível à propagação de erros em cascata. Ou seja, um constituinte mal colocado num nível mais baixo da árvore faz com que todos os nós acima dela também estejam errados, reduzindo muito a pontuação. \citeonline{parserEvalSecret} também nota que \textquote{\textit{The problem of standard Parseval is that it counts nodes as the same regardless of the underlying structure they dominate}}
 \footnote{\textquote{O problema do PARSERVAL padrão é que ele conta nós como os mesmos, independente da estrutura subalterna que estes dominam}. Tradução própria.}.

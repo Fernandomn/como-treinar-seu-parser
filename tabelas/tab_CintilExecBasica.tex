@@ -1,0 +1,16 @@
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{p{0.8\textwidth}}
+        \begin{itemize}
+            \item [-cp] \textit{ClassPath}. Indica o diretório onde se encontra a classe principal a ser executada
+            \item [-mx4g] Quantidade de memória usada. No caso, 4 GB.
+            \item [LexicalizedParser] \textit{Parser} utilizado, dentre os disponibilizados
+            \item [-loadFromSerializedFile] Carrega a gramática serializada, gerada na execução de treinamento anterior
+            \item [arquivo.txt] Arquivo que contém sentenças a serem classificadas pelo SP
+            % \item [-outputFilesDirectory] Define o diretório onde os arquivos de saída serão escritos. 
+            % \item [-testTreebank] Diretório onde se encontra o treebank a ser usado para teste. Os números no formato $a-b$ indicam o primeiro e o último arquivo, respectivamente. Números no formato $a-b,c-d$ indicam dois blocos de arquivos. Atente para não usar o mesmo bloco dos treinos, ou o parser passará por \textit{overfitting}, e terá resultados enviesados.
+        \end{itemize}
+    \end{tabular}
+    \caption[Comandos para uma execução simples do \textit{Stanford Parser}]{Comandos para uma execução simples do \textit{Stanford Parser}, utilizando o terminal.}
+    \label{tab:tab_exec_basico_cintil}
+\end{table}

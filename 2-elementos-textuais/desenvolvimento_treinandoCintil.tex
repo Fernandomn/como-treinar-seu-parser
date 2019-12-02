@@ -1,9 +1,12 @@
 \section{Treinando o Stanford Parser sobre CINTIL}
 \label{treinando_sp_cintil}
 
-O pacote obtido, com o CINTIL, contém um guia de instruções (\cite{narrativeDescriptionCintil}), e o \textit{treebank} propriamente dito em formato XML\footnote{\url{https://www.w3.org/XML/}}. Para melhor uso, e melhor aplicação das árvores tanto para treino como para testes, fez-se necessária a separação deste arquivo em arquivos menores. Foi construído um \textit{script} na linguagem Python para fazer tal separação, gerando dois tipos de arquivo: as sentenças originais (\textquote{\textit{raw}}), e suas árvores (\textquote{\textit{tree}}).
+O pacote obtido, com o CINTIL, contém um guia de instruções \cite{narrativeDescriptionCintil}, e o \textit{treebank} propriamente dito em formato XML\footnote{\url{https://www.w3.org/XML/}}. Para melhor uso, e melhor aplicação das árvores tanto para treino como para testes, fez-se necessária a separação deste arquivo em arquivos menores. Foi construído um \textit{script} na linguagem Python para fazer tal separação, gerando dois tipos de arquivo: as sentenças originais (\textquote{\textit{raw}}), e suas árvores (\textquote{\textit{tree}}).
 
-Este único trabalho não é suficiente. As \textit{POS tags} do CINTIL estão em Português, e para o uso delas pelo SP sem uso de pacotes, seria necessário traduzi-las para o Inglês. Fizemos então a conversão dessas \textit{tags}, de acordo com a Tabela \ref{tab:tab_cintil}. Note que \textit{tags} que possuem tradução direta (exemplo: Adjetivo, A e JJ) não foram especificadas nas observações.
+Este único trabalho não é suficiente. 
+% As \textit{POS tags} do CINTIL estão em Português, e para o uso delas pelo SP sem uso de pacotes, seria necessário traduzi-las para o Inglês. 
+O CINTIL tem o próprio \textit{tagset} e, para que o mesmo possa ser utilizado no SP sem o uso de pacotes, faz-se necessário transduzí-las para o padrão PTB, que é aceito pelo \textit{parser}.
+Fizemos então a conversão dessas \textit{tags}, de acordo com a Tabela \ref{tab:tab_cintil}. Note que \textit{tags} que possuem tradução direta (exemplo: Adjetivo, A e JJ) não foram especificadas nas observações.
 
 Outra dificuldade é que, como supracitado, o \textit{tagset} informado no site oficial do CINTIL está defasado com relação ao \textit{treebank} real. O \textit{tagset} mais confiável, a respeito, é o \textquote{CINTIL TreeBank Handbook} \cite{cintil_handbook}. Foram usadas as \textit{tags} listadas nele, e as que ocorrem no \textit{treebank} concreto e que não foram previstas no \textit{Handbook} (Por exemplo, P’, C’ etc).
 
@@ -32,7 +35,8 @@ A Tabela
 \begin{center}
 \input{tabelas/tab_conj_concat_cintil.tex}
 \end{center}
-O \textit{Penn Treebank} e o CINTIL lidam com conjunções de maneiras distintas. O PTB, em seu manual de anotação (\cite[p~117]{bracketing_ptb}), dedica a seção 7.5 para descrever tal fenômeno. Lá podemos ver que, para conjunções coordenadas, temos três casos: palavra simples (\textit{and}, \textit{but}, \textit{or}, \ldots), multi palavra (\textit{as well as}, \textit{not to mention}, \textit{rather than}, \ldots), e conjunções descontínuas (\textit{not only\ldots but}, \textit{not\ldots but instead}, \ldots). Palavras simples não precisam de marcação, a conjunção fica sem rótulo, como na Figura \ref{fig:ptb_conj_exe_1}. Conjunções com várias palavras tem o sintagma de conjunção marcado como CONJP, e as conjunções são postas em estrutura plana, mostrado na Figura \ref{fig:ptb_conj_exe_2}. Por fim, conjunções descontínuas tem apenas a parte com múltiplas palavras marcada por CONJP. A palavra isolada permanece isolada e sem marcação, como na Figura \ref{fig:ptb_conj_exe_3}. O manual possui a descrição de mais casos, envolvendo Conjunções Coordenadas e \textit{times}\footnote{\textit{Vezes}, no sentido de multiplicação. Exemplo, \textit{three times}, ou \textit{three times five}}, porém não nos alongaremos no assunto, por não possuírem as \textit{tags} CONJ ou CONJP.
+
+O \textit{Penn Treebank} e o CINTIL lidam com conjunções de maneiras distintas. O PTB, em seu manual de anotação \cite[p~117]{bracketing_ptb}, dedica a seção 7.5 para descrever tal fenômeno. Lá podemos ver que, para conjunções coordenadas, temos três casos: palavra simples (\textit{and}, \textit{but}, \textit{or}, \ldots), multi palavra (\textit{as well as}, \textit{not to mention}, \textit{rather than}, \ldots), e conjunções descontínuas (\textit{not only\ldots but}, \textit{not\ldots but instead}, \ldots). Palavras simples não precisam de marcação, a conjunção fica sem rótulo, como na Figura \ref{fig:ptb_conj_exe_1}. Conjunções com várias palavras tem o sintagma de conjunção marcado como CONJP, e as conjunções são postas em estrutura plana, mostrado na Figura \ref{fig:ptb_conj_exe_2}. Por fim, conjunções descontínuas tem apenas a parte com múltiplas palavras marcada por CONJP. A palavra isolada permanece isolada e sem marcação, como na Figura \ref{fig:ptb_conj_exe_3}. O manual possui a descrição de mais casos, envolvendo Conjunções Coordenadas e \textit{times}\footnote{\textit{Vezes}, no sentido de multiplicação. Exemplo, \textit{three times}, ou \textit{three times five}}, porém não nos alongaremos no assunto, por não possuírem as \textit{tags} CONJ ou CONJP.
 \begin{center}
 \input{imagens/ptb_conj_exe_1.tex}
 \end{center}
@@ -42,6 +46,7 @@ O \textit{Penn Treebank} e o CINTIL lidam com conjunções de maneiras distintas
 \begin{center}
 \input{imagens/ptb_conj_exe_3.tex}
 \end{center}
+
 O CINTIL, por outro lado, não é tão descritivo. É dito em \cite[p~20]{cintil_handbook}:
 \textquote{\textit{Coordination of two constituents A and B by means of a coordinative conjunction Conj (either a lexical item, such as \textit{e}, or a comma) are a cascade of adjunctions [A [Conj [ B ]]].}}
 \footnote{\textquote{Coordenação de dois constituintes A e B no sentido de uma conjunção coordenada Conj (tanto um item lexical, como \textit{e}, ou uma vírgula) são uma cascata de adjunções [A [Conj [B]]].}}
@@ -53,6 +58,7 @@ CINTIL abarca toda a nova sentença da conjunção, como demonstrado na Figura \
 \begin{center}
 \input{imagens/cintil_conj_exe_1.tex}
 \end{center}
+
 Com isto em mente, fez-se necessário reescrever a disposição das \textit{tags}, para que: CONJP se referisse apenas aos núcleos conjuntivos, CONJ’ fosse removida e, no contexto em que CONJ aparece dentro de \textit{tags} CONJP, remover suas marcações, sem removê-las noutros momentos. Um exemplo pode ser visto na Figura \ref{fig:cintil_conj_exe_2}.
 \begin{center}
 \input{imagens/cintil_conj_exe_2.tex}
@@ -60,10 +66,12 @@ Com isto em mente, fez-se necessário reescrever a disposição das \textit{tags
 
 \subsection{Problemas com C (Complementizador)}
 \label{subsec-cintil-c}
+
 Semelhante à CONJ em diversos aspectos, as \textit{tags} C, C’ e CP permitem a conjunção entre sentenças, tornando uma segunda sentença objeto de uma primeira. O tratamento feito com elas foi muito semelhante ao dado para a \textit{tags} CONJ, com um diferencial: CONJ’ ocorre sem necessariamente ter a \textit{tags} CONJP como pai (12 casos), o que nunca ocorre com a família CP. 
 
 \subsection{Problemas com PNT (Pontuação)}
 \label{subsec:cintil-pnt}
+
 Foi observado, também, que CINTIL e PTB lidam com pontuações de formas distintas. CINTIL usa a \textit{tags} PNT para classificar estes símbolos. PTB prevê uma \textit{tags} SYM, para símbolos. Além disso, vemos em \cite[p~52]{buildingPTB} que os símbolos costumam ser representados sem etiquetas, como exemplificado na Figura \ref{fig:ptb_comma_parenthe}. Em \cite[p~52]{bracketing_ptb}, fica bastante claro: fora \textit{bracketing} (parênteses, colchetes, chaves), os símbolos não recebem nenhuma \textit{POS}. Quando recebe, como no caso de símbolos funcionando como palavras, ou símbolos matemáticos, são \textit{tags} referentes ao sintagma. Um detalhe importante é como PTB lida com aspas e apóstrofos (\textit{quote}, e \textit{single-quote}). As aspas são removidas, e substituídas por dois apóstrofos ou duas crases (melhor visualizado na Figura \ref{fig:ptb-quote}).
 
 \begin{center}
@@ -78,15 +86,16 @@ Fez-se necessário criar um \textit{script} que removesse as \textit{tags} PNT d
 
 % Porém, não podia ser tão simples, e não foi. 
 Porém,
-CINTIL não só identifica os PNT de forma diferentes, como também os POSICIONA de forma distinta, como podemos ver no comparativo da Figura \ref{fig:comp_PNT_ptb_cintil}. No exemplo, abordando ponto final, é definido em  \cite[p~52]{bracketing_ptb}, 
+CINTIL não só identifica os PNT de forma diferentes, como também os POSICIONA de forma distinta, como podemos ver no comparativo da Figura \ref{fig:comp_PNT_ptb_cintil}. No exemplo, abordando ponto final, é definido em \cite[p~52]{bracketing_ptb}, 
 \begin{quote}
     \textquote{\textit{In this corpus, each unit of text is enclosed in a top level of unlabeled brackets [\ldots]. Formerly, top-level punctuation [\ldots] could be attached to these top-level brackets. However, in this release, such punctuation should all be attached one level down (to the highest level of labeled brackets), so that there is only one top-level node within the unlabeled brackets.}}
     \footnote{\textquote{Neste corpus, cada unidade de texto é fechada no nível superior de parênteses não marcados [\ldots]. Anteriormente, pontuações de nível superior [\ldots] podiam ser anexadas àqueles parênteses de nível superior. Porém, nesta versão, tal pontuação deve toda ser anexada um nível abaixo (para o nível mais alto dos parênteses rotulados), então existe apenas um nó no topo dentro dos parênteses não rotulados}. Tradução própria.}
 \end{quote}
-E resume em \citeonline[p~57]{bracketing_ptb}: 
+
+E resume em \cite[p~57]{bracketing_ptb}: 
 \textquote{\textit{Final punctuation as a rule is a child of the highest level of structure}}.
 \footnote{\textquote{Ponto final é, por regra, um filho da estrutura de nível mais elevado}. Tradução própria.}
-Já \citeonline[p~29]{cintil_handbook} define como \textquote{\textit{End of sentence markers are in the top most adjunction}}
+Já \cite[p~29]{cintil_handbook} define como \textquote{\textit{End of sentence markers are in the top most adjunction}}
 \footnote{\textit{Marcadores de fim de sentença estão na adjunção mais ao topo}. Tradução própria.}.
 
 \begin{center}
@@ -98,6 +107,7 @@ Vírgulas também são bastante curiosas. Em \cite[p~52]{bracketing_ptb}:
     \textquote{\textit{Paired punctuation marks are siblings of the constituents they surround. This is true even when the opening or closing member of the pair can be viewed as deleted. For instance, the commas that set off a subordinate clause or a relative clause from a main clause are siblings of the SBAR dominating the subordinate clause. [\ldots]}}
     \footnote{\textquote{Marcadores de pontuação pareados são irmãos do constituinte que eles rodeiam. Isto é verdade mesmo quando o membro inicial ou final do par pode ser visto como apagado. Por exemplo, as virgulas que definem uma cláusula subordinada ou clausula relativa de uma cláusula principal são irmãos do SBAR dominando a cláusula subordinada. [\ldots]}. Tradução própria.}
 \end{quote}
+
 Podemos ver esse fenômeno na Figura \ref{fig:ptb_comma_parenthe}. Já em \cite[p~30]{cintil_handbook}, 
 \textquote{\textit{Commas separating left periphery constituents are right adjoined to theses constituents.}}
 \footnote{\textquote{Vírgulas separando constituintes periféricos à esquerda são adjungidos à direita destes constituintes}, tradução própria}, exemplo na Figura \ref{fig:cintil_comma_left}.
@@ -119,7 +129,9 @@ Tal erro inviabiliza completamente qualquer tipo de teste, como podemos ver na m
 \end{center}
 
 % ------------------------------------------------------------------------------------------------
-\subsection{Treinamento}\label{subsec:treinamento_cintil}
+\subsection{Treinamento}
+\label{subsec:treinamento_cintil}
+
 Para fazer estas conversões, fizemos um \textit{script} disponível online\footnote{\url{ https://github.com/Fernandomn/separador-cintil}}.
 
 Com as \textit{tags} convertidas, foi feito o treinamento. O ato do treino é relativamente simples: deve-se, através do terminal do seu sistema, navegar até o diretório onde se encontra o \textit{stanford-parser.jar}, o arquivo que contém os \textit{parsers} do SP que utilizaremos. Estando no diretório correto, deve-se executar o comando \ref{lst:testeBasicoCintil}:
@@ -131,7 +143,7 @@ Com as \textit{tags} convertidas, foi feito o treinamento. O ato do treino é re
 O código acima merece algumas explicações a parte, para quem não está familiarizado ao uso do SP pelo terminal.
 
 \begin{center}
-\input{tabelas/tab_treinoBasicoCintil.tex}
+\input{tabelas/tab_CintilTreinoBasico.tex}
 \end{center}
 
 A Tabela \ref{tab:tab_treino_basico_cintil} mostra um fragmento das possibilidades de comandos a serem usados pela interface do terminal do SP. Note que usamos apenas 1014 arquivos nesta demonstração, que é um fração de 10\% dos arquivos / árvores do CINTIL disponíveis.
@@ -142,15 +154,17 @@ Para melhor verificação dos resultados, utilizamos o método de \textit{10-fol
     \footnote{\textquote{Esta abordagem envolve dividir aleatoriamente o conjunto de observações em k grupos, ou dobras, de tamanhos aproximadamente iguais. O primeiro grupo é tratado como conjunto de validação, e o método se encaixa nos k -- 1 grupos restantes}. Tradução própria.}.
 \end{displayquote}
 
-No nosso caso, dividimos nosso \textit{corpora} em 10 partes de 1014 sentenças. Fizemos o treinamento com 1 parte, e o teste com a parte restante, alternando as partes escolhidas.  Os resultados serão apresentados na conclusão.
+No nosso caso, dividimos nosso \textit{corpora} em 10 partes de 1014 sentenças. Fizemos o treinamento com 9 partes, e o teste com a parte restante, alternando as partes escolhidas. Os resultados serão apresentados na conclusão.
 
 Na sequência, foi executado o treinamento com as partes restantes. De maneira análoga, no mesmo diretório, foi utilizado o comando \ref{lst:testeBasicoCintil}:
 
 \begin{center}
 \input{codigos/cod_testeBasicoCintil.tex}
 \end{center}
+
 Que também merece explicações, na Tabela \ref{tab:tab_teste_basico_cintil}:
 \begin{center}
-\input{tabelas/tab_testeBasicoCintil.tex}
+\input{tabelas/tab_CintilTesteBasico.tex}
 \end{center}
+
 O resultado total dos testes resultou na extensa Tabela \ref{tab:cintil_result_full}, que pode ser vista nos apêndices. E os comentários dos resultados pode ser encontrado em \ref{resultados_cintil}.
