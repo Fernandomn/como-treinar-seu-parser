@@ -37,7 +37,7 @@ O PTB não prevê situações como estas. Pelo contrário, como podemos ver no g
 A flexão \textquote{\textit{mid-October}} é representada, sozinha, como um sintagma nominal (\textit{noun phrase}). Portanto, fez-se necessário a criação de uma sub-tarefa que removesse tais \textit{tags}, e que a estrutura fosse refeita, de modo a seguir os padrões do PTB.
 
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM \% (PORCENTAGEM)}
+\subsection{Problemas com \% (Porcentagem)}
 \label{subsec:percent}
 % Mais um caso interessante de distinção Bosque / PTB. 
 O tratamento de porcentagem no Bosque é mais um caso interessante de sua diferença com o PTB.
@@ -52,7 +52,7 @@ A estrutura foi reproduzida pelo \textit{script} desenvolvido, mas o SP não foi
     \input{imagens/ptb_percent_guide.tex}
 \end{center}
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM PONTUAÇÃO}
+\subsection{Problemas com pontuação}
 \label{subsec:bosque_point}
 
 O Bosque tem uma política de tratamento de símbolos mais parecida com a do PTB. Porém, envolve uma pluralidade maior de possíveis sinais, além de usar sinais não convencionais, como \guillemotleft, por exemplo. A Tabela \ref{tab:bosque_points} mostra os símbolos utilizados, além de suas respectivas frequências de ocorrência no \textit{treebank}.
@@ -122,7 +122,7 @@ A Tabela \ref{tab:bosque_func_edit} é um fragmento da Tabela \ref{tab:bosque_fu
 Isso nos leva a novas questões. Nem todas as \textit{tags} de função são explícitas quanto ao sintagma que elas definem. Ou seja, uma informação de sintagma precisa seria obtida pela \textit{tag} $f$, que no caso é $x$, que não tem valor sintagmático, e o PTB não prevê sintagmas não marcados, ou etiquetas coringa. Vamos verificar essas funções nas próximas sessões, e as estratégias utilizadas para resolver tais problemas.
 
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM >A e A<}
+\subsection{Problemas com >A e A<}
 \label{subsec:bosque_a}
 
 Vemos em \cite[p~13]{afonso2006arvores}
@@ -141,7 +141,7 @@ A possível ambiguidade da sentença anterior é resolvida em \cite[p~58]{afonso
 
 Para este trabalho, os nós não conservam as informações de função, apenas de forma. Assim sendo, >A será transduzido de acordo com o primeiro nó válido na direção indicada por > ou <.
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM CJT (Conjunção)}
+\subsection{Problemas com CJT (Conjunção)}
 \label{subsec:CJT}
 Ainda sobre sintagmas evidenciadores da relação de coordenação (visto em \ref{subsec:cu}), \cite[p~20]{afonso2006arvores} descreve: 
 \begin{quote}
@@ -157,7 +157,7 @@ Quando tal tipo de função ocorre para um nó, a solução de transdução cost
 
 Podemos ver na Tabela \ref{tab:bosque_CJT} a frequência com quem CJT se pareia, e vemos nele uma certa \textit{tag} chamada acl. Na Tabela \ref{tab:tab_bosque} podemos ver que ela merece uma atenção especial. Dedicaremos um pouco mais de tempo à ela.
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM ACL (ORAÇÕES AVERBAIS)}
+\subsection{Problemas com ACL (Orações Averbais)}
 \label{subsec:tag_acl}
 Vemos em \cite{freitas2007biblia}, \textquote{Finalmente, na oração averbal
 \footnote{Note que, em \cite[p~12]{afonso2006arvores}, acl é grifada como \textquote{oração deverbal}}
@@ -167,7 +167,7 @@ Vemos em \cite{freitas2007biblia}, \textquote{Finalmente, na oração averbal
     \input{tabelas/tab_bosque_acl.tex}
 \end{center}
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM KOMP< (COMPLEMENTOS)}
+\subsection{Problemas com KOMP< (Complementos)}
 \label{subsec:tag_komp}
 Esta etiqueta é definida, por \cite[p~57]{afonso2006arvores} como \textquote{KOMP<, segundo termo de uma oração comparativa ou oração consecutiva}. E em \cite[p~116]{afonso2006arvores}:
 \begin{quote}
@@ -184,13 +184,13 @@ Dois exemplos simples podem ser vistos na Figura \ref{fig:ptb_exemplo_comp}. Foi
     \input{imagens/ptb_exemple_comp.tex}
 \end{center}
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM CJT:acl}
+\subsection{Problemas com CJT:acl}
 \label{subsec:CJT_acl}
 Definitivamente, a mais desafiadora das conversões. Sentenças averbais com valor de conjunção. Não existe uma forma precisa de converter este par. 
 
 Notou-se também que observar os nós filhos, ou mesmo os pais, não nos dariam informações precisas que nos permitisse afirmar qual seria uma transdução interessante, que fosse reconhecível tanto por PTB como por SP. Ser arbitrário, e defini-lo como VP ou NP, por exemplo, causaria muitos problemas. Não restava muitas escolhas. Como trabalho futuro, caberá o estudo deste par. Por ora, decidiu-se transduzí-los para \textquote{S} (marcador de Sentença).
 % ------------------------------------------------------------------------------------------------
-\subsection{PROBLEMAS COM O BOSQUE}
+\subsection{Problemas com o Bosque}
 \label{subsec:erros_bosque}
 Dentre as dificuldades na transdução Bosque/PTB, alguns erros no \textit{dataset} merecem ser frisados. Como já dito, o Bosque originalmente é distribuído no formato Árvores Deitadas, mas possui uma distribuição em formato \textit{Penn Treebank}. A observação nos mostra que, na prática, apenas foram substituídos os símbolos de indentação pelos parênteses do PTB. 
 % Nos apêndices, haverá uma lista completa os que foram detectados por nós. 
