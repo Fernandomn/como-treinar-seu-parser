@@ -1,12 +1,16 @@
 \chapter{Desenvolvimento}
 \label{cap:desenv}
 
-A partir de agora, será descrito o desenvolvimento do trabalho propriamente dito. Espera-se que as revisões, até o momento, tenham sido suficientes para a compreensão total do mesmo.
+A partir de agora, será descrito o desenvolvimento do trabalho propriamente dito. Foram feitas as transduções dos \textit{corpora} CINTIL e BOSQUE para o formato PTB, como já mencionado. 
+% Espera-se que as revisões, até o momento, tenham sido suficientes para a compreensão total do mesmo.
 
-Para a execução dos treinos, fez-se necessário revisar a formatação do PTB, e dos dois \textit{treebanks} a serem convertidos. O procedimento de conversão, no geral, é basicamente o mesmo. Em primeiro lugar, a estrutura da sentença já classificada é refeita de forma lógica, remontando-a numa estrutura de dados em formato de árvore. Neste processo, as traduções das \textit{POS tags} são feitas. No segundo momento, caso a árvore recém traduzida possua alguma \textit{tag} que exija uma verificação mais aprofundada, esse tratamento é realizado. Esta segunda etapa ocorre de acordo com a necessidade, não sendo obrigatória para todas as sentenças. Por fim, a estrutura de dados é convertida para texto, respeitando o \textit{bracketing} do PTB.
+O procedimento de transdução \textit{inter-corpora} foi semelhante para ambas conversões mencionadas neste trabalho. Cabe, então, uma descrição desta metologia na sessão \ref{sec:treino_metodologia}. Depois desta explanação, veremos os pormenores do desenvolvimento da transdução dos \textit{corpora} originais, e os treinamentos realizados a partir de tais transduções, serão pormenorizados nas sessões \ref{sec:treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}.  
 
-O leitor pode se perguntar sobre a necessidade da segunda etapa, se um dos objetivos deste trabalho é, justamente, que não seja necessário muito desenvolvimento. Infelizmente, sem esse tratamento mais cuidadoso, o \textit{parser} é incapaz de ser treinado, ou de classificar sentenças. 
+% Para a execução dos treinos, fez-se necessário revisar a formatação do PTB, e dos dois \textit{treebanks} a serem convertidos. O procedimento de conversão, no geral, é basicamente o mesmo. Em primeiro lugar, a estrutura da sentença já classificada é refeita de forma lógica, remontando-a numa estrutura de dados em formato de árvore. Neste processo, as traduções das \textit{POS tags} são feitas. No segundo momento, caso a árvore recém traduzida possua alguma \textit{tag} que exija uma verificação mais aprofundada, esse tratamento é realizado. Esta segunda etapa ocorre de acordo com a necessidade, não sendo obrigatória para todas as sentenças. Por fim, a estrutura de dados é convertida para texto, respeitando o \textit{bracketing} do PTB.
+
+% O leitor pode se perguntar sobre a necessidade da segunda etapa, se um dos objetivos deste trabalho é, justamente, que não seja necessário muito desenvolvimento. Infelizmente, sem esse tratamento mais cuidadoso, o \textit{parser} é incapaz de ser treinado, ou de classificar sentenças. 
 
 
+\input{./2-elementos-textuais/desenvolvimento_metodologia}
 \input{./2-elementos-textuais/desenvolvimento_treinandoCintil}
 \input{./2-elementos-textuais/desenvolvimento_treinandoBosque}

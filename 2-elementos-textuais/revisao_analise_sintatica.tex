@@ -1,11 +1,11 @@
 \section{Análise Sintática (\textit{Parsing})}
 \label{sec:parsing}
 
-Análise sintática, ou \textit{parsing}, é uma técnica que possui muita importância principalmente em duas áreas de conhecimento. A primeira, no campo do processamento de Linguagens de Computação. Na segunda, no campo do Processamento de Linguagens Naturais.
+Análise sintática, ou \textit{parsing}, é uma técnica que possui importância principalmente em duas áreas de conhecimento. A primeira, no campo do processamento de Linguagens de Computação. Na segunda, no campo do Processamento de Linguagens Naturais.
 
 Sobre linguagens de computação, \citeonline[p~39]{aho2008compiladores} definem a análise sintática como \textquote{O processo para determinar como uma cadeia de terminais pode ser gerada por uma gramática}. Terminais são, na sua definição, (\textit{\Ibidem[p~27]{aho2008compiladores}}) \textquote{os símbolos elementares da linguagem, definidos pela gramática}. Sobre gramática, (\textit{\Ibidem[p~39]{aho2008compiladores}}) \textquote{descreve [\ldots] a estrutura hierárquica da maioria das construções de linguagens [\ldots]}. 
 
-Já sobre Processamento de Linguagem Natural (que será dado foco neste trabalho), como descrito por \citeonline[p~33]{charniak97statistical}, \textit{parsing} é \textquote{\textit{the process of assigning a phrase marker to a sentence}} \footnote{\textquote{O processo de atribuir marcadores de frase a uma sentença}. Tradução própria}. Por exemplo, na frase \textquote{\textit{o cachorro late}}, \textit{o} pode ser marcado como artigo, \textit{cachorro} como substantivo, \textit{late} como verbo. \textit{O cachorro}, juntos, formam um sintagma nominal. O verbo, sozinho, é um sintagma verbal. E ambos formam a sentença. Como fica mais claro na Figura \ref{fig:parse-simple}.
+Já sobre Processamento de Linguagem Natural (que será dado foco neste trabalho), como descrito por \citeonline[p~33]{charniak97statistical}, \textit{parsing} é \textquote{\textit{the process of assigning a phrase marker to a sentence}} \footnote{\textquote{O processo de atribuir marcadores de frase a uma sentença}. Tradução própria}. Por exemplo, na frase \textquote{\textit{o cachorro late}}, \textit{o} pode ser marcado como artigo, \textit{cachorro} como substantivo, \textit{late} como verbo. \textit{O cachorro}, juntos, formam um sintagma nominal. O verbo, sozinho, faz parte de um sintagma verbal. E ambos formam a sentença. Como fica mais claro na Figura \ref{fig:parse-simple}.
 
 \begin{center}
     \input{imagens/fig_parse-simple.tex}
@@ -13,35 +13,35 @@ Já sobre Processamento de Linguagem Natural (que será dado foco neste trabalho
 
 A esta estrutura damos o nome de \textit{árvore de derivação}, \textit{árvore}, ou \textit{parse}.
 
-Para sentenças simples, este é um trabalho simples. Porém, muito facilmente uma frase pode gerar mais de uma árvore. Ou seja, gerar uma ambiguidade sintática\footnote{Nota: Não haverá foco na ambiguidade lexical neste trabalho.}, como no exemplo usado por \citeonline[p~10]{paganiavaliaccao}, que podemos ver na Figura \ref{fig:parse-ambiguity}
+Para sentenças simples, este é um trabalho simples. Porém, muito facilmente uma frase pode gerar mais de uma árvore, ou seja, gerar uma ambiguidade sintática\footnote{Nota: Não haverá foco na ambiguidade lexical neste trabalho.}, como no exemplo usado por \citeonline[p~10]{paganiavaliaccao}, na Figura \ref{fig:parse-ambiguity}
 
 \begin{center}
     \input{imagens/fig_parse-ambig.tex}
 \end{center}
 
-Este exemplo já nos dá uma pista do problema a ser resolvido. Temos outro: a quantidade de árvores incoerentes. Como destaca \citeonline[p~33]{charniak97statistical}, o exemplo \textquote{\textit{
-% It 
-[\ldots] implies that we can assign at least a semiplausible meaning to all the possible parses. For most grammars [\ldots], this is not the case}}
-\footnote{\textquote{[este exemplo] Implica que podemos atribuir pelo menos um significado semi-plausível para toda árvore possível. Para a maioria das gramáticas [\ldots], este não é o caso}. Tradução própria.}.
+Além da ambiguidade, existe outro problema: a quantidade de árvores incoerentes. Como destaca \citeonline[p~33]{charniak97statistical}, o exemplo 
+\textquote{\textit{[\ldots] Implica que podemos atribuir pelo menos um significado semi-plausível para toda árvore possível. Para a maioria das gramáticas [\ldots], este não é o caso}
+\footnote{No original: \textquote{[\ldots] implies that we can assign at least a semiplausible meaning to all the possible parses. For most grammars [\ldots], this is not the case.} Tradução própria.}}.
 Ou seja, é necessário filtrar as árvores com real relevância e que mais se aproximem de uma estrutura correta.
 
-Nesse ponto, existem métodos que resolvam essa ambiguidade (que serão abordados mais à frente).
+Nesse ponto, existem métodos que resolvam essa ambiguidade, como as Gramáticas Lives de Contexto Probabilísticas e a classificação lexicalizada. Ambos serão abordados, respctivamente, nas sessões \ref{subsec:statisticalparsing} e \ref{subsec:lexParsing}.
 
 O leitor pode se questionar qual a utilidade de \textit{parsing}, e do seu estudo. \citeonline{Manning1999FoundationsNLP} dedicam alguns capítulos para demonstrar seu uso e técnicas\ como Tradução de Máquina, Agrupamento (\textit{clustering}), Recuperação de Informação e Categorização de Textos. Entrar nestes assuntos escaparia ao escopo deste trabalho, mas recomendamos a leitura\footnote{\cite[capítulos~13,14,15,16]{Manning1999FoundationsNLP}}.
 
-Apesar de uma ferramenta muito útil e desafiadora, \citeonline[p~457]{Manning1999FoundationsNLP} destacam:
-\textquote{\textit{Partly because parsers do not perform well enough yet, parsing has rarely been applied to higher-level tasks like speech recognition and language understanding}}
-\footnote{\textquote{Em partes por ainda não performarem bem o bastante ainda, \textit{parsing} raramente vem sendo aplicado para tarefas de alto nível como reconhecimento de fala e compreensão de linguagem}. Tradução própria.}. 
+% Apesar de uma ferramenta muito útil e desafiadora, \citeonline[p~457]{Manning1999FoundationsNLP} destacam:
+% \textquote{\textit{Partly because parsers do not perform well enough yet, parsing has rarely been applied to higher-level tasks like speech recognition and language understanding}}
+% \footnote{\textquote{Em partes por ainda não performarem bem o bastante ainda, \textit{parsing} raramente vem sendo aplicado para tarefas de alto nível como reconhecimento de fala e compreensão de linguagem}. Tradução própria.}. 
 
 % ---------------------------------------------------------
 
 \subsection{Etiquetas Morfosintáticas - Part of Speech Tags}
 \label{subsec:POStags}
 
-Sintaticamente falando, palavras podem ser agrupadas em classes (ou grupos) que demonstrem seu comportamento sintático. Tais classes podem ser chamadas de Categorias Sintáticas, ou Categorias Gramaticais. Até mesmo Classes Gramaticais. Exemplos de classes são \textit{verbo}, \textit{substantivo}, \textit{adjetivo}, \textit{artigo} etc. Outra forma de se referir a tais classes, é chamando-as de \textquote{\textit{Part of Speech}}\footnote{Parte do Discurso} (POS).
+Sintaticamente falando, palavras podem ser agrupadas em classes (ou grupos) que demonstrem seu comportamento sintático. Tais classes podem ser chamadas de Categorias Sintáticas, ou Categorias Gramaticais. Mesmo Classes. Exemplos de classes são \textit{verbo}, \textit{substantivo}, \textit{adjetivo}, \textit{artigo} etc. Outra forma de se referir a tais classes, é chamando-as de \textquote{\textit{Part of Speech}}\footnote{Parte do Discurso} (POS).
 
-Como saber se palavras diferentes pertencem ao mesmo grupo? \cite[p~81]{Manning1999FoundationsNLP} \textquote{\textit{The most basic test for words belonging to the same class is the substitution test}}
-\footnote{\textquote{O teste mais básico para palavras pertencentes à mesma classe é o teste de substituição}. Tradução própria.}.
+% Como saber se palavras diferentes pertencem ao mesmo grupo? 
+\cite[p~81]{Manning1999FoundationsNLP} \textquote{O teste mais básico para palavras pertencentes à mesma classe é o teste de substituição}
+\footnote{No original: \textquote{\textit{The most basic test for words belonging to the same class is the substitution test.}} Tradução própria.}.
 Podemos ver um exemplo na Figura \ref{fig:substTest}.
 
 \begin{center}
@@ -49,13 +49,13 @@ Podemos ver um exemplo na Figura \ref{fig:substTest}.
 \end{center}
 
 Na Figura \ref{fig:substTest}, demonstramos o teste da substituição para substantivos. Note que palavras podem ter mais de uma POS. Por exemplo, \textit{casa} pode ser um substantivo (NN), ou a terceira pessoa do singular do verbo \textquote{casar} (VBZ
-\footnote{Essa é uma tag do Penn Treebank, usada de maneira direta. Em \ref{subsec:PennTB} explicamos melhor este \textit{treebank}, e suas possíveis traduções no capítulo \ref{cap:desenv}}
-). Sistemas que fazem análise sintática de sentenças atribuem um rótulo a cada palavra que represente a sua classe gramatical. Esta marca é chamada de Etiqueta Morfossintática, ou \textit{POS tag}.
+\footnote{Essa é uma tag do Penn Treebank, usada de maneira direta. Em \ref{subsec:PennTB} explicamos melhor este \textit{treebank}, e suas possíveis traduções no capítulo \ref{cap:desenv}.}
+). Sistemas que fazem análise sintática de sentenças atribuem um rótulo a cada palavra que represente a sua classe gramatical. Esta marca é chamada de Etiqueta Morfossintática (ou \textit{POS tag}, no inglês).
 
 Palavras podem ser de duas categorias principais, citadas por \citeonline[p~82]{Manning1999FoundationsNLP}:
 \begin{quote}
-    \textquote{\textit{The open or lexical categories are ones like nouns, verbs and adjectives which have a large number of members, and to which new words are commonly added. The closed or functional categories are categories such as prepositions and determiners (containing words like of, on, the, a) which have only a few members, and the members of which normally have a clear grammatical use.}}
-    \footnote{\textquote{As categorias abertas, ou lexicais, são aquelas como substantivos, verbos e adjetivos, que tem um grande número de membros, e nos quais novas palavras são comumente adicionadas. As fechadas, ou funcionais, são categorias como preposições e artigos (contendo palavras como \textit{de, em, o, um}) que tem apenas poucos membros, e cujos membros normalmente tem um claro uso gramatical}. Tradução própria.}
+    \textquote{As categorias abertas, ou lexicais, são aquelas como substantivos, verbos e adjetivos, que tem um grande número de membros, e nos quais novas palavras são comumente adicionadas. As fechadas, ou funcionais, são categorias como preposições e artigos (contendo palavras como \textit{de, em, o, um}) que tem apenas poucos membros, e cujos membros normalmente tem um claro uso gramatical}
+    \footnote{No original: \textquote{\textit{The open or lexical categories are ones like nouns, verbs and adjectives which have a large number of members, and to which new words are commonly added. The closed or functional categories are categories such as prepositions and determiners (containing words like of, on, the, a) which have only a few members, and the members of which normally have a clear grammatical use.}}. Tradução própria.}
 \end{quote}
 Podemos complementar essa ideia com a Tabela \ref{tab:classesPalavras}, apresentada por \citeonline[p~55]{Castilho2010gramatica}:
 
@@ -63,7 +63,7 @@ Podemos complementar essa ideia com a Tabela \ref{tab:classesPalavras}, apresent
 \input{tabelas/tab_classes-palavras.tex}
 \end{center}
 
-Algumas POS tags serão descritas com mais detalhes quando forem abordados o Penn Treebank (\ref{subsec:PennTB}), e \textit{treebanks} para o Português (\ref{sec:tbPortugues}).
+Algumas POS tags serão descritas com mais detalhes quando forem abordados o Penn Treebank (\ref{subsec:PennTB}), e \textit{treebanks} para o Português (\ref{subsec:tbPortugues}).
 
 % ---------------------------------------------------------
 
@@ -77,7 +77,7 @@ Algumas POS tags serão descritas com mais detalhes quando forem abordados o Pen
 % Eles também destacam que esta forma de \textit{parsing} \textquote{\textit{represent syntactic information as a set of head-dependent relational arcs, typically constrained to form a tree}}
 % \footnote{\textquote{Representa informação sintática como um um conjunto de arcos relacionais núcleo-dependente, tipicamente forçado a formar uma árvore}. Tradução própria.}. 
 % Em outras palavras, remetendo à imagem \ref{fig:parse-simple} a relação \textit{o} e \textit{cachorro} demonstra o substantivo (cachorro) como núcleo (ou \textit{head}), e o artigo (o) como dependente (\textit{dependent}). 
-Em qualquer linguagem, palavras não são ditas ao acaso. Existe uma ordem, e regras, para que elas sejam bem emitidas, e bem recebidas. Um conceito fundamental, sobre tal ordenação, é a ideia que que palavras se agrupam de forma hierárquica. 
+Em qualquer linguagem, palavras não são ditas ao acaso. Existe uma ordem, e regras, para que elas sejam bem emitidas, e bem recebidas. Um conceito fundamental sobre tal ordenação é a ideia que palavras se agrupam de forma hierárquica. 
 Esta estrutura pode ser visualizada na Figura \ref{fig:constituency-tree},
 \begin{center}
 \input{imagens/fig_constituency-tree.tex}
@@ -91,7 +91,7 @@ O sintagma (ou \textit{phrase}) é, de acordo com \citeonline[p~55]{Castilho2010
     Trata-se de uma associação de palavras articuladas à volta de cinco dentre elas: o verbo, o substantivo, o adjetivo, o advérbio e a preposição. [\ldots] A classe de palavras que nucleariza o sintagma dá-lhe o nome, e assim teremos o sintagma nominal (SN), o sintagma verbal (SV), o sintagma adjetival (SAdj), o sintagma adverbial (SAdv) e o sintagma preposicionado (SP)}
     \footnote{Este trabalho baseou-se no \textit{tagset} do \textit{Penn Treebank}, que será melhor explicado na sessão \ref{subsec:PennTB}. Salvo exceções, serão utilizados neste trabalho os rótulos para sintagmas (\textit{phrase tag}) equivalentes ao do Penn. Que conste : \textit{noun phrase} (NP), \textit{verbal phrase} (VP), \textit{adjective phrase} (ADJP), \textit{adverb phrase} (ADVP), \textit{prepositional phrase} (PP)}. 
 \end{quote}
-E, (\textit{\Ibidem[p~55]{Castilho2010gramatica}}) \textquote{Os sintagmas exemplificam a propriedade de \textquote{constituência}, isto é, a capacidade linguística de organizar expressões dotadas de uma margem esquerda, um núcleo e uma margem direita}.
+E, \textquote{Os sintagmas exemplificam a propriedade de \textquote{constituência}, isto é, a capacidade linguística de organizar expressões dotadas de uma margem esquerda, um núcleo e uma margem direita} (\textit{\Ibidem[p~55]{Castilho2010gramatica}}).
 
 \cite{NLPConstParsing} destaca que \textquote{\textit{Constituency parsing aims to extract a constituency-based parse tree from a sentence that represents its syntactic structure according to a phrase structure grammar}}\footnote{\textquote{Análise de Constituência visa extrair uma árvore baseada em constituencia de uma sentença que represente sua estrutura sintática de acordo com uma gramática de estrutura frasal}. Tradução própria.}, ou seja, uma árvore de constituintes (ou árvore de constituência - \textit{constituency parse}). Esta árvore demonstra a relação hierárquica da sentença e dos seus elementos. Como destacam \citeonline[p~93]{Manning1999FoundationsNLP},
 \begin{displayquote}
@@ -153,14 +153,14 @@ Já línguas como o Latim ou o Russo podem posicionar as palavras em qualquer po
 Para reproduzir o padrão de sentenças, podemos nos valer das regras de reescrita. \cite[p~96]{Manning1999FoundationsNLP}
 \textquote{\textit{A rewrite rule has the form \textquote{category $\to$ category*} and states that the symbol on the left side can be rewritten as the sequence of symbols on the right side}}
 \footnote{\textquote{Uma regra de reescrita tem a forma \textquote{categoria $\to$ categoria*} e declara que o símbolo do lado esquerdo pode ser reescrito com a sequência de símbolos no lado direito}. Tradução própria.}.
-Ou seja, para quem já está familiarizado com o estudo de teoria dos autômatos, seriam as regras de produção ou reescrita. \citeonline[p~171]{hopcroft2003automataTheory} definem uma produção como:
+Ou seja, para quem já está familiarizado com o estudo de teoria dos autômatos, seriam as regras de produção ou reescrita. \cite[p~171]{hopcroft2003automataTheory} define uma produção como:
 \begin{itemize}
-    \item \textquote{\textit{A variable that is being (partially) defined by the production. This variable is often called the \textit{head} of the production.}}
-    \footnote{\textquote{Uma variável que está sendo (parcialmente) definida pela produção. Esta variável é geralmente chamada \textquote{núcleo} da produção}. Tradução própria.}
-    \item \textquote{\textit{The production symbol $\rightarrow$.}}
-    \footnote{\textquote{O símbolo da produção $\rightarrow$}. Tradução própria.}
-    \item \textquote{\textit{A string of zero or more terminals and variables. This string, called the \textit{body} of the production, represents one way to form strings in the language of the variable of the head.}}
-    \footnote{\textquote{Uma cadeia de caracteres de zero ou mais terminais e variáveis. Essa cadeia, chamada o corpo da produção, representa o modo de formar cadeias na linguagem da variável do núcleo}. Tradução própria.}
+    \item \textquote{Uma variável que está sendo (parcialmente) definida pela produção. Esta variável é geralmente chamada \textquote{núcleo} da produção.}
+    \footnote{No original: \textquote{\textit{A variable that is being (partially) defined by the production. This variable is often called the \textit{head} of the production.}} Tradução própria.}
+    \item \textquote{O símbolo da produção $\rightarrow$.}
+    \footnote{No original: \textquote{\textit{The production symbol $\rightarrow$.}} Tradução própria.}
+    \item \textquote{Uma cadeia de caracteres de zero ou mais terminais e variáveis. Essa cadeia, chamada o corpo da produção, representa o modo de formar cadeias na linguagem da variável do núcleo.}
+    \footnote{\textquote{\textit{A string of zero or more terminals and variables. This string, called the \textit{body} of the production, represents one way to form strings in the language of the variable of the head.}} Tradução própria.}
 \end{itemize}
 
 As  produções dependem apenas da variável a ser reescrita (no nosso caso, a categoria sintática). Portanto, temos uma Gramática Livre de Contexto (GLC, ou CFG em Inglês).
@@ -168,21 +168,21 @@ As  produções dependem apenas da variável a ser reescrita (no nosso caso, a c
 \subsection{Classificação Estatística (\textit{Statistical Parsing})}
 \label{subsec:statisticalparsing}
 
-Como dito em \ref{sec:parsing}, uma das dificuldades no processo de \textit{parsing} é a resolução de ambiguidades. \citeonline[33]{charniak97statistical}
-\textquote{\textit{most of the parses that wide-coverage grammars find are [\ldots] pretty senseless}}.
-\footnote{\textquote{maior parte das árvores que gramáticas com ampla cobertura encontram [\ldots] não fazem sentido}. Tradução própria.}
+Como dito em \ref{sec:parsing}, uma das dificuldades no processo de \textit{parsing} é a resolução de ambiguidades. \cite[33]{charniak97statistical}
+\textquote{maior parte das árvores que gramáticas com ampla cobertura encontram [\ldots] não fazem sentido.}
+\footnote{No original: \textquote{\textit{most of the parses that wide-coverage grammars find are [\ldots] pretty senseless.}} Tradução própria.}
 Isto exige uma estratégia para, não só identificar a sentença mais provável, como rejeitar classificações de baixa qualidade. 
 
-Uma estratégia possível é o uso da estatística. Como já visto em \ref{sec:parsing} e \ref{subsec:analiseConstSintagma}, a estrutura de um \textit{parse} é uma árvore de derivação, em que os nós terminais (folhas) são as palavras, e os nós não-terminais são referentes aos sintagmas, e compõe a estrutura de derivação e constituência. Pode-se, então, catalogar todas as possíveis derivações de cada sintagma, criando uma \textit{gramática}. Tais derivações são chamadas de regras.
+Uma estratégia possível é o uso da estatística. Como já visto em \ref{sec:parsing} e \ref{subsec:analiseConstSintagma}, a estrutura de um \textit{parse} é uma árvore de derivação, em que os nós terminais (folhas) são as palavras, e os nós não-terminais são referentes aos sintagmas, e compõem a estrutura de derivação e constituência. Pode-se, então, catalogar todas as possíveis derivações de cada sintagma, criando uma \textit{gramática}. Tais derivações são chamadas de regras.
 
-Determinar qual regra utilizar em cada derivação para classificar uma sentença se torna a questão a ser resolvida. Atribuindo-se um valor de probabilidade para cada regra, pode-se, então, selecionar as regras mais prováveis para uma dada sentença. \citeonline[p~37]{charniak97statistical} 
-\textquote{\textit{Statistical parsers work by assigning probabilities to possible parses of a sentence, locating the most probable parse, and then presenting the parse as the answer.}}
-\footnote{\textquote{Classificação estatística funciona atribuindo probabilidades à possíveis árvores de uma sentença, localizando a árvore mais provável, e então apresentando a árvore como resposta}. Tradução própria.}
+Determinar qual regra utilizar em cada derivação para classificar uma sentença se torna a questão a ser resolvida. Atribuindo-se um valor de probabilidade para cada regra, pode-se, então, selecionar as regras mais prováveis para uma dada sentença. \cite[p~37]{charniak97statistical} 
+\textquote{Classificação estatística funciona atribuindo probabilidades à possíveis árvores de uma sentença, localizando a árvore mais provável, e então apresentando tal árvore como resposta.}
+\footnote{No original: \textquote{\textit{Statistical parsers work by assigning probabilities to possible parses of a sentence, locating the most probable parse, and then presenting the parse as the answer.}} Tradução própria.}
 
 Com isto, pode-se intuir uma estrutura simples, uma Gramática Livre de Contexto com probabilidades atribuidas às suas regras. \cite[p~382]{Manning1999FoundationsNLP}
 \begin{quote}
-    \textquote{\textit{The simplest probabilistic model for recursive embedding is a PCFG, a Probabilistic (sometimes also called Stochastic) Context Free Grammar which is simply a CFG with probabilities added to the rules, indicating how likely different rewritings are.}}
-    \footnote{\textquote{O modelo probabilístico mais simples para incorporação recursiva é uma PCFG, uma Gramática Livre de Contexto Probabilística (às vezes também chamada Estocástica), que é simplesmente uma GLC com probabilidades adicionadas às regras, indicando o quão prováveis diferentes reescritas são.}}
+    \textquote{O modelo probabilístico mais simples para incorporação recursiva é uma PCFG, uma Gramática Livre de Contexto Probabilística (às vezes também chamada Estocástica), que é simplesmente uma GLC com probabilidades adicionadas às regras, indicando o quão prováveis diferentes reescritas são.}
+    \footnote{No original: \textquote{\textit{The simplest probabilistic model for recursive embedding is a PCFG, a Probabilistic (sometimes also called Stochastic) Context Free Grammar which is simply a CFG with probabilities added to the rules, indicating how likely different rewritings are.}} Tradução própria.}
 \end{quote}
     
 Deste modo, dada uma sentença $s$, e uma possível árvore $\pi$, sendo $c$ os constituintes da árvore, e $r(c)$ a regra usada para expandir $c$, temos a equação \ref{eq:pcfg_simples}.
@@ -195,10 +195,12 @@ Existem várias vantagens nas PCFGs. A estrutura de gramática livre de contexto
 
 Para se criar uma PCFG, o procedimento é como segue: deve-se ler árvores previamente classificadas (e consideradas corretas). Neste processo, deve-se anotar a quantidade de regras utilizadas. No exemplo de (\textit{\Ibidem[p~38]{charniak97statistical}}):
 \begin{quote}
-    \textquote{\textit{It is possible to read off all the necessary rules in this fashion. Furthermore, we can assign probabilities to the rules by counting how often each rule is used. For example, if the rule $np \rightarrow det\, noun$ is used, say, 1,000 times, and overall $np$ rules are used 60,000 times, then we assign this rule the probability $1,000/60,000 = .017$.}}
-    \footnote{\textquote{É possível ler todas as regras necessárias dessa maneira. Além disso, podemos atribuir as probabilidades às regras contando com que frequência cada regra é usada. Por exemplo, se a regra $np \rightarrow det\, noun$ é usada, digamos, 1000 vezes, e regras gerais de $np$ são usadas 60.000 vezes, então atribuímos à essa regra a probabilidade $1,000/60,000 = .017$}. Tradução própria.}
+    \textquote{É possível ler todas as regras necessárias dessa maneira. Além disso, podemos atribuir as probabilidades às regras contando com que frequência cada regra é usada. Por exemplo, se a regra $np \rightarrow det\, noun$ é usada, digamos, 1000 vezes, e regras gerais de $np$ são usadas 60.000 vezes, então atribuímos à essa regra a probabilidade $1,000/60,000 = .017$}
+    \footnote{No original: \textquote{\textit{It is possible to read off all the necessary rules in this fashion. Furthermore, we can assign probabilities to the rules by counting how often each rule is used. For example, if the rule $np \rightarrow det\, noun$ is used, say, 1,000 times, and overall $np$ rules are used 60,000 times, then we assign this rule the probability $1,000/60,000 = .017$.}}. Tradução própria.}
 \end{quote}
-Para catalogar as regras necessárias para uma gramática, é necessário um conjunto de sentenças / árvores pré-classificadas. São chamados de bancos de árvores, florestas sintáticas, ou \textit{treebanks}, que serão comentados em \ref{treebank}. Um dos mais populares entre eles, o \textit{Penn Treebank} (ou PTB), é abordado em \ref{subsec:PennTB}. Preferencialmente, esses conjuntos tem que ter uma quantidade alta de sentenças. O  \textit{Penn Treebank}, por exemplo, tem na casa de 50.000 árvores para que, com isto, sejam catalogadas uma quantidade grande de regras. Pois até mesmo o PTB (\textit{\Ibidem[p~39]{charniak97statistical}}) \textquote{\textit{is not large enough to contain them all}}\footnote{\textquote{não é grande o bastante para conter todas}. Tradução própria.}.
+Para catalogar as regras necessárias para uma gramática, é necessário um conjunto de sentenças / árvores pré-classificadas. São chamados de bancos de árvores, florestas sintáticas, ou \textit{treebanks}, que serão comentados em \ref{sec:treebank}. Um dos mais populares entre eles, o \textit{Penn Treebank} (ou PTB), é abordado em \ref{subsec:PennTB}. Preferencialmente, esses conjuntos tem que ter uma quantidade alta de sentenças. O  \textit{Penn Treebank}, por exemplo, tem na casa de 50.000 árvores para que, com isto, sejam catalogadas uma quantidade grande de regras. Pois até mesmo o PTB (\textit{\Ibidem[p~39]{charniak97statistical}}) 
+\textquote{não é grande o bastante para conter todas}
+\footnote{No original: \textquote{\textit{is not large enough to contain them all}}. Tradução própria.}.
 
 PCFGs possuem algumas características interessantes, que foram listadas em \cite[p~386-388]{Manning1999FoundationsNLP}
 \begin{itemize}
@@ -215,13 +217,13 @@ PCFGs possuem algumas características interessantes, que foram listadas em \cit
 \end{itemize}
 
 Por fim, \citeonline[p~38]{charniak97statistical} \textquote{\textit{PCFGs by themselves do not make particularly good statistical parsers, and many researchers do not use them}}
-\footnote{\textquote{PCFGs sozinhas não fazem \textit{parsers} estatísticos muito bons, e muitos pesquisadores não as usam}. Tradução própria.}. Uma possível razão é pelo fato de, dada a própria natureza deste tipo de gramática, contexto e estrutura léxica das sentenças são ignoradas. Veremos uma possível alternativa em \ref{lexParsing}.
+\footnote{\textquote{PCFGs sozinhas não fazem \textit{parsers} estatísticos muito bons, e muitos pesquisadores não as usam}. Tradução própria.}. Uma possível razão é pelo fato de, dada a própria natureza deste tipo de gramática, contexto e estrutura léxica das sentenças são ignoradas. Veremos uma possível alternativa em \ref{subsec:lexParsing}.
 
 % --------------------------------------------------
 \subsection{\textit{Lexicalized Parsing}}
-\label{lexParsing}
+\label{subsec:lexParsing}
 
-Considerar cada palavra no processo de \textit{parsing} seria muito problemático. Algumas palavras podem aparecer no conjuntos de dados apenas uma vez, ou ser uma conjugação pouco vista de um verbo pouco utilizado, e isso rapidamente se tornaria um problema. Uma alternativa, então, é considerar o núcleo dos constituintes. \cite[p~40]{charniak97statistical} \textit{Parsers} estatísticos lexicalizados coletam, então, duas estatísticas. Uma relativa ao núcleo do sintagma para a regra usada para expandir este sintagma, denotado $p(r|h)$ (para $r$ regra, e $h$ núcleo. E o núcleo de um sintagma com relação ao núcleo de uma subárvore, ou $p(h|m,t)$ (sendo $h$ núcleo da subárvore, $m$ o núcleo do sintagma mãe, e $t$ o tipo (\textit{POS tag}) da subárvore. 
+Considerar cada palavra no processo de \textit{parsing} seria muito problemático. Algumas palavras podem aparecer no conjuntos de dados apenas uma vez, ou ser uma conjugação pouco vista de um verbo pouco utilizado, e isso rapidamente se tornaria um problema. Uma alternativa, então, é considerar o núcleo dos constituintes. Por \cite[p~40]{charniak97statistical} \textit{Parsers} estatísticos lexicalizados coletam, então, duas estatísticas. Uma relativa ao núcleo do sintagma para a regra usada para expandir este sintagma, denotado $p(r|h)$ (para $r$ regra, e $h$ núcleo. E o núcleo de um sintagma com relação ao núcleo de uma subárvore, ou $p(h|m,t)$ (sendo $h$ núcleo da subárvore, $m$ o núcleo do sintagma mãe, e $t$ o tipo (\textit{POS tag}) da subárvore. 
 
 Assim, a Equação \ref{eq:pcfg_simples} se torna a Equação \ref{eq:lex_parser}:
 \begin{center}
@@ -230,10 +232,10 @@ Assim, a Equação \ref{eq:pcfg_simples} se torna a Equação \ref{eq:lex_parser
 
 A Equação \ref{eq:lex_parser} é explicada por (\textit{\Ibidem[p~40]{charniak97statistical}}), 
 \begin{quote}
-    \textquote{\textit{Here, we first find the probability of the head of the constituent $h(c)$ given the head of the mother $m(c)$ and then the probability of the rule $r(c)$ given the head of $c$.}}
-    \footnote{\textquote{Aqui, primeiro encontramos a probabilidade do núcleo do constituinte $h(c)$ dado o núcleo da mãe $m(c)$, e então a probabilidade da regra $r(c)$ dado o núcleo de $c$.}}
+    \textquote{Aqui, primeiro encontramos a probabilidade do núcleo do constituinte $h(c)$ dado o núcleo da mãe $m(c)$, e então a probabilidade da regra $r(c)$ dado o núcleo de $c$.}
+    \footnote{No original: \textquote{\textit{Here, we first find the probability of the head of the constituent $h(c)$ given the head of the mother $m(c)$ and then the probability of the rule $r(c)$ given the head of $c$.}} Tradução própria.}
 \end{quote}
 
 Essa modificação, por (\textit{\Ibidem[p~40]{charniak97statistical}}), permite que \textit{parsers} alcancem resultados de \textit{precision-recall}
-\footnote{Abordado em \ref{avaliacao_parsers}}
+\footnote{Abordado em \ref{subsec:avaliacao_parsers}}
 de 87\%, aproximadamente, contra 75\% dos PCFGs básicos.

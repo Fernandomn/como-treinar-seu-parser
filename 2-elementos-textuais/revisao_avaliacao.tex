@@ -1,11 +1,12 @@
-\subsection{Avaliação de Parsers de Constituência} \label{avaliacao_parsers}
+\subsection{Avaliação de Parsers de Constituência} 
+\label{subsec:avaliacao_parsers}
 Para verificar se um dado parser é capaz de classificar corretamente novas sentenças dadas, existem algumas métricas desenvolvidas. Dentre as mais conhecidas, se destacam as \textit{PARSEVAL Measures}, e sua derivação, a \textit{F-Measure}.
 % Mas vamos falar primeiro sobre medidas clássicas no estudo de NLP estatístico.
 
 % ------------------------------------------------------
 
 \subsubsection{\textit{PRECISION, RECALL, F1-SCORE}}
-\label{subsec_eval_measures}
+\label{subsubsec:eval_measures}
 Considerando um treinamento supervisionado (como no caso dos nossos \textit{parsers}), temos um conjunto de exemplos corretos (chamados \textit{gold standard}, padrão ouro), que podemos usar para comparar com os resultados obtidos pelo sistema desenvolvido. Considerando o padrão ouro como nosso objetivo/alvo, podemos obter uma tabela semelhante à Tabela \ref{tab:tab_confusao}. Como descrito por \citeonline[p~368]{Manning1999FoundationsNLP},
 \begin{quote}
     \textquote{\textit{The cases accounted for by \textit{tp} (true positives) and \textit{tn} (true negatives) are the cases our system got right. The wrongly selected cases in \textit{fp} are called false positives, false acceptances or Type II errors. The cases in \textit{fn} that failed to be selected are called fake negatives, false rejections or Type I errors.}}
@@ -28,8 +29,8 @@ A medida F-measure, também conhecido por F1-score \cite[p~262]{derczynski2016co
 % ------------------------------------------------------
 
 \subsubsection{\textit{PARSERVAL MEASURES}}
-\label{subsec:parseval}
-As PARSERVAL measures são basicamente três: \textit{precision} (ou \textit{labeled precision}, LP), \textit{recall} (ou \textit{labeled recall}, RB) e \textit{crossing brackets}, que seguem uma lógica semelhante à supracitada em \ref{subsec:parseval}. Dado um \textit{parser} que gere uma árvore, \cite[p~433-434]{Manning1999FoundationsNLP}
+\label{subsubsec:parseval}
+As PARSERVAL measures são basicamente três: \textit{precision} (ou \textit{labeled precision}, LP), \textit{recall} (ou \textit{labeled recall}, RB) e \textit{crossing brackets}, que seguem uma lógica semelhante à supracitada em \ref{subsubsec:parseval}. Dado um \textit{parser} que gere uma árvore, \cite[p~433-434]{Manning1999FoundationsNLP}
 \begin{quote}
     \textquote{\textit{Precision is how many brackets in the parse match those in the correct tree, recall measures how many of the brackets in the correct tree are in the parse, and crossing brackets gives the average of how many constituents in one tree cross over constituent boundaries in the other tree.}}
     \footnote{\textquote{Precisão é quantos parênteses na árvore gerada combinam com aqueles da árvore correta, revogação mede quantos parênteses na árvore correta estão na árvore gerada, e parênteses cruzados dá a média de quantos constituintes em uma árvore cruza com as fronteiras na outra árvore}. Tradução própria.}
@@ -43,4 +44,4 @@ Nesse contexto, o cálculo do F-MEASURE se dá utilizando a mesma Equação \ref
 Algumas críticas podem ser feitas à esse sistema. \citeonline{constParsEvalYT} demonstra que essa medida é muito sensível à propagação de erros em cascata. Ou seja, um constituinte mal colocado num nível mais baixo da árvore faz com que todos os nós acima dela também estejam errados, reduzindo muito a pontuação. \citeonline{parserEvalSecret} também nota que \textquote{\textit{The problem of standard Parseval is that it counts nodes as the same regardless of the underlying structure they dominate}}
 \footnote{\textquote{O problema do PARSERVAL padrão é que ele conta nós como os mesmos, independente da estrutura subalterna que estes dominam}. Tradução própria.}.
 
-Isto pode ser melhor observado na Figura \ref{fig:demo_parseval}. Numa sentença $W=[w_0 \ldots w_n]$, para $w_j$ palavras, os nós dá árvore são identificados por $P-(i:f)$, sendo $P$ a \textit{POS tag}, $i$ o inicio da \textit{abrangência} do nó, e $f$ o final. Nós com mesma \textit{POS} são identificados pela ordem de aparecimento na árvore, e pela abrangência. Por \textit{abrangência}, refere-se ao alcance de todos os seus descentendes. Assim, na árvore \ref{fig:demo_parseval}[a], o primeiro VP é representado por $VP-(2:9)$ por englobar a sentença de \textquote{\textit{were}} a \textquote{\textit{care}}. Note que, ao posicionar o último NP, referente à \textquote{\textit{yesterday}}, a árvore candidata o marca como $NP-(7:10)$, em contraste com o \textquote{padrão-ouro}, que deveria ser $NP-(9:10)$. Isto faz com que, não só este nó esteja errado, como todos os nós acima dele, derrubando muito LP, LR e, por fim, F1.
+Isto pode ser melhor observado na Figura \ref{fig:demo_parseval}. Numa sentença $W=[w_0 \ldots w_n]$, para $w_j$ palavras, os nós dá árvore são identificados por $P-(i:f)$, sendo $P$ a \textit{POS tag}, $i$ o inicio da \textit{abrangência} do nó, e $f$ o final. Nós com mesma \textit{POS} são identificados pela ordem de aparecimento na árvore, e pela abrangência. Por \textit{abrangência}, refere-se ao alcance de todos os seus descendentes. Assim, na árvore \ref{fig:demo_parseval}[a], o primeiro VP é representado por $VP-(2:9)$ por englobar a sentença de \textquote{\textit{were}} a \textquote{\textit{care}}. Note que, ao posicionar o último NP, referente à \textquote{\textit{yesterday}}, a árvore candidata o marca como $NP-(7:10)$, em contraste com o \textquote{padrão-ouro}, que deveria ser $NP-(9:10)$. Isto faz com que, não só este nó esteja errado, como todos os nós acima dele, fazendo com que os valores de LP, LR e, por fim, F1 sejam afetados negativamente.

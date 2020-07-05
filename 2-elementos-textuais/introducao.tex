@@ -2,7 +2,7 @@
 % Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
 % ----------------------------------------------------------
 \chapter{Introdução}
-\label{cha:introducao}
+\label{cap:introducao}
 % ----------------------------------------------------------
 % \begin{quote}
 %     \textquote{O mundo é mediado pela linguagem} \cite{oliveira2019servico}
@@ -123,7 +123,7 @@ Os primeiros testes empíricos foram um fracasso. Os corpus disponíveis não er
     
 % \textquote{Ei, você escreveu errado, é \textquote{traduzir}!}
 
-\textquote{Transdutores} foram explicados por \citeonline[p~1]{Mohri2004}:
+\textquote{Transdutores} foram explicados por \citeonline[p~1]{weightedTransducersMohri}:
 \begin{quote}
     \textquote{[Transdutores] São autômatos os quais cada transição, em adição à sua etiqueta de entrada normal, é aumentado com uma etiqueta de saída de um possível novo alfabeto, e carrega algum elemento de peso de um semi anel. Transdutores podem ser usados para definir um mapeamento entre dois tipos diferentes de fontes de informação, por exemplo palavras e sequências de fenômenos}
     \footnote{\textquote{\textit{[Transductors] are automata in which each transition in addition to its usual input label is augmented with an output label from a possibly new alphabet, and carries some weight element of a semiring. Transducers can be used to define a mapping between two different types of information sources, e.g., word and phoneme sequences.}}}
@@ -145,7 +145,7 @@ O estudo de \textit{parsers} é bastante conhecido do meio acadêmico, tendo mui
 % Porém, o estudo de \textit{parsers} para a língua portuguesa parece não receber o mesmo entusiasmo, ficando restrito à melhoria dos sistemas já conhecidos.
 Foi sentida, porém, a falta de mais estudos focados na língua portuguesa.
 
-Pesquisas prévias mostraram que existem, sim, \textit{parsers} projetados pensando na língua portuguesa (serão mais abordados na sessão \ref{parser_portugues}). Porém, eram de difícil acesso, ou não era possível utilizá-los. Foram encontrados, também, bancos de dados\footnote{Bancos de Árvores (\textit{treebanks}, que serão melhor explicados em (\ref{treebank}} com dados da língua portuguesa, variantes europeia e brasileira.
+Pesquisas prévias mostraram que existem, sim, \textit{parsers} projetados pensando na língua portuguesa (serão mais abordados na sessão \ref{subsec:parser_portugues}). Porém, eram de difícil acesso, ou não era possível utilizá-los. Foram encontrados, também, bancos de dados\footnote{Bancos de Árvores (\textit{treebanks}, que serão melhor explicados em (\ref{sec:treebank})} com dados da língua portuguesa, variantes europeia e brasileira.
 
 Sabendo-se da existência de tecnologias tanto de \textit{parsing} como de textos em português pré-classificados, pensou-se na possibilidade do desenvolvimento \textit{Out-of-the-box}, adaptando tecnologias pré-existentes, e avaliando seus resultados. Não apenas desejando verificar a eficiência de tal método, como analisar quanto estudo técnico é necessário para tal.
 
@@ -170,7 +170,8 @@ Portanto, foi desenvolvido um método que faça a conversão entre dados de form
 
 Este trabalho tem como objetivo o treinamento de \textit{parsers} já existentes para que sejam capazes de processar a língua portuguesa. A partir de tal treino, avaliar a sua eficiência, taxa de erros e afins.
 
-\section{Objetivos Específicos}\label{sec:objetivos-especificos}
+\section{Objetivos Específicos}
+\label{sec:objetivos-especificos}
 \begin{itemize}
 %quebrar o problema grande em subproblemas
     \item Estudar sobre analisadores sintáticos (\textit{parsers});
@@ -204,22 +205,23 @@ Como já citado, a quantidade de pesquisas em \textit{parsers} para a língua po
 % Deseja-se que este seja mais um trabalho a acrescentar e fomentar conteúdo para esta subárea de pesquisa.
 
 
-\section{Metodologia}\label{sec:metodologia}
+\section{Metodologia}
+\label{sec:metodologia}
 % O método utilizado para elaboração deste trabalho de conclusão de curso, foi: estudar conjuntos de sentenças já classificadas na língua portuguesa (\textit{treebanks}, serão explicados em \ref{treebank}), e verificar as correspondências destas com o formato aceito pelo \textit{parser} escolhido. A partir de então, verificar quais etiquetas morfossintáticas (\textit{POS tags}, abordadas em \ref{subsec:POStags}) tem correspondência direta, e quais não. As que possuem, foram feitas transduções diretas. As que não, verificar uma correspondência gramatical, e utilizá-las no procedimento. 
 
 % Certas estruturas gramaticais são distintas, por mais que possuam valor sintático semelhante. Para estas, foi necessário fazer a convergência de estrutura, transduzindo assim não só as etiquetas, mas também a morfologia da árvore classificada (\textit{parse tree}, explicadas em \ref{parsing}).
 
 % As sentenças classificadas e transduzidas foram utilizadas para treinar o \textit{parser}. Foram coletados os dados de resultados dos treinos e testes, e e feitas análises baseadas nos métodos abordados em \ref{resultados}. 
 
-O desenvolvimento deste trabalho foi dividido em X etapas.
+O desenvolvimento deste trabalho foi dividido em 6 etapas.
 
 A Primeira etapa consistiu na revisão bibliográfica. Fez-se necessário o estudo dos classificadores sintáticos, e das florestas sintáticas. 
 
 Para o estudo dos classificadores sintáticos, pesquisou-se no Google Acadêmico\footnote{\url{http://www.scholar.google.com}} por \textit{parsing}, \textit{statistical parsing}, \textit{constituency parsing}, \textit{Neural Networks and parsing}, \textit{Treebank}, \textit{parser comparison}. Foram coletados 10 artigos por assunto pesquisado, que tiveram seu resumo/\textit{abstract} lidos, para avaliação de relevância. Como material base de estudo, foi usado  \cite{Manning1999FoundationsNLP}. Será melhor abordado em \ref{sec:parser}.
 
-Para a pesquisa de florestas sintáticas para o português, pesquisou-se pelas palavras-chave \textit{portuguese treebank}, \textit{treebank português}, \textit{floresta sintática português} em motores de busca como Google Acadêmico e Google\footnote{\url{www.google.com}}. Encontramos o Bosque \cite{bick2008FlorestaSintatica}, do projeto Floresta Sintá(c)tica disponível publicamente, e nos foi cedido o CINTIL \cite{cintil_handbook}. Será explicado em \ref{treebank}.
+Para a pesquisa de florestas sintáticas para o português, pesquisou-se pelas palavras-chave \textit{portuguese treebank}, \textit{treebank português}, \textit{floresta sintática português} em motores de busca como Google Acadêmico e Google\footnote{\url{www.google.com}}. Encontramos o Bosque \cite{bick2008FlorestaSintatica}, do projeto Floresta Sintá(c)tica disponível publicamente, e nos foi cedido o CINTIL \cite{cintil_handbook}. Será explicado em \ref{sec:treebank}.
 
-De forma análoga, pesquisou-se por \textit{parsers} na língua portuguesa nos motores de busca supracitados, com as palavras-chave \textit{portuguese parser}, \textit{parser português}, \textit{classificador sintático português}. Encontramos referências ao PALAVRAS \cite{bick2000palavras} e ao LX-Parser \cite{siteLxParser}. Abordados em \ref{parser_portugues}.
+De forma análoga, pesquisou-se por \textit{parsers} na língua portuguesa nos motores de busca supracitados, com as palavras-chave \textit{portuguese parser}, \textit{parser português}, \textit{classificador sintático português}. Encontramos referências ao PALAVRAS \cite{bick2000palavras} e ao LX-Parser \cite{siteLxParser}. Abordados em \ref{subsec:parser_portugues}.
 
 Na Segunda etapa, buscou-se por um \textit{parser} a ser utilizado no projeto. Utilizando-se os motores de busca supracitados, pesquisou-se por \textit{parser}, \textit{parsing}, \textit{constituency parser}. Devido à sua robustez, fácil utilização sem necessidade de desenvolvimento (por comandos de terminal), e por ter amplo reconhecimento na comunidade, optou-se pelo uso do Stanford Parser \cite{fastAccurate}. Este recebe, como entrada, dados no formato Penn Treebank \cite{buildingPTB}. O SP será melhor descrito em \ref{sec:stanfordParser}.
 
@@ -234,9 +236,9 @@ Na Quarta etapa, foi feita a transdução de bancos de árvores propriamente dit
 % Em casos onde foi obrigatória a adaptação do formato da sentença classificada, esforçou-se para realizar o mínimo de impacto na árvore resultante. 
 A discussão aprofundada do método de transdução será realizada no Capítulo \ref{cap:desenv}.
 
-A Quinta etapa envolveu o treino do Stanford Parser propriamente dito. Em nenhum momento houve implementação sobre o \textit{parser}. Foi realizado apenas o processo de transdução, treinamento e avaliação. Para o uso do \textit{parser}, foi utilizada a sua interface de terminal (\textit{command line interface}, CLI). O treino foi feito utilizando o método \textit{10-fold validation}, para possibilitar uma média de avaliação. Os procedimentos de treino serão comentados nas sessões \ref{treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}.
+A Quinta etapa envolveu o treino do Stanford Parser propriamente dito. Em nenhum momento houve implementação sobre o \textit{parser}. Foi realizado apenas o processo de transdução, treinamento e avaliação. Para o uso do \textit{parser}, foi utilizada a sua interface de terminal (\textit{command line interface}, CLI). O treino foi feito utilizando o método \textit{10-fold validation}, para possibilitar uma média de avaliação. Os procedimentos de treino serão comentados nas sessões \ref{sec:treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}.
 
 % As sentenças pré-classificadas transduzidas foram utilizadas para treinar o \textit{parser} escolhido. Optou-se por não realizar desenvolvimento de código diretamente sobre \textit{parser}. Portanto, foi utilizada a interface por terminal (\textit{command line interface}, CLI). Usou-se o método \textit{10-fold validation}, para obter diversas métricas de treino, que pudessem ser comparadas entre si, e com os resultados do outro conjunto de dados transduzidos.
 
 % O classificador em questão imprime os resultados de treino por padrão. Tais resultados foram coletados, catalogados, e analisados. A análise foi feita, primeiramente, separando os resultados de cada conjunto de dados, e depois comparando-os.
-Por fim, na Sexta etapa foi feito o cruzamento dos dados obtidos, suas análises e considerações, que serão demonstradas na sessão \ref{resultados}. 
+Por fim, na Sexta etapa foi feito o cruzamento dos dados obtidos, suas análises e considerações, que serão demonstradas na sessão \ref{sec:resultados}. 

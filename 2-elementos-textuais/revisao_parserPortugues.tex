@@ -1,12 +1,12 @@
 \subsection{\textit{Parsers} para Língua Portuguesa}
-\label{parser_portugues}
+\label{subsec:parser_portugues}
 Seguindo a premissa do trabalho, pesquisamos por \textit{parsers} para a língua portuguesa já disponíveis. Encontramos principalmente dois, o PALAVRAS e o LX-Parser, que descreveremos aqui.
 
 % ------------------------------------------------------
 \subsubsection{PALAVRAS}
-\label{subsec:palavras}
+\label{subsubsec:palavras}
 
-Este \textit{software} foi o produto da dissertação de doutorado de Echkard Bick\footnote{\url{https://visl.sdu.dk/~eckhard/Artikeloversigt.html}}, \cite{bick2000palavras}. É um \textit{parser} baseado no paradigma de Gramática de Restrições. Este \textit{parser} foi utilizado no projeto Floresta Sintá(c)tica, para classificação automática de textos, como pode ser visto em \ref{subsec:florestasintatica}.
+Este \textit{software} foi o produto da dissertação de doutorado de Echkard Bick\footnote{\url{https://visl.sdu.dk/~eckhard/Artikeloversigt.html}}, \cite{bick2000palavras}. É um \textit{parser} baseado no paradigma de Gramática de Restrições. Este \textit{parser} foi utilizado no projeto Floresta Sintá(c)tica, para classificação automática de textos, como pode ser visto em \ref{subsubsec:florestasintatica}.
 
 Além do projeto da Linguateca, vemos em \cite{bick2000palavras} que o parser também é utilizado no projeto GramTrans\footnote{https://gramtrans.com/}, que utiliza o CETEMFolha e CETEMPúblico para fazer traduções dinamarquês / Português.
 
@@ -23,13 +23,14 @@ O PALAVRAS está disponível sob licença proprietária, e portanto não pudemos
 % ------------------------------------------------------
 
 \subsubsection{LX-PARSER}
-\label{subsec:lxparser}
+\label{subsubsec:lxparser}
 % siteLxParser
-Como descrito em \cite{siteLxParser}, \textquote{O LX-Parser é um analisador sintáctico de constituência para o Português baseado numa abordagem estatística}. Em \cite{Branco2010OutOfTheBox} podemos ver que tanto o Bosque quanto o CINTL foram considerados para o seu desenvolvimento. Cabe uma citação: 
-\textquote{\textit{Most of that paper actually consists in the description of the many difficulties that the authors need to cope with when adapting the tree format of Bosque to a format suited for training the parser}}.
-Trouxemos essa trecho pois encontramos dificuldades semelhantes. Por fim, \citeauthor{Branco2010OutOfTheBox} decidiram por continuar o desenvolvimento utilizando o CINTIL.
-\footnote{Pode-se supor que, o fato de a mesma equipe de desenvolvimento do LX-Parser ter desenvolvido o CINTIL, tenha tido forte influência nesta escolha.}
+Como descrito em \cite{siteLxParser}, \textquote{O LX-Parser é um analisador sintáctico de constituência para o Português baseado numa abordagem estatística}. Em \cite{Branco2010OutOfTheBox} podemos ver que tanto o Bosque quanto o CINTIL foram considerados para o seu desenvolvimento. Cabe uma citação: 
+\textquote{A maior parte do artigo, na verdade, consiste na descrição das muitas dificuldades que os autores tiveram de lidar quando adaptando o formato de árvore do Bosque para o formato adequado para treinar o \textit{parser}}
+\footnote{\textit{Most of that paper actually consists in the description of the many difficulties that the authors need to cope with when adapting the tree format of Bosque to a format suited for training the parser}. Tradução própria.}.
+Foram encontradas dificuldades semelhantes no desenvolvimento desse trabalho. Por fim, \citeauthor{Branco2010OutOfTheBox} decidiram por continuar o desenvolvimento utilizando o CINTIL.
+\footnote{Pode-se supor que o fato de a mesma equipe de desenvolvimento do LX-Parser ter desenvolvido o CINTIL tenha tido forte influência nesta escolha.}
 
 LX-Parser usa como base o \textit{Stanford Parser}, e conta com um \textit{tagset} que pode ser visto na Tabela \ref{tab:tab_cintil}
-
-O software \textit{standalone} está disponível para download, porém utiliza uma versão muito antiga do SP, portanto não foi possível utilizá-lo. Mas contam com uma versão online que pode ser acessada em \url{http://lxcenter.di.fc.ul.pt/services/pt/LXParserPT.html}. Note-se que não é um \textit{webservice}, ou seja, não é uma ferramenta que pode ser acessada remotamente por outro sistema. Exigindo assim, portanto, que o usuário acesse a página da web para usufruí-la.
+.
+O software \textit{standalone} está disponível para download, porém utiliza uma versão muito antiga do SP, não sendo possível utilizá-lo. Mas contam com uma versão online que pode ser acessada em \url{http://lxcenter.di.fc.ul.pt/services/pt/LXParserPT.html}. Note-se que não é um \textit{webservice}, ou seja, não é uma ferramenta que pode ser acessada remotamente por outro sistema. Exigindo assim, portanto, que o usuário acesse a página da web para usufruí-la.
