@@ -1,0 +1,67 @@
+\section{Treinamento}
+\label{sec:desenvolvimento_treinamento_}
+
+% Para fazer estas conversões, fizemos um \textit{script} disponível online\footnote{\url{ https://github.com/Fernandomn/treebank-transductor}}.
+
+Com as \textit{tags} convertidas, foram feitos os treinamentos. O ato do treino é relativamente simples: deve-se, através do terminal do seu sistema, navegar até o diretório onde se encontra o \textit{stanford-parser.jar}, o arquivo que contém os \textit{parsers} do SP que utilizaremos. 
+
+Estando no diretório correto, para realizar o treinamento so SP a partir do CINTIL, deve-se executar o comando \ref{lst:testeBasicoCintil}:
+
+\begin{center}
+    \input{codigos/cod_treinoBasicoCintil.tex}
+\end{center}
+
+O código acima merece algumas explicações a parte, para quem não está familiarizado ao uso do SP pelo terminal.
+
+\begin{center}
+    \input{tabelas/tab_CintilTreinoBasico.tex}
+\end{center}
+
+A Tabela \ref{tab:tab_treino_basico_cintil} mostra um fragmento das possibilidades de comandos a serem usados pela interface do terminal do SP. Note que usamos apenas 1014 arquivos nesta demonstração, que é um fração de 10\% dos arquivos / árvores do CINTIL disponíveis.
+
+Para melhor verificação dos resultados, utilizamos o método de \textit{10-fold cross-validation}. Este método, como explicado por \citeonline{james2013introduction},
+\begin{displayquote}
+    \textquote{[Esta abordagem] envolve dividir aleatoriamente o conjunto de observações em k grupos, ou dobras, de tamanhos aproximadamente iguais. O primeiro grupo é tratado como conjunto de validação, e o método se encaixa nos k -- 1 grupos restantes}
+    \footnote{\textquote{\textit{[\ldots] involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k -- 1 folds}}. Tradução própria.}.
+\end{displayquote}
+
+O \textit{corpora} foi dividido em 10 partes de 1014 sentenças. Foi feito o treinamento com nove partes, deixando a décima parte restante para o treino.
+
+A Figura \ref{fig:fluxograma_10fold} demonstra o uso do \textit{10-fold} neste projeto.
+
+\begin{center}
+    \input{imagens/fluxograma_10fold}
+\end{center}
+
+Na sequência, foi executado o treinamento com as partes restantes. De maneira análoga, no mesmo diretório (ou seja, fazendo testes sobre o CINTIL transduzido), foi utilizado o comando \ref{lst:testeBasicoCintil}:
+
+\begin{center}
+    \input{codigos/cod_testeBasicoCintil.tex}
+\end{center}
+
+Que também merece explicações, na Tabela \ref{tab:tab_teste_basico_cintil}:
+\begin{center}
+    \input{tabelas/tab_CintilTesteBasico.tex}
+\end{center}
+
+Os treinamentos foram feitos alternando a parte de teste e as partes de treino, totalizando a criação de dez gramáticas, e dez resultados de treinos distintos.
+
+O resultado total dos testes resultou na extensa Tabela \ref{tab:cintil_result_full}, que pode ser vista nos apêndices. E os comentários dos resultados pode ser encontrado em \ref{subsec:resultados_cintil}.
+
+De modo análogo ao CINTIL, fizemos o treinamento baseado num comando simples, como visto no código \ref{lst:treinoBasicoBosque}
+\begin{center}
+    \input{codigos/cod_treinoBasicoBosque.tex}
+\end{center}
+
+São comandos análogos aos supracitados. Explicações podem ser vistas na Tabela \ref{tab:tab_treino_basico_cintil}.
+
+Para a execução dos testes, foi utilizado o comando \ref{lst:testeBasicoBosque}
+\begin{center}
+    \input{codigos/cod_testeBasicoBosque.tex}
+\end{center}
+
+É o mesmo comando explicado na Tabela \ref{tab:tab_teste_basico_cintil}. Também foi utilizado o \textit{10-fold validation} para o Bosque. Porém, os testes foram feitos majoritariamente com o CETEMFolha, que possui 4213 sentenças (contra 10140 do CINTIL).
+
+O resultado completo dos testes pode ser visto na Tabela \ref{tab:bosque_result_full}, nos apêndices. Os comentários dos resultados pode ser visto em \ref{subsec:resultados_bosque}.
+
+Os resultados serão apresentados na Sessão \ref{sec:resultados}.

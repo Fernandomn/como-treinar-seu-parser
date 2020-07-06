@@ -10,7 +10,7 @@ equivalente à \ref{eq:funcao_transdutor}:
 
 Sendo CD o \textit{Corpus} de Origem (CO), a converter, e (CD) o Corpus de Destino, a ser convertido.
 
-O procedimento de transdução consiste de X etapas principais: 
+O procedimento de transdução consiste de 4 etapas principais: 
 \begin{enumerate}
     \item Escolha dos \textit{corpora}; 
     \item Estudo das estruturas do CO e do CD;
@@ -18,6 +18,9 @@ O procedimento de transdução consiste de X etapas principais:
     \item Construção do transdutor
 \end{enumerate}
 
+\begin{center}
+    \input{imagens/fluxograma_metodolodia}
+\end{center}
 
 \subsection{Escolha dos \textit{corpora}}
 \label{subsec:escolha_corpora}
@@ -55,7 +58,7 @@ O desenvolvedor deve criar uma tabela de equivalências, onde de um lado estarã
 \subsubsection{Identificação de \textit{tags} correlacionadas}
 \label{subsubsec:tags_correlacionadas}
 
-Nesta etapa, serão identificadas as \textit{tags} que podem ser transduzidas diretamente do CO para o CD, sem perda de significado. Tais \textit{tags}, em geral, não possuem grande dificuldade de identificação: a tradução dos seus nomes já costuma ser esse indicativo. Por exemplo: Para o CINTIL, como demonstrado na Tabela \ref{tab:cintil_tags} da Sessão \ref{subsec:treinamento_cintil}, a leitura de seu manual \cite[p~4]{cintil_handbook} aponta que \textquote{\textit{adjectives}} recebem a \textit{tag} $A$. O Manual de Marcação do Penn Treebank \cite[p~1]{posPTBguidelines}, por sua vez, define \textquote{\textit{adjectives}} como $JJ$. A tabela de correlações pode, portanto, ser preenchida com a correlação $A / JJ$. O BOSQUE define suas \textit{tags} em português. Nestes casos uma tradução simples resolverá a questão: Se por um lado o BOSQUE não tem uma tag para \textquote{adjectives}, por outro existe a tag \textquote{adjectivos}. Portanto, na tabela de correlações BOSQUE/PTB, será preenchida a linha $adj / JJ$.
+Nesta etapa, serão identificadas as \textit{tags} que podem ser transduzidas diretamente do CO para o CD, sem perda de significado. Tais \textit{tags}, em geral, não possuem grande dificuldade de identificação: a tradução dos seus nomes já costuma ser esse indicativo. Por exemplo: Para o CINTIL, como demonstrado na Tabela \ref{tab:cintil_tags} da Sessão \ref{sec:treinando_sp_cintil}, a leitura de seu manual \cite[p~4]{cintil_handbook} aponta que \textquote{\textit{adjectives}} recebem a \textit{tag} $A$. O Manual de Marcação do Penn Treebank \cite[p~1]{posPTBguidelines}, por sua vez, define \textquote{\textit{adjectives}} como $JJ$. A tabela de correlações pode, portanto, ser preenchida com a correlação $A / JJ$. O BOSQUE define suas \textit{tags} em português. Nestes casos uma tradução simples resolverá a questão: Se por um lado o BOSQUE não tem uma tag para \textquote{adjectives}, por outro existe a tag \textquote{adjectivos}. Portanto, na tabela de correlações BOSQUE/PTB, será preenchida a linha $adj / JJ$.
 
 \subsubsection{Identificação de \textit{tags} conceitualmente semelhantes}
 \label{subsubsec:tags_conceit_semelhantes}
@@ -73,7 +76,7 @@ Tal estrutura pode ser classificada como um Sintagma Verbal. E, por \cite[p~321]
 
 Por fim, o modelo de \textit{tags} que demandam mais trabalho de pesquisa e adaptação são aquelas que não permitem transduções diretas. Um exemplo marcante são as \textit{tags} de coordenação de ambos os CO escolhidos, $CONJP$ para o CINTIL e $CU$ para o BOSQUE. Ambas serão abordadas em suas respectivas sessões, \ref{subsec:cintil-conj} e \ref{subsec:cu}.
 
-Nestes casos, faz-se necessária, em primeiro lugar, o entendimento do que tal estrutura representa gramaticalmente na linguagem. O livro base para este trabalho foi \cite{Castilho2010gramatica}, e nele foram baseadas a maior parte das pesquisas teóricas sobre linguagem e gramática. Em seguida, é necessário o estudo e domínio da forma como tal estrutura é descrita / implementada no CO, e no CD.
+Nestes casos, faz-se necessária, em primeiro lugar, o entendimento do que tal estrutura representa gramaticalmente na linguagem. O livro base para este trabalho foi \cite{Castilho2010gramatica}, e nele foram baseadas a maior parte das pesquisas teóricas sobre linguagem e gramática. Também foi bastante utilizado \cite{mioto2013novo}, para dúvidas linguísticas e estruturais. Em seguida, é necessário o estudo e domínio da forma como tal estrutura é descrita / implementada no CO, e no CD.
 
 \subsection{Construção do Transdutor}
 \label{subsec:construcao_transdutor}
@@ -81,12 +84,18 @@ Neste trabalho, o transdutor $t(x)$ é um algoritmo de Busca em Profundidade, qu
 
 No primeiro momento do transdutor, as cadeias de entrada são percorridas apenas uma vez por iteração da recursão. Nesta varredura, a estrutura de árvore é construída. A cada marcador de começo de sub-árvore $w_i$ (\textquote{abre parênteses}, em ambas COs do trabalho), inicia uma nova iteração recursiva, baseada numa nova sub-cadeia $S_{i+1,j},\;i<j,\;0\leq i,\; j\leq n$. Nesta nova interação, o procedimento se repete até encontrar o simbolo de final de sub-árvore $w_j$ (\textquote{fecha parênteses} em ambos os COs). Nesse momento, a varredura de sub-árvore se encerra, a estrutura de dados é atualizada com essa sub-árvore, e a varredura continua a partir de $w_{i+1}$.
 
-Durante a varredura por sub-árvore / nó, são identificadas as \textit{POS tags}. Em ambos COs, as POS, se localizam logo após \textquote{(} (particularidades serão pormenorizadas nas Sessões \ref{sec:treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}). Cadeias de caracteres anteriores ao \textquote{)} são considerados palavras, ou seja $S_{i,j}=[(, w^*,\;,w^*,)]$ indica um nó. Ao identificar uma \textit{tag}, o nó lógico recebera essa \textit{tag}. Palavras não são modificadas. \textit{Tags} identificadas como \textquote{problemáticas}, ou seja, \textit{tags} da categoria 3, recebem uma marca específica.
+Durante a varredura por sub-árvore / nó, são identificadas as \textit{POS tags}. Em ambos COs, as POS, se localizam logo após \textquote{(} (particularidades serão pormenorizadas nas Sessões \ref{sec:treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}). Cadeias de caracteres anteriores ao \textquote{)} são considerados palavras, ou seja $S_{i,j}=[(, w^*,\;,w^*,)],\;w\in \Sigma$ indica um nó. Ao identificar uma \textit{tag}, o nó lógico recebera essa \textit{tag}. Palavras não são modificadas. \textit{Tags} identificadas como \textquote{problemáticas}, ou seja, \textit{tags} da categoria 3, recebem uma marca específica.
 
 Na segunda etapa, as operações ocorrem diretamente na estrutura de dados gerada. É aqui que as \textit{tags} são transduzidas, caso sejam das categorias 1 e 2. \textit{Tags} da categoria 3, que foram marcadas, serão resolvidas. 
 Existem pormenores sobre a detecção e adaptação de sinais gráficos (ponto, por exemplo), também.
 Sua descrição será feita nas sessões \ref{sec:treinando_sp_cintil} e \ref{sec:treinando_sp_bosque}. Recomenda-se a leitura do algoritmo desenvolvido.
 
-Por fim, na terceira etapa, é feita a impressão da estrutura de dados de modo análogo ao formato do CD. É feita uma nova Busca em Profundidade, gerando a cadeia de caracteres final. Poucas adaptações precisam ser feitas nesse momento.
+Por fim, na terceira etapa, é feita a impressão textual da estrutura de dados de modo análogo ao formato do CD. É feita uma nova Busca em Profundidade, gerando a cadeia de caracteres final. Poucas adaptações precisam ser feitas nesse momento.
+
+A Figura \ref{fig:fluxograma_transdutor} demonstra as etapas realizadas pelo transdutor.
+
+\begin{center}
+    \input{imagens/fluxograma_transdutor}
+\end{center}
 
 O transdutor pode ser encontrado no GitHub do autor, \url{https://github.com/Fernandomn/como-treinar-seu-parser}.

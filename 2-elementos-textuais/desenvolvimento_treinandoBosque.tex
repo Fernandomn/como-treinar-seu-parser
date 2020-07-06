@@ -162,7 +162,7 @@ Podemos ver na Tabela \ref{tab:bosque_CJT} a frequência com quem CJT se pareia,
 Vemos em \cite{freitas2007biblia}, \textquote{Finalmente, na oração averbal
 \footnote{Note que, em \cite[p~12]{afonso2006arvores}, acl é grifada como \textquote{oração deverbal}}
 \footnote{\textquote{the crawling chaos\ldots}. \citeonline{lovecraft1920nyarlathotep}}
-, o verbo não está presente, mas normalmente estas orações são encabeçadas por uma conjunção subordinativa que indica a natureza oracional do período}. Ao passo que fcl e icl (orações finitas e não-finitas) podemos afirmar serem conversíveis para VP, acl nos obriga a fazer conversões para a forma de oração subordinada \cite[p~172]{bracketing_ptb}, porém também não de forma assertiva. Pois, como vemos na Tabela \ref{tab:bosque_acl}, acl pode se ligar a qualquer forma sintagmática, inclusive início de orações. Porém, observar a função costuma dar uma informação bastante definitiva, conversão que adotamos nos casos de ADVL:acl, EXC:acl, N<:acl, N<PRED:acl, QUE:acl, STA:acl, UTT:acl. Para casos como ACC:acl e OC:acl, tomamos opções arbitrárias: convertemos para NP. Faltam dois casos então, KOMP< e CJT (novamente).
+, o verbo não está presente, mas normalmente estas orações são encabeçadas por uma conjunção subordinativa que indica a natureza oracional do período}. Ao passo que as \textit{tags} fcl e icl (orações finitas e não-finitas) podemos afirmar serem conversíveis para VP, a \textit{tag} acl nos obriga a fazer conversões para a forma de oração subordinada \cite[p~172]{bracketing_ptb}, porém também não de forma assertiva. Pois, como vemos na Tabela \ref{tab:bosque_acl}, acl pode se ligar a qualquer forma sintagmática, inclusive início de orações. Porém, observar a função costuma dar uma informação bastante definitiva, conversão que adotamos nos casos de ADVL:acl, EXC:acl, N<:acl, N<PRED:acl, QUE:acl, STA:acl, UTT:acl. Para casos como ACC:acl e OC:acl, tomamos opções arbitrárias: convertemos para NP. Faltam dois casos então, KOMP< e CJT (novamente).
 \begin{center}
     \input{tabelas/tab_bosque_acl.tex}
 \end{center}
@@ -176,7 +176,8 @@ Esta etiqueta é definida, por \cite[p~57]{afonso2006arvores} como \textquote{KO
 
 É reservado o Capítulo 22 do \cite[p~284]{bracketing_ptb} para o estudo de comparativos. Nele, vemos:
 \begin{quote}
-    \textquote{\textit{The than, that, or as is bracketed as either a PP or an SBAR, and a certain amount of variations exists in the choice of PP, or SBAR. SBAR is used when the rest of the than/that/as-phrase is a tensed sentence, or when it contains a subject. PP is in general when the rest of the than/that/as-phrase is a single constituent [\ldots]}}.
+    \textquote{\textit{than}, \textit{that}, or \textit{as} é categorizado tanto um PP ou um SBAR, e uma certa quantidade de variações existem na escolha de PP, ou SBAR. SBAR é usado quando o resto do sintagma que contem \textit{than/that/as} é uma sentença flexionada, ou quando contém um sujeito. PP é, no geral, quando o resto do sintagma que contem \textit{than/that/as} é um constituinte simples [\ldots]}
+    \footnote{\textit{The than, that, or as is bracketed as either a PP or an SBAR, and a certain amount of variations exists in the choice of PP, or SBAR. SBAR is used when the rest of the than/that/as-phrase is a tensed sentence, or when it contains a subject. PP is in general when the rest of the than/that/as-phrase is a single constituent [\ldots]}}.
 \end{quote}
 
 Dois exemplos simples podem ser vistos na Figura \ref{fig:ptb_exemplo_comp}. Foi necessário, então, repetir tal comportamento na transdução.
@@ -216,20 +217,3 @@ Símbolos marcados incorretamente - Bosque apresenta símbolos entre parentes, s
 \end{center}
 
 % ------------------------------------------------------------------------------------------------
-\subsection{Treinamento}
-\label{subsec:treinamento_bosque}
-De modo análogo ao CINTIL, fizemos o treinamento baseado num comando simples, como visto no código \ref{lst:treinoBasicoBosque}
-\begin{center}
-    \input{codigos/cod_treinoBasicoBosque.tex}
-\end{center}
-
-São comandos análogos aos utilizados para CINTIL. Explicações podem ser vistas na Tabela \ref{tab:tab_treino_basico_cintil}.
-
-Para a execução dos testes, foi utilizado o comando \ref{lst:testeBasicoBosque}
-\begin{center}
-    \input{codigos/cod_testeBasicoBosque.tex}
-\end{center}
-
-É o mesmo comando explicado na Tabela \ref{tab:tab_teste_basico_cintil}. Também foi utilizado o \textit{10-fold validation} para o Bosque. Porém, os testes foram feitos majoritariamente com o CETEMFolha, que possui 4213 sentenças (contra 10140 do CINTIL).
-
-O resultado completo dos testes pode ser visto na Tabela \ref{tab:bosque_result_full}, nos apêndices. Os comentários dos resultados pode ser visto em \ref{resultados_bosque}.

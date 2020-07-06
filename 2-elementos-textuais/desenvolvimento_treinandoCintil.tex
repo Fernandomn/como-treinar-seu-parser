@@ -15,7 +15,7 @@ Outra dificuldade é que, como supracitado, o \textit{tagset} informado no site 
 \input{tabelas/tab_cintil.tex}
 \end{center}
 
-As \textit{tags} definidas como sendo da Categoria 3 serão exibidas abaixo, com as respectivas conversões necessárias.
+As \textit{tags} definidas como sendo da Categoria 3 serão analisadas abaixo, com as respectivas conversões necessárias.
 % ------------------------------------------------------------------------------------------------
 \subsection{Problemas com CONJ (Conjunção)}
 \label{subsec:cintil-conj}
@@ -37,7 +37,9 @@ A Tabela
 \input{tabelas/tab_conj_concat_cintil.tex}
 \end{center}
 
-O \textit{Penn Treebank} e o CINTIL lidam com conjunções de maneiras distintas. O PTB, em seu manual de anotação \cite[p~117]{bracketing_ptb}, dedica a seção 7.5 para descrever tal fenômeno. Lá podemos ver que, para conjunções coordenadas, temos três casos: palavra simples (\textit{and}, \textit{but}, \textit{or}, \ldots), multi palavra (\textit{as well as}, \textit{not to mention}, \textit{rather than}, \ldots), e conjunções descontínuas (\textit{not only\ldots but}, \textit{not\ldots but instead}, \ldots). Palavras simples não precisam de marcação, a conjunção fica sem rótulo, como na Figura \ref{fig:ptb_conj_exe_1}. Conjunções com várias palavras tem o sintagma de conjunção marcado como CONJP, e as conjunções são postas em estrutura plana, mostrado na Figura \ref{fig:ptb_conj_exe_2}. Por fim, conjunções descontínuas tem apenas a parte com múltiplas palavras marcada por CONJP. A palavra isolada permanece isolada e sem marcação, como na Figura \ref{fig:ptb_conj_exe_3}. O manual possui a descrição de mais casos, envolvendo Conjunções Coordenadas e \textit{times}\footnote{\textit{Vezes}, no sentido de multiplicação. Exemplo, \textit{three times}, ou \textit{three times five}}, porém não nos alongaremos no assunto, por não possuírem as \textit{tags} CONJ ou CONJP.
+O \textit{Penn Treebank} e o CINTIL lidam com conjunções de maneiras distintas. O PTB, em seu manual de anotação \cite[p~117]{bracketing_ptb}, dedica a seção 7.5 para descrever tal fenômeno. Lá podemos ver que, para conjunções coordenadas, temos três casos: palavra simples (\textit{and}, \textit{but}, \textit{or}, \ldots), multi palavra (\textit{as well as}, \textit{not to mention}, \textit{rather than}, \ldots), e conjunções descontínuas (\textit{not only\ldots but}, \textit{not\ldots but instead}, \ldots). Palavras simples não precisam de marcação, a conjunção fica sem rótulo, como na Figura \ref{fig:ptb_conj_exe_1}. Conjunções com várias palavras tem o sintagma de conjunção marcado como CONJP, e as conjunções são postas em estrutura plana, mostrado na Figura \ref{fig:ptb_conj_exe_2}. Por fim, conjunções descontínuas tem apenas a parte com múltiplas palavras marcada por CONJP. A palavra isolada permanece isolada e sem marcação, como na Figura \ref{fig:ptb_conj_exe_3}. O manual possui a descrição de mais casos, envolvendo Conjunções Coordenadas e \textit{times}\footnote{\textit{Vezes}, no sentido de multiplicação. Exemplo, \textit{three times}, ou \textit{three times five}}, 
+porém não serão abordadas neste trabalho.
+% porém não nos alongaremos no assunto, por não possuírem as \textit{tags} CONJ ou CONJP.
 \begin{center}
 \input{imagens/ptb_conj_exe_1.tex}
 \end{center}
@@ -129,46 +131,3 @@ Tal erro inviabiliza completamente qualquer tipo de teste, como podemos ver na m
 \end{center}
 
 % ------------------------------------------------------------------------------------------------
-\subsection{Treinamento}
-\label{subsec:treinamento_cintil}
-
-% Para fazer estas conversões, fizemos um \textit{script} disponível online\footnote{\url{ https://github.com/Fernandomn/treebank-transductor}}.
-
-Com as \textit{tags} convertidas, foi feito o treinamento. O ato do treino é relativamente simples: deve-se, através do terminal do seu sistema, navegar até o diretório onde se encontra o \textit{stanford-parser.jar}, o arquivo que contém os \textit{parsers} do SP que utilizaremos. Estando no diretório correto, deve-se executar o comando \ref{lst:testeBasicoCintil}:
-
-\begin{center}
-\input{codigos/cod_treinoBasicoCintil.tex}
-\end{center}
-
-O código acima merece algumas explicações a parte, para quem não está familiarizado ao uso do SP pelo terminal.
-
-\begin{center}
-\input{tabelas/tab_CintilTreinoBasico.tex}
-\end{center}
-
-A Tabela \ref{tab:tab_treino_basico_cintil} mostra um fragmento das possibilidades de comandos a serem usados pela interface do terminal do SP. Note que usamos apenas 1014 arquivos nesta demonstração, que é um fração de 10\% dos arquivos / árvores do CINTIL disponíveis.
-
-Para melhor verificação dos resultados, utilizamos o método de \textit{10-fold cross-validation}. Este método, como explicado por \citeonline{james2013introduction},
-\begin{displayquote}
-    \textquote{[Esta abordagem] envolve dividir aleatoriamente o conjunto de observações em k grupos, ou dobras, de tamanhos aproximadamente iguais. O primeiro grupo é tratado como conjunto de validação, e o método se encaixa nos k -- 1 grupos restantes}
-    \footnote{\textquote{\textit{[\ldots] involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k -- 1 folds}}. Tradução própria.}.
-\end{displayquote}
-
-O \textit{corpora} foi dividido em 10 partes de 1014 sentenças. Foi feito o treinamento com nove partes, deixando a décima parte restante para o treino. 
-
-Na sequência, foi executado o treinamento com as partes restantes. De maneira análoga, no mesmo diretório, foi utilizado o comando \ref{lst:testeBasicoCintil}:
-
-\begin{center}
-    \input{codigos/cod_testeBasicoCintil.tex}
-\end{center}
-
-Que também merece explicações, na Tabela \ref{tab:tab_teste_basico_cintil}:
-\begin{center}
-    \input{tabelas/tab_CintilTesteBasico.tex}
-\end{center}
-
-Os treinamentos foram feitos alternando a parte de teste e as partes de treino, totalizando a criação de dez gramáticas, e dez resultados de treinos distintos.
-
-Os resultados serão apresentados na Sessão \ref{sec:resultados}.
-
-O resultado total dos testes resultou na extensa Tabela \ref{tab:cintil_result_full}, que pode ser vista nos apêndices. E os comentários dos resultados pode ser encontrado em \ref{subsec:resultados_cintil}.
